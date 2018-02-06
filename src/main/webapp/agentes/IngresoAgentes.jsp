@@ -14,7 +14,17 @@
 				placeholder="Ingrese el RUT del Agente">
 		</div>
 		<div class="form-group">
-			<label for="exampleFormControlInput1">Monto Max. por cliente</label>
+			<label for="exampleFormControlInput1">Banco</label> <input type="text"
+				class="form-control" id="banco"
+				placeholder="Ingrese el banco del Agente">
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1">Cuenta Corriente</label> <input type="text"
+				class="form-control" id="cCorriente"
+				placeholder="Ingrese la cuenta corriente">
+		</div>
+		<div class="form-group">
+			<label for="exampleFormControlInput1"> Monto máximo de préstamo</label>
 			<input type="number" class="form-control" id="monto"
 				placeholder="Ingrese el monto Maximo">
 		</div>
