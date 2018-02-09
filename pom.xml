@@ -7,6 +7,11 @@
 	<version>1.0.0</version>
 	<name>Factoring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

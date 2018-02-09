@@ -30,7 +30,7 @@
 		</div>
 		
 		<div class="botones-derecha"> <button type="button" class="btn btn-primary">Aceptar</button>
-		<button type="button" class="btn btn-primary">Cancelar</button> </div>
+		<button type="button" id="botonAceptar" class="btn btn-primary">Cancelar</button> </div>
 	
 	</form>
 

@@ -1,4 +1,7 @@
 <div class ="titulo" >
+
+<script src="js/tabla.js"></script>
+
 <h3>Ingreso de Clientes</h3>
 </div>
 <div class="formulario tablaCentro">
