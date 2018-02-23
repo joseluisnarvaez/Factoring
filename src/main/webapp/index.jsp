@@ -15,7 +15,7 @@
 <header class="main-header">
 	<ul class="main-nav">
 		<li><a href="#" id="IngresoCheque">Cheques</a></li>
-		<li><a href="#">Busqueda</a></li>
+		<li><a href="#" id="BusquedaCheque">Busqueda</a></li>
 		<li  class="dropdown"> <a href="#">Clientes</a>
 			<ul class="drop-nav">
 				<li><a href="#" id="IngresoClientes">Ingreso Clientes</a></li>

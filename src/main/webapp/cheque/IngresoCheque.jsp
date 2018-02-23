@@ -34,7 +34,7 @@ Fecha de Ingreso: 21/02/2018 13:30
 			</br>
 			</br>
 			
-			<table>
+			<table >
 				<tr>
 				
 					<td>
@@ -48,7 +48,7 @@ Fecha de Ingreso: 21/02/2018 13:30
 			</table>
 			
 			
-			<table id="tabla0">
+			<table class="table table-striped" id="tabla0">
 				<thead>
 								<tr>
 					<td>
@@ -194,7 +194,7 @@ Fecha de Ingreso: 21/02/2018 13:30
 					
 			</table>
 			
-			<table id="tabla1">
+			<table class="table table-striped" id="tabla1">
 				<thead>
 				<tr>
 					<td>

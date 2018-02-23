@@ -21,16 +21,9 @@ $(document).ready(function() {
     	$('#idContenido').load('cheque/IngresoCheque.jsp');
     });
     
-    // radio button
-    $("input[name = optradio]").click(function () {
-    	if( $("#form #montoEntregar").is(':checked')) {
-    		alert('montoEntregar');
-    	}
-    	if( $("#form #montoCheque").is(':checked')) {
-    		alert('montoCheque');
-    	}
-	});
-
-
-
+//  Busqueda cheques
+    $('a#BusquedaCheque').click(function(evt) {
+    	$('#idContenido').load('busqueda/BusquedaCheques.jsp');
+    });
+    
 });
