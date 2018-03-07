@@ -4,4 +4,20 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+        <servlet-name>dwr-invoker</servlet-name>
+        <display-name>DWR Servlet</display-name>
+        <description>Direct Web Remoter Servlet</description>
+        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dwr-invoker</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
 </web-app>
