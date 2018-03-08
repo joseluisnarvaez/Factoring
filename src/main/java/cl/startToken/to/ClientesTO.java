@@ -1,13 +1,16 @@
 package cl.startToken.to;
 
+import java.io.Serializable;
+
 /**
  * Clase que representa la tabla de clientes de la base de datos
  * 
  * @author jNarvaez
  *
  */
-public class ClientesTO {
+public class ClientesTO implements Serializable {
 
+	private static final long serialVersionUID = -4871164744088837917L;
 	private String nombre;
 	private String aPaterno;
 	private String aMaterno;

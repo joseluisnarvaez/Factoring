@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#some-menu').load('menu/menu.jsp');
-    $('#idContenido').load('cheque/IngresoCheque.jsp');
+    $('#idContenido').load('clientes/BusquedaClientes.jsp');
 //Menu Agentes
     $('a#IngresoAgente').click(function(evt) {
     	  $('#idContenido').load('agentes/IngresoAgentes.jsp');

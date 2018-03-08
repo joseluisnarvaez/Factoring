@@ -1,3 +1,6 @@
+<script type='text/javascript' src='/Factoring/dwr/interface/clientes.js'></script>
+<script type='text/javascript' src='/Factoring/dwr/engine.js'></script>
+
 <h3>Buscar Clientes</h3>
 
 <div class="formulario tablaCentro">

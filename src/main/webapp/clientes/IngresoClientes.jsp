@@ -1,6 +1,11 @@
-<div class ="titulo" >
+<script type='text/javascript' src='/Factoring/dwr/interface/clientes.js'></script>
+<script type='text/javascript' src='/Factoring/dwr/engine.js'></script>
+<script type='text/javascript' src='/Factoring/js/validaciones.js'></script>
 
-<script src="js/tabla.js"></script>
+
+
+<div class ="titulo" >
+  
 
 <h3>Ingreso de Clientes</h3>
 </div>
@@ -14,6 +19,7 @@
 		<div class="form-group">
 			<label for="exampleFormControlInput1">RUT</label> <input type="text"
 				class="form-control" id="rut"
+				onblur="formateaRut"
 				placeholder="Ingrese el RUT del Agente">
 		</div>
 	    <div class="form-group">

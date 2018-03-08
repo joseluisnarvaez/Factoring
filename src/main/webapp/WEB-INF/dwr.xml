@@ -3,9 +3,10 @@
     "http://directwebremoting.org/schema/dwr20.dtd">
 
 <dwr>
-  <allow>
-    <create creator="new" javascript="clientes">
-      <param name="class" value="cl.startToken.dwr.Clientes"/>
-    </create>
-  </allow>
+	<allow>
+		<create creator="new" javascript="clientes">
+			<param name="class" value="cl.startToken.dwr.Clientes" />
+		</create>
+		<convert converter = "bean" match = "cl.startToken.to.ClientesTO" javascript = "cliente" />	
+	</allow>
 </dwr>
