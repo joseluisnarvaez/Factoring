@@ -1,6 +1,5 @@
-<script type='text/javascript' src='/Factoring/dwr/interface/clientes.js'></script>
-<script type='text/javascript' src='/Factoring/dwr/engine.js'></script>
-
+<script src="resources/js/clientes.js"></script>
+<div class="contenido" >
 <h3>Buscar Clientes</h3>
 
 <div class="formulario tablaCentro">
@@ -23,7 +22,10 @@
 
 </div>
 
-<div >
+
+
+
+
 
 	<table class="table table-striped">
 		<thead>
@@ -39,37 +41,8 @@
 				
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Juan</td>
-				<td>17.440.344-3</td>
-				<td>BBVA</td>
-				<td>4344234-234234-123423</td>
-				<td>50.000</td>
-				<td><i class="fa fa-pencil"></i></td>
-				<td><i class="fa fa-trash" aria-hidden="true"></i></td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Juan</td>
-				<td>17.440.344-3</td>
-				<td>BBVA</td>
-				<td>4344234-234234-123423</td>
-				<td>50.000</td>
-				<td><i class="fa fa-pencil"></i></td>
-				<td><i class="fa fa-trash" aria-hidden="true"></i></td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Juan</td>
-				<td>17.440.344-3</td>
-				<td>BBVA</td>
-				<td>4344234-234234-123423</td>
-				<td>50.000</td>
-				<td><i class="fa fa-pencil"></i></td>
-				<td><i class="fa fa-trash" aria-hidden="true"></i></td>
-			</tr>
+		<tbody id="tablaClientes">
+			
 		</tbody>
 	</table>
 

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Conexion {
 
 	private static Connection con = null;
-	private static String bd = "javacrud";
+	private static String bd = "armus spa";
 	private static String login = "root";
 	private static String pass = "toor";
 	private static String url = "jdbc:mysql://127.0.0.1:3306/";

@@ -23,13 +23,13 @@ public class ClientesDao {
 	/**
 	 * Metodo que implementa la logica de obtener clientes de la base de datos
 	 * 
-	 * @return
-	 * 
+	 * @return List<ClientesTO>
+	 * @author Jnarvaez
 	 */
 	public static List<ClientesTO> obtenerClientes() {
 		List<ClientesTO> listaClientes = new ArrayList<>();
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("exec sp_lst_cliente");
+			PreparedStatement stmt = con.prepareStatement("call sp_lst_cliente");
 			ResultSet rs = stmt.executeQuery()){
 			while (rs.next()) {
 				listaClientes.add(parseaCliente(rs));			
