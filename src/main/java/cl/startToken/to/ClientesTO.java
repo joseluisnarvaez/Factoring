@@ -11,9 +11,8 @@ import java.io.Serializable;
 public class ClientesTO implements Serializable {
 
 	private static final long serialVersionUID = -4871164744088837917L;
-	private String nombre;
-	private String aPaterno;
-	private String aMaterno;
+	private int idClientes;
+	private String nombreCompleto;
 	private int rut;
 	private String dv_cliente;
 	private String banco;
@@ -21,28 +20,24 @@ public class ClientesTO implements Serializable {
 	private double interes_mensual;
 	private int monto_maximo_prestamo;
 
-	public String getNombre() {
-		return nombre;
+	
+	public int getIdClientes() {
+		return idClientes;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setIdClientes(int idClientes) {
+		this.idClientes = idClientes;
 	}
 
-	public String getaPaterno() {
-		return aPaterno;
+
+	public String getNombreCompleto() {
+		return nombreCompleto;
 	}
 
-	public void setaPaterno(String aPaterno) {
-		this.aPaterno = aPaterno;
-	}
-
-	public String getaMaterno() {
-		return aMaterno;
-	}
-
-	public void setaMaterno(String aMaterno) {
-		this.aMaterno = aMaterno;
+	
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
 
 	public int getRut() {
@@ -93,15 +88,14 @@ public class ClientesTO implements Serializable {
 		this.monto_maximo_prestamo = monto_maximo_prestamo;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ClientesTO [nombre=");
-		builder.append(nombre);
-		builder.append(", aPaterno=");
-		builder.append(aPaterno);
-		builder.append(", aMaterno=");
-		builder.append(aMaterno);
+		builder.append("ClientesTO [nombreCompleto=");
+		builder.append(nombreCompleto);
 		builder.append(", rut=");
 		builder.append(rut);
 		builder.append(", dv_cliente=");

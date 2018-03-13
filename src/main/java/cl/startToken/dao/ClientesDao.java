@@ -40,18 +40,22 @@ public class ClientesDao {
 		}
 		return listaClientes;
 	}
+	
+	
+	
 
 	private static ClientesTO parseaCliente(ResultSet rs) throws SQLException {
 		
 		ClientesTO cliente = new ClientesTO();
-		cliente.setaMaterno(rs.getString("aMaterno"));
-		cliente.setaPaterno(rs.getString("aPaterno"));
+		StringBuilder nombre = new StringBuilder();
+		nombre.append(rs.getString("nombre")).append(" ").append(rs.getString("aPaterno")).append(" ").append(rs.getString("aMaterno"));
+		cliente.setIdClientes(rs.getInt("idClientes"));
+		cliente.setNombreCompleto(nombre.toString());
 		cliente.setBanco(rs.getString("banco"));
 		cliente.setC_corriente(rs.getString("c_corriente"));
 		cliente.setDv_cliente(rs.getString("dv_cliente"));
 		cliente.setInteres_mensual(rs.getDouble("interes_mensual"));
 		cliente.setMonto_maximo_prestamo(rs.getInt("monto_maximo_prestamo"));
-		cliente.setNombre(rs.getString("nombre"));
 		cliente.setRut(rs.getInt("rut"));
 		return cliente;
 	}
