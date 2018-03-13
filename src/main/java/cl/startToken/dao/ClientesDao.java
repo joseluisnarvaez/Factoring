@@ -55,7 +55,7 @@ public class ClientesDao {
 		cliente.setC_corriente(rs.getString("c_corriente"));
 		cliente.setDv_cliente(rs.getString("dv_cliente"));
 		cliente.setInteres_mensual(rs.getDouble("interes_mensual"));
-		cliente.setMonto_maximo_prestamo(rs.getInt("monto_maximo_prestamo"));
+		cliente.setMonto_maximo_prestamo(rs.getLong("monto_maximo_prestamo"));
 		cliente.setRut(rs.getInt("rut"));
 		return cliente;
 	}

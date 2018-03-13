@@ -18,7 +18,7 @@ public class ClientesTO implements Serializable {
 	private String banco;
 	private String c_corriente;
 	private double interes_mensual;
-	private int monto_maximo_prestamo;
+	private long monto_maximo_prestamo;
 
 	
 	public int getIdClientes() {
@@ -80,11 +80,11 @@ public class ClientesTO implements Serializable {
 		this.interes_mensual = interes_mensual;
 	}
 
-	public int getMonto_maximo_prestamo() {
+	public long getMonto_maximo_prestamo() {
 		return monto_maximo_prestamo;
 	}
 
-	public void setMonto_maximo_prestamo(int monto_maximo_prestamo) {
+	public void setMonto_maximo_prestamo(long monto_maximo_prestamo) {
 		this.monto_maximo_prestamo = monto_maximo_prestamo;
 	}
 

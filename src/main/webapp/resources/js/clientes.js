@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
 	$.get("clientes/", function(data, status) {
+		
+	});
+	$.get("clientes/clientes", function(data, status) {
 		armaTabla(data);
 	});
 
@@ -37,6 +40,32 @@ $(document).ready(function() {
 		    }
 		});
 	});
+	
+	
+	 $('#actualizaCliente').submit(function(e) {
+		  var form = objectifyForm($( this ).serializeArray() );
+		  
+		  
+		  $.ajax({
+	          type: 'PUT',
+	          url: 'clientes/',
+	          data : $( this ).serializeArray() ,
+	          async: false,
+	          success: function(msg){
+	        	  if(msg == 1 ){
+	        		  alert('Actualizado con exito');
+	        	  }
+	        	  else if (msg == -1 ){
+	        		  alert('Datos ingresados se encuentran con errores.');
+	        	  }
+	          },
+	          error: function(){
+	            //alert("failure");
+	          }
+	        });
+		 
+	        
+	    });
 
 
 	function armaTabla(data) {
@@ -75,6 +104,23 @@ $(document).ready(function() {
 
 		$("#tablaClientes").html(tbody);
 	}
+	
+	
+	function objectifyForm(formArray) {
+
+		  var returnArray="{";
+		  var primeraVuelta = true;
+		  for (var i = 0; i < formArray.length; i++){
+			  if(!primeraVuelta){
+				  
+				  returnArray+= ',';
+			  }
+			  else {primeraVuelta = false;}
+			  
+		    returnArray+=  "'"+[formArray[i]['name']]+"':'"+formArray[i]['value']+"'";
+		  }
+		  return returnArray+"}";
+		}
 
 });
 

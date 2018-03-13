@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +28,15 @@ public class ClienteController {
 		return null;
 
 	}
-
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody Model iniciarCliente(Model model) {
+		model.addAttribute("cliente", new ClientesTO()); 
+		return model;
+	}
+	
+
+	@RequestMapping(value = "/clientes", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String obtenerClientes() {
 
 		List<ClientesTO> retorno = ClientesDao.obtenerClientes();
@@ -36,8 +45,17 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	public ModelAndView actualizarCliente() {
-		return null;
+	 
+	public  @ResponseBody String  actualizarCliente(@RequestBody String jsonCliente) {
+		
+		 ClientesTO cliente = Validaciones.validaCliente(jsonCliente);
+		 
+		 if(cliente == null){
+			 return "-1";	 
+		 }
+		
+		System.out.println(cliente.toString());
+		return "1";
 
 	}
 	
