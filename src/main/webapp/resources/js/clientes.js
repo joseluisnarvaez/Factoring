@@ -1,9 +1,7 @@
 $(document).ready(function() {
 
+	
 	$.get("clientes/", function(data, status) {
-		
-	});
-	$.get("clientes/clientes", function(data, status) {
 		armaTabla(data);
 	});
 
@@ -23,24 +21,8 @@ $(document).ready(function() {
 
 	});
 	
-	
-	$("#eliminaCliente").click(function() {
-		var id =$("#eliminaCliente").val();
-		var url = "clientes/"+id;  
-		$.ajax({
-		    url: url,
-		    type: 'DELETE',
-		    success: function(data) {
-		    	if(data == 1 ){
-					alert("Eliminado")
-				}
-				else {
-					armaTabla(data);	
-				}
-		    }
-		});
-	});
-	
+
+
 	
 	 $('#actualizaCliente').submit(function(e) {
 		  var form = objectifyForm($( this ).serializeArray() );
@@ -96,7 +78,7 @@ $(document).ready(function() {
 			tbody += "<i class='fa fa-pencil'></i>";
 			tbody += "</td>";
 			tbody += "<td>";
-			tbody += "<button value ="+value.idClientes+" id='eliminaCliente' > <i class='fa fa-trash' aria-hidden='true'></i></button>";
+			tbody += "<a href='#'> <i class='fa fa-trash' value='"+value.idClientes+"' id='eliminaCliente' aria-hidden='true'></i></a>";
 			tbody += "</td>";
 			tbody += "</tr>";
 			index++;
@@ -172,3 +154,24 @@ function checkRut(rut) {
     // Si todo sale bien, eliminar errores (decretar que es válido)
     rut.setCustomValidity('');
 }
+
+$("#eliminaCliente").click(function() {
+	 if (confirm('Desea eliminarlo?')) {
+		 	var id =$("#eliminaCliente").val();
+			var url = "clientes/"+id;  
+			$.ajax({
+				 type : "DELETE",
+		         url : url,
+			    success: function(data) {
+			    	if(data == 1 ){
+						alert("Eliminado")
+					}
+					else {
+						armaTabla(data);	
+					}
+			    }
+			});
+	  }
+	
+});
+

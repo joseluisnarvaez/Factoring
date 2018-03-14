@@ -75,7 +75,7 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">RUT</label> 
-						<input	type="text" name="rut" class="form-control" id="rut" onblur="formateaRut"		placeholder="Ingrese el RUT del Agente">
+						<input	type="text" name="rut" required oninput="checkRut(this)" class="form-control" id="rut"	placeholder="Ingrese el RUT del Agente">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Banco</label>

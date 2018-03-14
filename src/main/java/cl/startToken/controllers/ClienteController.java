@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +29,6 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody Model iniciarCliente(Model model) {
-		model.addAttribute("cliente", new ClientesTO()); 
-		return model;
-	}
-	
-
-	@RequestMapping(value = "/clientes", method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody String obtenerClientes() {
 
 		List<ClientesTO> retorno = ClientesDao.obtenerClientes();
@@ -45,24 +37,19 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.PUT)
-	 
 	public  @ResponseBody String  actualizarCliente(@RequestBody String jsonCliente) {
-		
 		 ClientesTO cliente = Validaciones.validaCliente(jsonCliente);
-		 
 		 if(cliente == null){
 			 return "-1";	 
 		 }
-		
-		System.out.println(cliente.toString());
+		 ClientesDao.actualizarClientes(cliente);
 		return "1";
-
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE ,produces = "application/json")
-	public @ResponseBody String eliminarCliente(@PathVariable("id") long id) {
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE , produces = "application/json" )
+	public @ResponseBody String eliminarCliente(@PathVariable String id) {
+		ClientesDao.eliminaCliente(Integer.parseInt(id));
 		return "1";
-
 	}
 
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET, produces = "application/json")
@@ -70,7 +57,6 @@ public class ClienteController {
 			@RequestParam(value = "rut") String rut) {
 
 		List<ClientesTO> listaFiltrar = ClientesDao.obtenerClientes();
-		
 		if(!Validaciones.validarRut(rut)) {
 			return "1";
 		}
@@ -82,7 +68,6 @@ public class ClienteController {
 				listaRetorno.add(cliente);
 			}
 		}
-
 		return new Gson().toJson(listaRetorno);
 
 	}
