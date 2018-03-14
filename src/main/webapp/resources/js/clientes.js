@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	
-	$.get("clientes/", function(data, status) {
-		armaTabla(data);
-	});
+	$("#tablaClientes").html("			<tr>			<td>			1			</td>			<td>			Jose Narvaez			</td>			<td>			17449355-3			</td>			<td>			BBVA			</td>			<td>			10254824423			</td>			<td>			500000			</td>			<td>			<i class='fa fa-pencil'></i>			</td>			<td>			<a href='#'> <i class='fa fa-trash' value='1' id='eliminaCliente' aria-hidden='true'></i></a>			</td>			</tr>");	
+//	$.get("clientes/", function(data, status) {
+//		armaTabla(data);
+//	});
 
 	$("#buscar").click(function() {
 		var nombre =$("#nombre").val();
@@ -36,6 +36,7 @@ $(document).ready(function() {
 	          success: function(msg){
 	        	  if(msg == 1 ){
 	        		  alert('Actualizado con exito');
+	        		  location.reload();
 	        	  }
 	        	  else if (msg == -1 ){
 	        		  alert('Datos ingresados se encuentran con errores.');
@@ -49,43 +50,21 @@ $(document).ready(function() {
 	        
 	    });
 
+	
 
-	function armaTabla(data) {
-
-		var tbody = "";
-		var index = 1;
-		$.each(data, function(key, value) {
-			tbody += "<tr>";
-			tbody += "<td>";
-			tbody += index;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += value.nombreCompleto;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += value.rut + "-" + value.dv_cliente;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += value.banco;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += value.c_corriente;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += value.monto_maximo_prestamo;
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += "<i class='fa fa-pencil'></i>";
-			tbody += "</td>";
-			tbody += "<td>";
-			tbody += "<a href='#'> <i class='fa fa-trash' value='"+value.idClientes+"' id='eliminaCliente' aria-hidden='true'></i></a>";
-			tbody += "</td>";
-			tbody += "</tr>";
-			index++;
-		});
-
-		$("#tablaClientes").html(tbody);
-	}
+	$("#eliminaCliente").click(function() {
+		 if (confirm('Desea eliminarlo?')) {
+			
+			var url = "clientes/elimina/"+ $(this).attr("value");	 
+			$.get(url, function(data, status) {
+				if(data == 1 ){
+					alert("Eliminado");
+					location.reload();
+				}
+			});
+		  }
+		
+	});
 	
 	
 	function objectifyForm(formArray) {
@@ -155,23 +134,41 @@ function checkRut(rut) {
     rut.setCustomValidity('');
 }
 
-$("#eliminaCliente").click(function() {
-	 if (confirm('Desea eliminarlo?')) {
-		 	var id =$("#eliminaCliente").val();
-			var url = "clientes/"+id;  
-			$.ajax({
-				 type : "DELETE",
-		         url : url,
-			    success: function(data) {
-			    	if(data == 1 ){
-						alert("Eliminado")
-					}
-					else {
-						armaTabla(data);	
-					}
-			    }
-			});
-	  }
-	
-});
+function armaTabla(data) {
+
+	var tbody = "";
+	var index = 1;
+	$.each(data, function(key, value) {
+		tbody += "<tr>";
+		tbody += "<td>";
+		tbody += index;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += value.nombreCompleto;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += value.rut + "-" + value.dv_cliente;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += value.banco;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += value.c_corriente;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += value.monto_maximo_prestamo;
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += "<a href='#'> <i class='fa fa-pencil' value = '"+value.idClientes+"'  id='editaCliente' aria-hidden='true'></i></a>";
+		tbody += "</td>";
+		tbody += "<td>";
+		tbody += "<a href='#'> <i class='fa fa-trash' value = 'value.idClientes'  id='eliminaCliente' aria-hidden='true'></i></a>";
+		tbody += "</td>";
+		tbody += "</tr>";
+		index++;
+	});
+
+	$("#tablaClientes").html();
+}
+
 

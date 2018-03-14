@@ -47,7 +47,7 @@
 			</tr>
 		</thead>
 		<tbody id="tablaClientes">
-
+		
 		</tbody>
 	</table>
 

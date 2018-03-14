@@ -46,8 +46,8 @@ public class ClienteController {
 		return "1";
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE , produces = "application/json" )
-	public @ResponseBody String eliminarCliente(@PathVariable String id) {
+	@RequestMapping(value = "/elimina/{id}", method = RequestMethod.GET , produces = "application/json")
+	public @ResponseBody String eliminarCliente(@PathVariable("id") String id) {
 		ClientesDao.eliminaCliente(Integer.parseInt(id));
 		return "1";
 	}
@@ -70,5 +70,19 @@ public class ClienteController {
 		}
 		return new Gson().toJson(listaRetorno);
 
+	}
+	
+	@RequestMapping(value = "/cliente/{id}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody String obtenerClientebyId(@PathVariable("id") String id) {
+
+		List<ClientesTO> listaFiltrar = ClientesDao.obtenerClientes();
+			ClientesTO clienteRetorno = null;
+		
+		for (ClientesTO cliente : listaFiltrar) {
+			if (cliente.getIdClientes() == Integer.parseInt(id)) {
+				clienteRetorno = cliente;
+			}
+		}
+		return new Gson().toJson(clienteRetorno);
 	}
 }
