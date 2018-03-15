@@ -1,5 +1,4 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <script src="resources/js/clientes.js"></script>
 <div class="contenido">
 	<h3>Buscar Clientes</h3>
@@ -17,9 +16,6 @@
 					placeholder="Ingrese el RUT del Cliente">
 			</div>
 			<div class="botones-derecha">
-				<button type="button" class="btn btn-info btn-lg"
-					data-toggle="modal" data-target="#myModal">Open Modal</button>
-				<button type="button" class="btn btn-primary" id="editar">Editar</button>
 				<button type="button" class="btn btn-primary" id="buscar">Buscar</button>
 				<button type="button" class="btn btn-primary">Cancelar</button>
 			</div>
@@ -68,26 +64,26 @@
 			</div>
 			<div class="modal-body">
 				<form method="post" id="actualizaCliente" action="#">
-
+					<input type="hidden" name="id" id="id" value="">
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Nombre</label>
-						<input	type="text" name="nombreCompleto" class="form-control" id="Nombre"	placeholder="Ingrese el nombre del Agente">
+						<input	type="text" name="nombreCompleto" class="form-control" id="fnombre"	placeholder="Ingrese el nombre del Agente">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">RUT</label> 
-						<input	type="text" name="rut" required oninput="checkRut(this)" class="form-control" id="rut"	placeholder="Ingrese el RUT del Agente">
+						<input	type="text" name="rut" required oninput="checkRut(this)" class="form-control" id="frut"	placeholder="Ingrese el RUT del Agente">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Banco</label>
-						 <input type="text" name="banco" class="form-control" id="banco"	placeholder="Ingrese el Banco del Agente">
+						 <input type="text" name="banco" class="form-control" id="fbanco"	placeholder="Ingrese el Banco del Agente">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">CTA. Corriente</label>
-						 <input	type="text" name="c_corriente" class="form-control" id="ctacc"		placeholder="Ingrese la cuenta corriente">
+						 <input	type="text" name="c_corriente" class="form-control" id="fctacc"		placeholder="Ingrese la cuenta corriente">
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Monto Max. por cliente</label>
-							 <input type="number" name="monto_maximo_prestamo" class="form-control" id="monto"		placeholder="Ingrese el monto Maximo">
+							 <input type="number" name="monto_maximo_prestamo" class="form-control" id="fmonto"		placeholder="Ingrese el monto Maximo">
 					</div>
 
 					<div class="botones-derecha">

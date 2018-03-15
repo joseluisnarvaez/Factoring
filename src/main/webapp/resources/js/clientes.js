@@ -1,9 +1,8 @@
 $(document).ready(function() {
-
-	$("#tablaClientes").html("			<tr>			<td>			1			</td>			<td>			Jose Narvaez			</td>			<td>			17449355-3			</td>			<td>			BBVA			</td>			<td>			10254824423			</td>			<td>			500000			</td>			<td>			<i class='fa fa-pencil'></i>			</td>			<td>			<a href='#'> <i class='fa fa-trash' value='1' id='eliminaCliente' aria-hidden='true'></i></a>			</td>			</tr>");	
-//	$.get("clientes/", function(data, status) {
-//		armaTabla(data);
-//	});
+	
+	$.get("clientes/", function(data, status) {
+		armaTabla(data);
+	});
 
 	$("#buscar").click(function() {
 		var nombre =$("#nombre").val();
@@ -43,30 +42,12 @@ $(document).ready(function() {
 	        	  }
 	          },
 	          error: function(){
-	            //alert("failure");
 	          }
 	        });
 		 
 	        
 	    });
 
-	
-
-	$("#eliminaCliente").click(function() {
-		 if (confirm('Desea eliminarlo?')) {
-			
-			var url = "clientes/elimina/"+ $(this).attr("value");	 
-			$.get(url, function(data, status) {
-				if(data == 1 ){
-					alert("Eliminado");
-					location.reload();
-				}
-			});
-		  }
-		
-	});
-	
-	
 	function objectifyForm(formArray) {
 
 		  var returnArray="{";
@@ -159,16 +140,44 @@ function armaTabla(data) {
 		tbody += value.monto_maximo_prestamo;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += "<a href='#'> <i class='fa fa-pencil' value = '"+value.idClientes+"'  id='editaCliente' aria-hidden='true'></i></a>";
+		tbody += "<a href='#'> <i class='fa fa-pencil' data-toggle='modal' data-target='#myModal' onclick='cargaUsuario("+value.idClientes+")'  value = '"+value.idClientes+"'  id='editaCliente' aria-hidden='true'></i></a>";
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += "<a href='#'> <i class='fa fa-trash' value = 'value.idClientes'  id='eliminaCliente' aria-hidden='true'></i></a>";
+		tbody += "<a href='#'> <i class='fa fa-trash'  onclick='elimina("+value.idClientes+")'  aria-hidden='true'></i></a>";
 		tbody += "</td>";
 		tbody += "</tr>";
 		index++;
 	});
 
-	$("#tablaClientes").html();
+	$("#tablaClientes").html(tbody);
 }
+
+
+
+	function elimina(id){
+	 if (confirm('Desea eliminarlo?')) {
+		
+		var url = "clientes/elimina/"+ id;	 
+		$.get(url, function(data, status) {
+			if(data == 1 ){
+				alert("Eliminado");
+				location.reload();
+			}
+		});
+	  }
+}
+	
+
+	function cargaUsuario(id) {
+		var url = "clientes/cliente/" + id;
+		$.get(url, function(data) {
+			$("#fnombre").val(data.nombreCompleto);
+			$("#frut").val(data.rut +"-"+data.dv_cliente);
+			$("#fbanco").val(data.banco);
+			$("#fctacc").val(data.c_corriente);
+			$("#fmonto").val(data.monto_maximo_prestamo);
+			$("#id").val(data.idClientes);
+		});
+	}
 
 
