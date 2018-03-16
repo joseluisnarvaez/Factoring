@@ -19,8 +19,27 @@ $(document).ready(function() {
 		});
 
 	});
-	
 
+						
+	$("#creaCliente").submit(function(e) {
+		var form = objectifyForm($(this).serializeArray());
+		var url = "clientes/";
+		$.ajax({
+			  method: "POST",
+			  url: url,
+			  contentType: "application/json",
+			  data: form,
+			  async: false,
+			  success: function(msg){
+	        	  if(msg == 1 ){
+	        		  alert('Actualizado con exito');
+	        		  location.reload();
+	        	  }
+	          },
+			  
+		});
+	});
+	
 
 	
 	 $('#actualizaCliente').submit(function(e) {
@@ -128,7 +147,7 @@ function armaTabla(data) {
 		tbody += value.nombreCompleto;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.rut + "-" + value.dv_cliente;
+		tbody += value.rutDb + "-" + value.dv_cliente;
 		tbody += "</td>";
 		tbody += "<td>";
 		tbody += value.banco;
@@ -172,7 +191,7 @@ function armaTabla(data) {
 		var url = "clientes/cliente/" + id;
 		$.get(url, function(data) {
 			$("#fnombre").val(data.nombreCompleto);
-			$("#frut").val(data.rut +"-"+data.dv_cliente);
+			$("#frut").val(data.rutDb +"-"+data.dv_cliente);
 			$("#fbanco").val(data.banco);
 			$("#fctacc").val(data.c_corriente);
 			$("#fmonto").val(data.monto_maximo_prestamo);

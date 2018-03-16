@@ -54,7 +54,7 @@ public class ClientesDao {
 			PreparedStatement stmt = con.prepareStatement("call sp_upd_cliente (?,?,?,?,?,?,?,?)");){
 			stmt.setInt(1, cliente.getIdClientes());
 			stmt.setString(2, cliente.getNombreCompleto());
-			stmt.setInt(3,cliente.getRut());
+			stmt.setInt(3,cliente.getRutDb());
 			stmt.setString(4, cliente.getDv_cliente());
 			stmt.setString(5, cliente.getBanco());
 			stmt.setString(6, cliente.getC_corriente());
@@ -87,6 +87,31 @@ public class ClientesDao {
 		}
 	}
 	
+	/**
+	 * Actualiza cliente con id
+	 * 
+	 * @return List<ClientesTO>
+	 * @author Jnarvaez
+	 */
+	public static void crearClientes(ClientesTO cliente) {
+		try(Connection con = Conexion.getConnection(); 
+			PreparedStatement stmt = con.prepareStatement("call sp_crea_cliente (?,?,?,?,?,?,?)");){
+			stmt.setString(1, cliente.getNombreCompleto());
+			stmt.setInt(2,cliente.getRutDb());
+			stmt.setString(3, cliente.getDv_cliente());
+			stmt.setString(4, cliente.getBanco());
+			stmt.setString(5, cliente.getC_corriente());
+			stmt.setDouble(6, cliente.getInteres_mensual());
+			stmt.setLong(7, cliente.getMonto_maximo_prestamo());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	private static ClientesTO parseaCliente(ResultSet rs) throws SQLException {
 		
@@ -100,7 +125,10 @@ public class ClientesDao {
 		cliente.setDv_cliente(rs.getString("dv_cliente"));
 		cliente.setInteres_mensual(rs.getDouble("interes_mensual"));
 		cliente.setMonto_maximo_prestamo(rs.getLong("monto_maximo_prestamo"));
-		cliente.setRut(rs.getInt("rut"));
+		cliente.setRutDb(rs.getInt("rut"));
 		return cliente;
 	}
+	
+	
+	
 }

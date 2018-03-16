@@ -2,8 +2,8 @@
 
 <body>
 <%@include file="menu.jsp" %>
-<%@include file="clientes/BusquedaClientes.jsp" %>
   
+  <div id='idContenido' class="contenido" ></div>  
 </body>
 
 </html>

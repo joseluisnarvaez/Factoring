@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
@@ -23,8 +22,14 @@ import cl.startToken.utils.Validaciones;
 public class ClienteController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ModelAndView crearCliente() {
-		return null;
+	public @ResponseBody String crearCliente( @RequestBody String jsonCliente) {
+		
+		ClientesTO cliente = new Gson().fromJson(jsonCliente, ClientesTO.class);
+		String[] ruts = cliente.getRut().split("-");
+		cliente.setRutDb(Integer.parseInt(ruts[0]));
+		cliente.setDv_cliente(ruts[1]);
+		ClientesDao.crearClientes(cliente);
+		return "1";
 
 	}
 	
@@ -64,7 +69,7 @@ public class ClienteController {
 		int parteNumerica = Integer.parseInt(ruts[0]);
 		List<ClientesTO> listaRetorno = new ArrayList<>();
 		for (ClientesTO cliente : listaFiltrar) {
-			if (cliente.getNombreCompleto().contains(nombre) && cliente.getRut() == parteNumerica) {
+			if (cliente.getNombreCompleto().contains(nombre) && cliente.getRutDb() == parteNumerica) {
 				listaRetorno.add(cliente);
 			}
 		}

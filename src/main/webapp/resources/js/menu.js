@@ -12,19 +12,19 @@ $(document).ready(function() {
   
 //    Menu Clientes
     $('a#IngresoClientes').click(function(evt) {
-    	$(location).attr('href','clientes/IngresoClientes.jsp');
+    	$('#idContenido').load('clientes/IngresoClientes.jsp');
     });
     $('a#BusquedaClientes').click(function(evt) {
-    	$(location).attr('href','clientes/BusquedaClientes.jsp');
+    	$('#idContenido').load('clientes/BusquedaClientes.jsp');
     });
 //  Ingreso cheques
     $('a#IngresoCheque').click(function(evt) {
-    	$(location).attr('href','cheque/IngresoCheque.jsp');
+    	$('#idContenido').load('cheque/IngresoCheque.jsp');
     });
     
 //  Busqueda cheques
     $('a#BusquedaCheque').click(function(evt) {
-    	$(location).attr('href','busqueda/BusquedaCheques.jsp');
+    	$('#idContenido').load('busqueda/BusquedaCheques.jsp');
     });
     
 });

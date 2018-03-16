@@ -53,7 +53,7 @@ public class Validaciones {
 			return null;
 		}
 		String[] rut = mapValores.get("rut").split("-");
-		cliente.setRut(Integer.parseInt(rut[0]));
+		cliente.setRutDb(Integer.parseInt(rut[0]));
 		cliente.setDv_cliente(rut[1]);
 		
 		return cliente;
