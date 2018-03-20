@@ -1,10 +1,11 @@
+<script src="resources/js/agente.js"></script>
 <h3>Buscar Agente</h3>
 
 <div class="formulario tablaCentro">
 	<form>
 		<div class="form-group">
 			<label for="exampleFormControlInput1">Nombre</label> <input
-				type="text" class="form-control" id="Nombre"
+				type="text" class="form-control" id="nombre"
 				placeholder="Ingrese el nombre del Agente">
 		</div>
 		<div class="form-group">
@@ -13,7 +14,7 @@
 				placeholder="Ingrese el RUT del Agente">
 		</div>
 		<div class="botones-derecha">
-			<button type="button" class="btn btn-primary">Buscar</button>
+			<button type="button" id="buscar" class="btn btn-primary">Buscar</button>
 			<button type="button" class="btn btn-primary">Cancelar</button>
 		</div>
 	</form>
