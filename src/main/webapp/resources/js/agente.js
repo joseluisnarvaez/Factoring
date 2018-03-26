@@ -21,7 +21,7 @@ $(document).ready(function() {
 	});
 
 						
-	$("#creaCliente").submit(function(e) {
+	$("#creaAgente").submit(function(e) {
 		var form = objectifyForm($(this).serializeArray());
 		var url = "agentes/";
 		$.ajax({
@@ -44,12 +44,11 @@ $(document).ready(function() {
 	
 	 $('#actualizaCliente').submit(function(e) {
 		  var form = objectifyForm($( this ).serializeArray() );
-		  
-		  
 		  $.ajax({
 	          type: 'PUT',
 	          url: 'agentes/',
-	          data : $( this ).serializeArray() ,
+	          contentType: "application/json",
+	          data :form ,
 	          async: false,
 	          success: function(msg){
 	        	  if(msg == 1 ){
@@ -144,31 +143,25 @@ function armaTabla(data) {
 		tbody += index;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.nombreCompleto;
+		tbody += value.nombres;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.rutDb + "-" + value.dv_cliente;
+		tbody += value.rutDb + "-" + value.dv;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.banco;
+		tbody += value.monto;
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.c_corriente;
+		tbody += "<a href='#'> <i class='fa fa-pencil' data-toggle='modal' data-target='#myModal' onclick='cargaUsuario("+value.id+")'  value = '"+value.id+"'  id='editaCliente' aria-hidden='true'></i></a>";
 		tbody += "</td>";
 		tbody += "<td>";
-		tbody += value.monto_maximo_prestamo;
-		tbody += "</td>";
-		tbody += "<td>";
-		tbody += "<a href='#'> <i class='fa fa-pencil' data-toggle='modal' data-target='#myModal' onclick='cargaUsuario("+value.idClientes+")'  value = '"+value.idClientes+"'  id='editaCliente' aria-hidden='true'></i></a>";
-		tbody += "</td>";
-		tbody += "<td>";
-		tbody += "<a href='#'> <i class='fa fa-trash'  onclick='elimina("+value.idClientes+")'  aria-hidden='true'></i></a>";
+		tbody += "<a href='#'> <i class='fa fa-trash'  onclick='elimina("+value.id+")'  aria-hidden='true'></i></a>";
 		tbody += "</td>";
 		tbody += "</tr>";
 		index++;
 	});
 
-	$("#tablaClientes").html(tbody);
+	$("#tablaAgentes").html(tbody);
 }
 
 
@@ -190,12 +183,12 @@ function armaTabla(data) {
 	function cargaUsuario(id) {
 		var url = "agentes/agente/" + id;
 		$.get(url, function(data) {
-			$("#fnombre").val(data.nombreCompleto);
-			$("#frut").val(data.rutDb +"-"+data.dv_cliente);
+			$("#fnombre").val(data.nombres);
+			$("#frut").val(data.rutDb +"-"+data.dv);
 			$("#fbanco").val(data.banco);
-			$("#fctacc").val(data.c_corriente);
-			$("#fmonto").val(data.monto_maximo_prestamo);
-			$("#id").val(data.idClientes);
+			$("#fctacc").val(data.cCorriente);
+			$("#fmonto").val(data.monto);
+			$("#id").val(data.id);
 		});
 	}
 

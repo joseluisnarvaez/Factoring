@@ -3,11 +3,11 @@ $(document).ready(function() {
     $('#idContenido').load('cheque/IngresoCheque.jsp');
 //Menu Agentes
     $('a#IngresoAgente').click(function(evt) {
-    	 $(location).attr('href','agentes/IngresoAgentes.jsp');
+     	$('#idContenido').load('agentes/IngresoAgentes.jsp');
     	  
     });
     $('a#BusquedaAgente').click(function(evt) {
-    	$(location).attr('href','agentes/busquedaAgentes.jsp');
+    	$('#idContenido').load('agentes/busquedaAgentes.jsp');
     });
   
 //    Menu Clientes
