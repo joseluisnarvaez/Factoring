@@ -4,14 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 import cl.startToken.dao.ClientesDao;
 import cl.startToken.to.ClientesTO;
 
 
-@ManagedBean(name = "cliente", eager = true)
+
+@Named
 @ViewScoped
 public class IngresoClienteBeans implements Serializable {
 
@@ -28,9 +29,9 @@ public class IngresoClienteBeans implements Serializable {
 	@PostConstruct
 	public void init () {
 		to = new ClientebeanTO();
-		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+//		List<ClientesTO> lista = ClientesDao.obtenerClientes();
 		
-		to.setListaClientes(lista);
+//		to.setListaClientes(lista);
 	}
 	
 	
