@@ -1,0 +1,136 @@
+<ui:composition template="/WEB-INF/template/Template.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+>
+   <ui:define name="title">ArmusSpa</ui:define>
+   <script src="../resources/js/clientes.js"></script>
+    <ui:define name="content">
+	
+	<div class="contenido">
+		<h3>Buscar Clientes</h3>
+
+		<div class="formulario tablaCentro">
+			<h:form>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Nombre</label> <h:inputText
+						type="text" class="form-control" id="nombre"  value="#{cliente.nombre}"
+						placeholder="Ingrese el nombre del Cliente"/>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">RUT</label>
+					 <h:inputText
+						type="text" class="form-control" id="rut" required= "true"
+						oninput="checkRut(this)" value="#{cliente.rut}" placeholder="Ingrese el RUT del Cliente"/>
+				</div>
+				
+			</h:form>
+			<div class="botones-derecha">
+					<p:commandButton styleClass="btn btn-primary" value="buscar"  actionListener="#{cliente.buscar}"/>
+					
+					<button type="button"  class="btn btn-primary" id="buscar">Buscar</button>
+					<button type="button" class="btn btn-primary">Cancelar</button>
+				</div>
+
+		</div>
+		
+	
+		<div >
+				<h:form id= "tabla">
+					<p:dataTable styleClass="table table-striped"  id="tablaexport" var="item"
+						value="#{cliente.to.listaClientes}" paginator="false" rows="10">
+						<p:column headerText="Nombre" sortBy="#{item.nombreCompleto}">
+							<h:outputText value="#{item.nombreCompleto}" />
+						</p:column>
+						<p:column headerText="Rut" sortBy="#{item.rutDb}">
+							<h:outputText value="#{item.rutDb} - #{item.dv_cliente} " />
+						</p:column>
+						<p:column headerText="Banco" sortBy="#{item.banco}">
+							<h:outputText value="#{item.banco}" />
+						</p:column>
+						<p:column headerText="Cuenta Corriente" sortBy="#{item.c_corriente}">
+							<h:outputText value="#{item.c_corriente}" />
+						</p:column>
+						<p:column headerText="Monto Max. Por Cliente" sortBy="#{item.monto_maximo_prestamo}">
+							<h:outputText value="#{item.monto_maximo_prestamo}" />
+						</p:column>
+						<p:column headerText="Modificar" >
+							<h:outputText value="#{item.monto_maximo_prestamo}" />
+						</p:column>
+						<p:column headerText="Eliminar">
+							<h:outputText value="#{item.monto_maximo_prestamo}" />
+						</p:column>
+					</p:dataTable>
+
+					<h:commandLink>
+
+						<p:button styleClass="btn btn-primary"  value="Exportar PDF" />
+						<p:dataExporter  type="pdf" target="tablaexport" fileName="consulta"
+							pageOnly="true" />
+					</h:commandLink>
+
+				</h:form>
+			</div>
+
+	
+
+
+	</div>
+
+	<!-- Modal  -->
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Actualizacion Cliente</h4>
+					<button type="button" class="close" data-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<h:form method="post" id="actualizaCliente" action="#">
+						 <h:inputText type="hidden" name="id" id="id" value=""/>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Nombre</label>
+								  <h:inputText name="nombreCompleto" class="form-control"	id="fnombre" placeholder="Ingrese el nombre del Agente"/>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">RUT</label>
+								  <h:inputText name="rut" required= "true" oninput="checkRut(this)"	class="form-control" id="frut"	placeholder="Ingrese el RUT del Agente"/>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Banco</label>  <h:inputText
+									type="text" name="banco" class="form-control" id="fbanco"
+									placeholder="Ingrese el Banco del Agente"/>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">CTA. Corriente</label> <h:inputText
+									type="text" name="c_corriente" class="form-control" id="fctacc"
+									placeholder="Ingrese la cuenta corriente"/>
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Monto Max. por
+									cliente</label>  <h:inputText type="number" name="monto_maximo_prestamo"
+									class="form-control" id="fmonto"
+									placeholder="Ingrese el monto Maximo"/>
+							</div>
+
+							<div class="botones-derecha">
+								<button type="submit" class="btn btn-primary">Aceptar</button>
+								<button type="button" class="btn btn-primary"
+									data-dismiss="modal">Cancelar</button>
+							</div>
+					</h:form>
+				</div>
+				<div class="modal-footer"></div>
+			</div>
+
+		</div>
+	</div>
+    </ui:define>
+</ui:composition>
+

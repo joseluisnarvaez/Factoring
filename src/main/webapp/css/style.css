@@ -144,27 +144,10 @@ ul {
 .botones-derecha{
 	float: right;
 }
+
+
 .ui-datatable-tablewrapper{
 	overflow: visible;
-	margin-top: 10%;
+	
 }
 
-#tabla {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-#tabla td, #tabla th {
-    border: 1px solid #ddd;
-}
-
-#tabla tr:nth-child(even){background-color: #f2f2f2;}
-
-#tabla tr:hover {background-color: #ddd;}
-
-#tabla th{
-    text-align: left;
-    background-color: #007bff;
-    color: #040404;
-}
