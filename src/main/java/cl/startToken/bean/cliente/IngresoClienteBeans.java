@@ -5,21 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.inject.Named;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 import cl.startToken.dao.ClientesDao;
 import cl.startToken.to.ClientesTO;
+import cl.startToken.utils.Validaciones;
 
 
 
-@Named
+@ManagedBean
 @ViewScoped
 public class IngresoClienteBeans implements Serializable {
 
 	private static final long serialVersionUID = -5943861834526443610L;
 	
-	
+	@Inject
 	private transient ClientebeanTO to;
 	private List<ClientesTO> listaClientes;
 	private String rut;
@@ -30,32 +34,53 @@ public class IngresoClienteBeans implements Serializable {
 	@PostConstruct
 	public void init () {
 		to = new ClientebeanTO();
-		List<ClientesTO> lista = new ArrayList<>();
-		for(int i = 0 ; i< 11 ; i++){
-			
-		
-		ClientesTO cliente = new ClientesTO();
-		
-		cliente.setBanco("BBVAS");
-		cliente.setC_corriente("13245674812");;
-		cliente.setDv_cliente("3");
-		cliente.setInteres_mensual(0.3);;
-		
-		cliente.setMonto_maximo_prestamo(500000);;
-		cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD "+i);;
-		cliente.setRut("17449355-3");
-		cliente.setRutDb(17449355);
-		
-		lista.add(cliente);
-		}
-//		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+	
+		List<ClientesTO> lista = ClientesDao.obtenerClientes();
 		
 		to.setListaClientes(lista);
 	}
 	
 	
 	public void  buscar() {
-		System.out.println("en la busqueda");
+		List<ClientesTO> listaFiltro = new ArrayList<>();
+		if(to.getNombre() == null || to.getRut() == null) {
+			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Favor ingresar algun valor en las busquedas"));
+				return;
+		}
+		if(!to.getRut().contains("-") || to.getRut().contains(".")) {
+			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Formato Rut invalido (solo lleva Guines ejm: 1-9)"));
+			return;
+		}
+
+		int rut = 0 ;
+		 if(!to.getRut().isEmpty()) {
+				String[] rutValido = to.getRut().split("-");
+				boolean validacionRut = Validaciones.validarRut(rutValido[0]);
+				
+				if(!validacionRut) {
+					
+				}
+				rut = Integer.parseInt(rutValido[0]);
+		 }
+		if(!to.getNombre().isEmpty()) {
+			for(ClientesTO cliente : to.getListaClientes()) {
+				if(cliente.getNombreCompleto().contains(to.getNombre())) {
+					listaFiltro.add(cliente);
+				}
+			}
+		}
+		else if(!to.getRut().isEmpty()) {
+			for(ClientesTO cliente : to.getListaClientes()) {
+				if(cliente.getRutDb() == rut) {
+					listaFiltro.add(cliente);
+				}
+			}
+		}
+		else {
+			
+		}
+		
+
 	}
 	
 	
