@@ -1,0 +1,61 @@
+<ui:composition template="/WEB-INF/template/Template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">ArmusSpa</ui:define>
+	<script src="../resources/js/clientes.js"></script>
+
+	<ui:define name="content">
+		<div class="contenido">
+			<h3>Ingresar Clientes</h3>
+
+
+			<div class="formulario tablaCentro">
+
+				<h:form method="post" id="actualizaCliente" action="#">
+
+					<div class="form-group">
+						<label for="exampleFormControlInput1">Nombre</label>
+						<h:inputText name="nombreCompleto" class="form-control"
+							value="#{ingresoClienteBeans.to.nuevoCliente.nombreCompleto}" />
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput1">RUT</label>
+						<h:inputText name="rut"
+							value="#{ingresoClienteBeans.to.nuevoCliente.rut}"
+							class="form-control" id="frut"
+							placeholder="Ingrese el RUT del Agente" />
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput1">Banco</label>
+						<h:inputText type="text" name="banco" class="form-control"
+							value="#{ingresoClienteBeans.to.nuevoCliente.banco}"
+							placeholder="Ingrese el Banco del Agente" />
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput1">CTA. Corriente</label>
+						<h:inputText type="text" name="c_corriente" class="form-control"
+							value="#{ingresoClienteBeans.to.nuevoCliente.c_corriente}"
+							placeholder="Ingrese la cuenta corriente" />
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput1">Monto Max. por
+							cliente</label>
+						<h:inputText type="number" name="monto_maximo_prestamo"
+							value="#{ingresoClienteBeans.to.nuevoCliente.monto_maximo_prestamo}"
+							class="form-control" id="fmonto"
+							placeholder="Ingrese el monto Maximo" />
+					</div>
+
+					<div class="botones-derecha">
+						<p:commandButton value="Guardar" styleClass="btn btn-primary" action="#{ingresoClienteBeans.guardarCliente}" />
+					</div>
+				</h:form>
+
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>
+

@@ -6,21 +6,21 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-//	private static Connection con = null;
-//	private static String bd = "armusspa_armus";
-//	private static String login = "armusspa_admin";
-//	private static String pass = "admin52";
-//	private static String url = "jdbc:mysql://mysql3000.mochahost.com:3306/";
-//	private static String dsn = url + bd;
-//
-	
-	
 	private static Connection con = null;
-	private static String bd = "Armus Spa";
-	private static String login = "root";
-	private static String pass = "toor";
-	private static String url = "jdbc:mysql://127.0.0.1:3306/";
+	private static String bd = "armusspa_armus";
+	private static String login = "armusspa_admin";
+	private static String pass = "admin52";
+	private static String url = "jdbc:mysql://mysql3000.mochahost.com:3306/";
 	private static String dsn = url + bd;
+
+	
+//	
+//	private static Connection con = null;
+//	private static String bd = "Armus Spa";
+//	private static String login = "root";
+//	private static String pass = "toor";
+//	private static String url = "jdbc:mysql://127.0.0.1:3306/";
+//	private static String dsn = url + bd;
 
 	public static Connection getConnection() {
 		try {

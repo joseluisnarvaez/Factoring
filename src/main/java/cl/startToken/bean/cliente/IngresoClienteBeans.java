@@ -25,11 +25,6 @@ public class IngresoClienteBeans implements Serializable {
 	
 	@Inject
 	private transient ClientebeanTO to;
-	private List<ClientesTO> listaClientes;
-	private String rut;
-	private String nombre;
-	
-
 	
 	@PostConstruct
 	public void init () {
@@ -38,6 +33,8 @@ public class IngresoClienteBeans implements Serializable {
 		List<ClientesTO> lista = ClientesDao.obtenerClientes();
 		
 		to.setListaClientes(lista);
+		
+		to.setNuevoCliente(new ClientesTO());
 	}
 	
 	
@@ -84,28 +81,48 @@ public class IngresoClienteBeans implements Serializable {
 	}
 	
 	
-	public List<ClientesTO> getListaClientes() {
-		return listaClientes;
+	public void eliminaCliente(int idCliente) {
+		
+		ClientesDao.eliminaCliente(idCliente);
+		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+		
+		to.setListaClientes(lista);
+		
+		
 	}
-
-	public void setListaClientes(List<ClientesTO> listaClientes) {
-		this.listaClientes = listaClientes;
+	
+	
+	public void buscarClienteID(int idCliente) {
+		
+		
+		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+		
+		for (ClientesTO clientesTO : lista) {
+			if(clientesTO.getIdClientes() == idCliente) {
+				clientesTO.setRut(clientesTO.getRutDb()+"-"+clientesTO.getDv_cliente());
+				to.setClienteActualizar(clientesTO);
+				
+				break;
+			}
+		}
+		
 	}
-
-	public String getRut() {
-		return rut;
+	
+	public void actualizarCliente() {
+		ClientesDao.actualizarClientes(to.getClienteActualizar());
+		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+		
+		to.setListaClientes(lista);
 	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	
+	
+	public void guardarCliente() {
+		String[] rut = to.getNuevoCliente().getRut().split("-");
+		
+		to.getNuevoCliente().setRutDb(Integer.parseInt(rut[0]));
+		to.getNuevoCliente().setDv_cliente(rut[1]);
+		ClientesDao.crearClientes(to.getNuevoCliente());
+		
 	}
 
 	public ClientebeanTO getTo() {

@@ -12,6 +12,8 @@ public class ClientebeanTO implements Serializable {
 	private List<ClientesTO> listaClientes;
 	private String rut;
 	private String nombre;
+	private ClientesTO clienteActualizar;
+	private ClientesTO nuevoCliente;
 
 	public List<ClientesTO> getListaClientes() {
 		return listaClientes;
@@ -36,5 +38,22 @@ public class ClientebeanTO implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public ClientesTO getClienteActualizar() {
+		return clienteActualizar;
+	}
+
+	public void setClienteActualizar(ClientesTO clienteActualizar) {
+		this.clienteActualizar = clienteActualizar;
+	}
+
+	public ClientesTO getNuevoCliente() {
+		return nuevoCliente;
+	}
+
+	public void setNuevoCliente(ClientesTO nuevoCliente) {
+		this.nuevoCliente = nuevoCliente;
+	}
+	
 	
 }
