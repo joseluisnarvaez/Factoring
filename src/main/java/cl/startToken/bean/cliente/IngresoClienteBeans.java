@@ -30,7 +30,26 @@ public class IngresoClienteBeans implements Serializable {
 	public void init () {
 		to = new ClientebeanTO();
 	
-		List<ClientesTO> lista = ClientesDao.obtenerClientes();
+		List<ClientesTO> lista = new ArrayList<>();
+		for(int i = 0 ; i< 11 ; i++){
+			
+		
+		ClientesTO cliente = new ClientesTO();
+		
+		cliente.setBanco("BBVAS");
+		cliente.setC_corriente("13245674812");;
+		cliente.setDv_cliente("3");
+		cliente.setInteres_mensual(0.3);;
+		
+		cliente.setMonto_maximo_prestamo(500000);;
+		cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD");;
+		cliente.setRut("17449355-3");
+		cliente.setRutDb(17449355);
+		
+		lista.add(cliente);
+		}
+		
+//		List<ClientesTO> lista = ClientesDao.obtenerClientes();
 		
 		to.setListaClientes(lista);
 		

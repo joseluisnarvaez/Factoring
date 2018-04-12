@@ -1,4 +1,5 @@
 <ui:composition template="/WEB-INF/template/Template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -60,7 +61,7 @@
 							<h:outputText value="#{item.monto_maximo_prestamo}" />
 						</p:column>
 						<p:column headerText="Modificar" exportable="false" >
-							<p:commandLink styleClass="fa fa-pencil" update=":tabla" oncomplete="#{ingresoClienteBeans.buscarClienteID(item.idClientes)}"  onclick="PF('dlg2').show();" />
+							<p:commandLink styleClass="fa fa-pencil" update=":tabla" actionListener="#{ingresoClienteBeans.buscarClienteID(item.idClientes)}"  oncomplete="PF('dlg2').show();" />
 						</p:column>
 						<p:column headerText="Eliminar" exportable="false" >
 							<p:commandLink styleClass="fa fa-trash" actionListener="#{ingresoClienteBeans.eliminaCliente(item.idClientes)}" update=":tabla" /> 

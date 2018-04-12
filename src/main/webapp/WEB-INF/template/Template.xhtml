@@ -1,25 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 	
     <h:head>
+		 	<script type="text/javascript" src="/Factoring/javax.faces.resource/js/menu.js.jsf"/>
+		 	<script type="text/javascript" src="/Factoring/javax.faces.resource/js/bootstrap.min.js.jsf"/>
+			<f:facet name="last">
+		 <link type="text/css" rel="stylesheet" href="/Factoring/javax.faces.resource/css/style.css.jsf" />
+		 <link type="text/css" rel="stylesheet" href="/Factoring/javax.faces.resource/css/bootstrap.min.css.jsf" />
+		 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		</f:facet>
         <title>
             <ui:insert name="title">ArmusSpa</ui:insert>
         </title>        
     </h:head>
 
-    <ui:include src="Header.xhtml"/>
-
     <h:body> 
-    	
+
     	 <ui:include src = "Menu.xhtml" />
-    	 <ui:include name="mensajes" src ="Mensajes.xhtml"  />
-         <ui:insert name="content" src ="Content.xhtml"  /> 
+
+		<div class="container">
+    		<p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
+         	<ui:insert name="content"></ui:insert>
+         </div> 
      </h:body> 
 
 
