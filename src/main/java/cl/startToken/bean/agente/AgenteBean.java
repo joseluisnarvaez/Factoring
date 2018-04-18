@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import cl.startToken.dao.AgentesDao;
 import cl.startToken.to.AgentesTO;
+import cl.startToken.to.Bancos;
 import cl.startToken.utils.Validaciones;
 
 @ManagedBean
@@ -47,7 +48,13 @@ public class AgenteBean implements Serializable {
 		// lista.add(cliente);
 		// }
 		//
+		List<Bancos> listaBancos = new ArrayList<>();
 		
+		for (Bancos bancos : Bancos.values()) {
+			listaBancos.add(bancos);
+		}
+		
+		to.setListaBancos(listaBancos);
 		llenarTabla();
 		to.setNuevoAgente(new AgentesTO());
 	}

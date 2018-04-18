@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import cl.startToken.to.AgentesTO;
+import cl.startToken.to.Bancos;
 
 public class AgentebeanTO implements Serializable {
 
@@ -14,6 +15,7 @@ public class AgentebeanTO implements Serializable {
 	private String nombre;
 	private AgentesTO agenteActualizar;
 	private AgentesTO nuevoAgente;
+	private List<Bancos> listaBancos;
 
 	public String getRut() {
 		return rut;
@@ -54,5 +56,14 @@ public class AgentebeanTO implements Serializable {
 	public void setNuevoAgente(AgentesTO nuevoAgente) {
 		this.nuevoAgente = nuevoAgente;
 	}
+
+	public List<Bancos> getListaBancos() {
+		return listaBancos;
+	}
+
+	public void setListaBancos(List<Bancos> listaBancos) {
+		this.listaBancos = listaBancos;
+	}
+	
 
 }

@@ -56,7 +56,7 @@ public class AgentesDao {
 			stmt.setString(2, agente.getNombres());
 			stmt.setInt(3,agente.getRutDb());
 			stmt.setString(4, agente.getDv());
-			stmt.setString(5, agente.getBanco());
+			stmt.setInt(5, agente.getBanco());
 			stmt.setString(6, agente.getcCorriente());
 			stmt.setDouble(7, agente.getMonto());
 			
@@ -98,7 +98,7 @@ public class AgentesDao {
 			stmt.setString(1, agente.getNombres());
 			stmt.setInt(2,agente.getRutDb());
 			stmt.setString(3, agente.getDv());
-			stmt.setString(4, agente.getBanco());
+			stmt.setInt(4, agente.getBanco());
 			stmt.setString(5, agente.getcCorriente());
 			stmt.setDouble(6, agente.getMonto());
 			
@@ -117,7 +117,7 @@ public class AgentesDao {
 		agente.setNombres(rs.getString("nombre"));
 		agente.setRutDb(rs.getInt("rut"));
 		agente.setDv(rs.getString("dv_agente"));
-		agente.setBanco(rs.getString("banco"));
+		agente.setBanco(rs.getInt("banco"));
 		agente.setcCorriente(rs.getString("cCorriente"));
 		agente.setMonto(rs.getLong("monto"));
 		agente.setEstado(rs.getInt("estado"));

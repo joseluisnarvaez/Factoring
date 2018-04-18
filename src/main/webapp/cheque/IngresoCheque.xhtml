@@ -1,0 +1,113 @@
+<ui:composition template="/WEB-INF/template/Template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	
+>
+   <ui:define name="title">ArmusSpa</ui:define>
+   <script src="../resources/js/clientes.js"></script>
+	
+    <ui:define name="content">
+	<div class="contenido">
+		<h3>Ingreso de cheques</h3>
+		<div>
+		<label>Fecha de Ingreso: #{chequeBean.to.fechaIngreso}</label> 
+		</div>
+		<h:form>
+			<table>
+				<tr>
+					<td>
+					  	 <p:outputLabel value="Nombre:" for="acSimple" />
+	       				 <p:autoComplete id="acSimple" value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					</td>
+					<td>
+						 <p:commandButton  value="Cargar Cliente" actionListener="#{chequeBean.cliente}" update="@form :formCheque"/>
+					</td>
+				</tr>
+			</table>
+				<p:accordionPanel rendered="#{chequeBean.to.pintaDatos}">
+					<p:tab title="Datos Cliente">
+					<table >
+						<tr>
+							<td>
+							  	<p:outputLabel value="Nombre:"/>
+	       						<p:outputLabel id="nombreCliente" value="#{chequeBean.to.nombreCliente}"  />
+							</td>
+							<td>
+								<label for="exampleFormControlInput1">RUT</label>
+								<p:outputLabel id="rut" value="#{chequeBean.to.cliente.rut}" styleClass="" />
+							</td>	
+							<td></td>
+							<td>
+								<p:outputLabel value="Interes:"  />
+	       						<p:inputText id="interes" value="#{chequeBean.to.cliente.interes_mensual}"  />
+							</td>
+							<td>
+								<label for="exampleFormControlInput1">Riesgo</label>
+					 			<p:outputLabel styleClass="form-control" id="riesgo"	placeholder="Riesgos"/>
+							</td>
+						</tr>
+					</table>		
+						
+					</p:tab>
+				</p:accordionPanel>
+		</h:form>
+		
+		<h:form id="formCheque" rendered="true">
+			<table>
+				<tr>
+					<td>
+					  	 <p:commandButton  value="Cheque a entregar"  onclick="PF('dlg1').show();"/>
+					</td>
+					<td>
+						 <p:commandButton  value="Monto del Cheque"  onclick="PF('dlg2').show();" />
+					</td>
+				</tr>
+			</table>
+		</h:form>
+		
+		<p:dialog header="Ingreso Monto a entregar" widgetVar="dlg1" modal="true" height="100">
+		<h:form>
+    		<table>
+				<tr>
+					<td>
+					  	 <p:outputLabel value="Nombre:"  />
+	       				 <p:autoComplete   value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					</td>
+					<td>
+						 <p:commandButton  value="Cargar Cliente" actionListener="#{chequeBean.cliente}" />
+					</td>
+				</tr>
+			</table>
+		</h:form>
+		</p:dialog> 
+		<p:dialog header="Ingreso de Cheque" widgetVar="dlg2" modal="true" height="150" resizable="false">
+		<h:form>
+		
+				<h:panelGrid columns="2">
+					
+					 <p:outputLabel value="Monto a entregar"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+				 	 <p:outputLabel value="Interes Mensual"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					 <p:outputLabel value="Fecha Vencimiento"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					 <p:outputLabel value="Dias"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					 <p:outputLabel value="Monto Cheque"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+					 <p:outputLabel value="N° Cheque"  />
+					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
+				</h:panelGrid>
+		
+				<p:commandButton  value="Agregar Cheque" actionListener="#{chequeBean.cliente}"/>
+		</h:form>
+		</p:dialog> 
+		
+		</div>
+	
+    </ui:define>
+</ui:composition>
+

@@ -1,58 +1,64 @@
 package cl.startToken.bean.cheques;
 
 import java.io.Serializable;
-import java.util.List;
 
-import cl.startToken.to.AgentesTO;
+import cl.startToken.to.ClientesTO;
 
 public class ChequebeanTO implements Serializable {
 
-	private static final long serialVersionUID = 2637758829962441585L;
+	private static final long serialVersionUID = 4746449932137978887L;
+	
+	private String fechaIngreso;
+	
+	private ClientesTO clienteIngresado;
+	
+	private String nombreCliente;
+	
+	private ClientesTO cliente;
+	
+	private boolean pintaDatos;
 
-	private List<AgentesTO> listaAgente;
-	private String rut;
-	private String nombre;
-	private AgentesTO agenteActualizar;
-	private AgentesTO nuevoAgente;
-
-	public String getRut() {
-		return rut;
+	public String getFechaIngreso() {
+		return fechaIngreso;
 	}
 
-	public void setRut(String rut) {
-		this.rut = rut;
+	public void setFechaIngreso(String fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public ClientesTO getClienteIngresado() {
+		return clienteIngresado;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setClienteIngresado(ClientesTO clienteIngresado) {
+		this.clienteIngresado = clienteIngresado;
 	}
 
-	public List<AgentesTO> getListaAgente() {
-		return listaAgente;
+	public String getNombreCliente() {
+		return nombreCliente;
 	}
 
-	public void setListaAgente(List<AgentesTO> listaAgente) {
-		this.listaAgente = listaAgente;
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
 	}
 
-	public AgentesTO getAgenteActualizar() {
-		return agenteActualizar;
+	public ClientesTO getCliente() {
+		return cliente;
 	}
 
-	public void setAgenteActualizar(AgentesTO agenteActualizar) {
-		this.agenteActualizar = agenteActualizar;
+	public void setCliente(ClientesTO cliente) {
+		this.cliente = cliente;
 	}
 
-	public AgentesTO getNuevoAgente() {
-		return nuevoAgente;
+	public boolean isPintaDatos() {
+		return pintaDatos;
 	}
 
-	public void setNuevoAgente(AgentesTO nuevoAgente) {
-		this.nuevoAgente = nuevoAgente;
+	public void setPintaDatos(boolean pintaDatos) {
+		this.pintaDatos = pintaDatos;
 	}
-
+	
+	
+	
+	
 }

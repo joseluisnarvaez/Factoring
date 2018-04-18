@@ -17,6 +17,7 @@ public class ClientesTO implements Serializable {
 	private int rutDb;
 	private String dv_cliente;
 	private int banco;
+	private String glosaBanco;
 	private String c_corriente;
 	private double interes_mensual;
 	private long monto_maximo_prestamo;
@@ -103,6 +104,17 @@ public class ClientesTO implements Serializable {
 	public void setMonto_maximo_prestamo(long monto_maximo_prestamo) {
 		this.monto_maximo_prestamo = monto_maximo_prestamo;
 	}
+	
+
+	public String getGlosaBanco() {
+		return glosaBanco;
+	}
+
+
+	public void setGlosaBanco(String glosaBanco) {
+		this.glosaBanco = glosaBanco;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -7,7 +7,8 @@ public class AgentesTO {
 	private int rutDb;
 	private String dv;
 	private String rut;
-	private String banco;
+	private int banco;
+	private String glosaBanco;
 	private String cCorriente;
 	private long monto;
 	private int estado;
@@ -41,10 +42,10 @@ public class AgentesTO {
 	public void setRut(String rut) {
 		this.rut = rut;
 	}
-	public String getBanco() {
+	public int getBanco() {
 		return banco;
 	}
-	public void setBanco(String banco) {
+	public void setBanco(int banco) {
 		this.banco = banco;
 	}
 	public String getcCorriente() {
@@ -64,6 +65,12 @@ public class AgentesTO {
 	}
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	public String getGlosaBanco() {
+		return glosaBanco;
+	}
+	public void setGlosaBanco(String glosaBanco) {
+		this.glosaBanco = glosaBanco;
 	}
 	@Override
 	public String toString() {

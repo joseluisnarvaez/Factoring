@@ -45,13 +45,13 @@
 							<h:outputText value="#{i+1}" />
 						</p:column>
 						
-						<p:column headerText="Nombre" sortBy="#{item.nombreCompleto}">
+						<p:column headerText="Nombre" sortBy="#{item.nombres}">
 							<h:outputText value="#{item.nombres}" />
 						</p:column>
 						<p:column headerText="Rut" sortBy="#{item.rutDb}">
 							<h:outputText value="#{item.rutDb} - #{item.dv} " />
 						</p:column>
-						<p:column headerText="Monto Max. Por Cliente" sortBy="#{item.monto_maximo_prestamo}">
+						<p:column headerText="Monto Max. Por Cliente" sortBy="#{item.monto}">
 							<h:outputText value="#{item.monto}" />
 						</p:column>
 						<p:column headerText="Modificar" exportable="false" >

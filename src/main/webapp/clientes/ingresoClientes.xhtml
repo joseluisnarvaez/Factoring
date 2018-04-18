@@ -30,14 +30,20 @@
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Banco</label>
-						<h:inputText type="text" name="banco" class="form-control"
-							value="#{ingresoClienteBeans.to.nuevoCliente.banco}"
-							placeholder="Ingrese el Banco del Agente" />
+							<p:selectOneMenu  value="#{ingresoClienteBeans.to.nuevoCliente.banco}"  >
+									<f:selectItems value="#{ingresoClienteBeans.to.listaBancos}"    var="banco"    itemLabel="#{banco.glosa}"   itemValue="#{banco.codBanco}"/> 
+							</p:selectOneMenu>
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">CTA. Corriente</label>
 						<h:inputText type="text" name="c_corriente" class="form-control"
 							value="#{ingresoClienteBeans.to.nuevoCliente.c_corriente}"
+							placeholder="Ingrese la cuenta corriente" />
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput1">Interes Mensual</label>
+						<h:inputText type="text" name="c_corriente" class="form-control"
+							value="#{ingresoClienteBeans.to.nuevoCliente.interes_mensual}"
 							placeholder="Ingrese la cuenta corriente" />
 					</div>
 					<div class="form-group">
