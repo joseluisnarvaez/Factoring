@@ -45,7 +45,7 @@ public class Validaciones {
 		ClientesTO cliente = new ClientesTO();
 		cliente.setIdClientes(Integer.parseInt(mapValores.get("id")));
 		cliente.setNombreCompleto(mapValores.get("nombreCompleto").replace("+"," "));
-		cliente.setBanco(mapValores.get("banco"));
+//		cliente.setBanco(mapValores.get("banco"));
 		cliente.setC_corriente(mapValores.get("c_corriente"));
 		cliente.setMonto_maximo_prestamo(Long.parseLong(mapValores.get("monto_maximo_prestamo")));
 		boolean rutValido = validarRut(mapValores.get("rut"));

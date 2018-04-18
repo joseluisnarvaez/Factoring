@@ -16,7 +16,7 @@ public class ClientesTO implements Serializable {
 	private String rut;
 	private int rutDb;
 	private String dv_cliente;
-	private String banco;
+	private int banco;
 	private String c_corriente;
 	private double interes_mensual;
 	private long monto_maximo_prestamo;
@@ -72,11 +72,11 @@ public class ClientesTO implements Serializable {
 		this.dv_cliente = dv_cliente;
 	}
 
-	public String getBanco() {
+	public int getBanco() {
 		return banco;
 	}
 
-	public void setBanco(String banco) {
+	public void setBanco(int banco) {
 		this.banco = banco;
 	}
 

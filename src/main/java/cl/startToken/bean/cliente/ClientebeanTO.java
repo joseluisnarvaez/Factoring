@@ -3,6 +3,7 @@ package cl.startToken.bean.cliente;
 import java.io.Serializable;
 import java.util.List;
 
+import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
 
 public class ClientebeanTO implements Serializable {
@@ -14,6 +15,7 @@ public class ClientebeanTO implements Serializable {
 	private String nombre;
 	private ClientesTO clienteActualizar;
 	private ClientesTO nuevoCliente;
+	private List<Bancos> listaBancos;
 
 	public List<ClientesTO> getListaClientes() {
 		return listaClientes;
@@ -54,6 +56,15 @@ public class ClientebeanTO implements Serializable {
 	public void setNuevoCliente(ClientesTO nuevoCliente) {
 		this.nuevoCliente = nuevoCliente;
 	}
+
+	public List<Bancos> getListaBancos() {
+		return listaBancos;
+	}
+
+	public void setListaBancos(List<Bancos> listaBancos) {
+		this.listaBancos = listaBancos;
+	}
+	
 	
 	
 }

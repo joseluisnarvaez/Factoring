@@ -9,7 +9,7 @@
 
 	<ui:define name="content">
 		<div class="contenido">
-			<h3>Ingresar Clientes</h3>
+			<h3>Ingresar Agente</h3>
 
 
 			<div class="formulario tablaCentro">
@@ -19,38 +19,38 @@
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Nombre</label>
 						<h:inputText name="nombreCompleto" class="form-control"
-							value="#{ingresoClienteBeans.to.nuevoCliente.nombreCompleto}" />
+							value="#{agenteBean.to.nuevoAgente.nombres}" />
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">RUT</label>
 						<h:inputText name="rut"
-							value="#{ingresoClienteBeans.to.nuevoCliente.rut}"
+							value="#{agenteBean.to.nuevoAgente.rut}"
 							class="form-control" id="frut"
 							placeholder="Ingrese el RUT del Agente" />
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Banco</label>
 						<h:inputText type="text" name="banco" class="form-control"
-							value="#{ingresoClienteBeans.to.nuevoCliente.banco}"
+							value="#{agenteBean.to.nuevoAgente.banco}"
 							placeholder="Ingrese el Banco del Agente" />
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">CTA. Corriente</label>
 						<h:inputText type="text" name="c_corriente" class="form-control"
-							value="#{ingresoClienteBeans.to.nuevoCliente.c_corriente}"
+							value="#{agenteBean.to.nuevoAgente.cCorriente}"
 							placeholder="Ingrese la cuenta corriente" />
 					</div>
 					<div class="form-group">
 						<label for="exampleFormControlInput1">Monto Max. por
 							cliente</label>
 						<h:inputText type="number" name="monto_maximo_prestamo"
-							value="#{ingresoClienteBeans.to.nuevoCliente.monto_maximo_prestamo}"
+							value="#{agenteBean.to.nuevoAgente.monto}"
 							class="form-control" id="fmonto"
 							placeholder="Ingrese el monto Maximo" />
 					</div>
 
 					<div class="botones-derecha">
-						<p:commandButton value="Guardar" styleClass="btn btn-primary" action="#{ingresoClienteBeans.guardarCliente}" update=":actualizaCliente" />
+						<p:commandButton value="Guardar" styleClass="btn btn-primary" update=":actualizaCliente" action="#{agenteBean.guardarAgente}" />
 					</div>
 				</h:form>
 

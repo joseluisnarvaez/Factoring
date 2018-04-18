@@ -56,7 +56,7 @@ public class ClientesDao {
 			stmt.setString(2, cliente.getNombreCompleto());
 			stmt.setInt(3,cliente.getRutDb());
 			stmt.setString(4, cliente.getDv_cliente());
-			stmt.setString(5, cliente.getBanco());
+			stmt.setInt(5, cliente.getBanco());
 			stmt.setString(6, cliente.getC_corriente());
 			stmt.setDouble(7, cliente.getInteres_mensual());
 			stmt.setLong(8, cliente.getMonto_maximo_prestamo());
@@ -99,7 +99,7 @@ public class ClientesDao {
 			stmt.setString(1, cliente.getNombreCompleto());
 			stmt.setInt(2,cliente.getRutDb());
 			stmt.setString(3, cliente.getDv_cliente());
-			stmt.setString(4, cliente.getBanco());
+			stmt.setInt(4, cliente.getBanco());
 			stmt.setString(5, cliente.getC_corriente());
 			stmt.setDouble(6, cliente.getInteres_mensual());
 			stmt.setLong(7, cliente.getMonto_maximo_prestamo());
@@ -120,7 +120,7 @@ public class ClientesDao {
 		nombre.append(rs.getString("nombres"));
 		cliente.setIdClientes(rs.getInt("idClientes"));
 		cliente.setNombreCompleto(nombre.toString());
-		cliente.setBanco(rs.getString("banco"));
+		cliente.setBanco(rs.getInt("banco"));
 		cliente.setC_corriente(rs.getString("c_corriente"));
 		cliente.setDv_cliente(rs.getString("dv_cliente"));
 		cliente.setInteres_mensual(rs.getDouble("interes_mensual"));

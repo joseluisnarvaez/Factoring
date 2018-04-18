@@ -52,7 +52,7 @@
 							<h:outputText value="#{item.rutDb} - #{item.dv_cliente} " />
 						</p:column>
 						<p:column headerText="Banco" sortBy="#{item.banco}">
-							<h:outputText value="#{item.banco}" />
+							<h:outputText value="#{item.banco.glosa}" />
 						</p:column>
 						<p:column headerText="Cuenta Corriente" sortBy="#{item.c_corriente}">
 							<h:outputText value="#{item.c_corriente}" />
@@ -87,7 +87,7 @@
 
 	</div>
 
-<p:dialog header="Actualiza Cliente" widgetVar="dlg2" modal="true" >
+			<p:dialog header="Actualiza Cliente" widgetVar="dlg2" modal="true" >
 					<h:form method="post" id="actualizaCliente" action="#">
 						 
 							<div class="form-group">
@@ -99,9 +99,12 @@
 								  <h:inputText name="rut" value="#{ingresoClienteBeans.to.clienteActualizar.rut}"	class="form-control" id="frut"	placeholder="Ingrese el RUT del Agente"/>
 							</div>
 							<div class="form-group">
-								<label for="exampleFormControlInput1">Banco</label>  <h:inputText
-									type="text" name="banco" class="form-control" value="#{ingresoClienteBeans.to.clienteActualizar.banco}"
-									placeholder="Ingrese el Banco del Agente"/>
+								<label for="exampleFormControlInput1">Banco: </label>  
+								
+								<p:selectOneMenu  value="#{ingresoClienteBeans.to.clienteActualizar.banco}"  >
+									<f:selectItems value="#{ingresoClienteBeans.to.listaBancos}"    var="banco"    itemLabel="#{banco.codBanco}"   itemValue="#{banco.glosa}"/> 
+								</p:selectOneMenu>
+								
 							</div>
 							<div class="form-group">
 								<label for="exampleFormControlInput1">CTA. Corriente</label> <h:inputText
@@ -117,8 +120,7 @@
 
 							<div class="botones-derecha">
 								<p:commandButton value="Guardar" actionListener="#{ingresoClienteBeans.actualizarCliente}"  onclick="PF('dlg2').hidden();" styleClass="btn btn-primary"  />
-								<p:commandButton value="Cancelar"   onclick="PF('dlg2').hidden();" styleClass="btn btn-primary"  />
-								<button type="submit" class="btn btn-primary">Aceptar</button>
+								<p:commandButton value="Cancelar"   onclick="PF('dlg2').hidden();" styleClass="btn btn-primary"   />
 								
 							</div>
 					</h:form>

@@ -1,0 +1,109 @@
+<ui:composition template="/WEB-INF/template/Template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	
+>
+   <ui:define name="title">ArmusSpa</ui:define>
+   <script src="../resources/js/clientes.js"></script>
+	
+    <ui:define name="content">
+	<div class="contenido">
+		<h3>Busqueda Agentes</h3>
+
+	
+		<div class="formulario tablaCentro">
+			<h:form>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">Nombre</label> <h:inputText
+						type="text" class="form-control" id="nombre"  value="#{agenteBean.to.nombre}"
+						placeholder="Ingrese el nombre del Cliente"/>
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlInput1">RUT</label>
+					 <h:inputText
+						type="text" class="form-control" id="rut" required= "true"
+						oninput="checkRut(this)" value="#{agenteBean.to.rut}" placeholder="Ingrese el RUT del Cliente"/>
+				</div>
+				<div class="botones-derecha">
+					<p:commandButton styleClass="btn btn-primary" value="buscar"  action="#{agenteBean.buscar}" process="@this"/>
+				</div>
+				
+			</h:form>
+			
+		</div>
+		
+	
+		<div >
+				<h:form id= "tabla">
+					<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay clientes que mostrar" 
+					 id="tablaexport" var="item" value="#{agenteBean.to.listaAgente}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
+						
+						<p:column headerText="#"  exportable="false">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						
+						<p:column headerText="Nombre" sortBy="#{item.nombreCompleto}">
+							<h:outputText value="#{item.nombres}" />
+						</p:column>
+						<p:column headerText="Rut" sortBy="#{item.rutDb}">
+							<h:outputText value="#{item.rutDb} - #{item.dv} " />
+						</p:column>
+						<p:column headerText="Monto Max. Por Cliente" sortBy="#{item.monto_maximo_prestamo}">
+							<h:outputText value="#{item.monto}" />
+						</p:column>
+						<p:column headerText="Modificar" exportable="false" >
+							<p:commandLink styleClass="fa fa-pencil" update=":tabla" actionListener="#{agenteBean.buscarAgenteID(item.id)}"  oncomplete="PF('dlg2').show();" />
+						</p:column>
+						<p:column headerText="Eliminar" exportable="false" >
+							<p:commandLink styleClass="fa fa-trash" actionListener="#{agenteBean.eliminaAgente(item.id)}" update=":tabla" /> 
+						</p:column>
+					</p:dataTable>
+
+					<h:commandLink>
+
+						<p:button styleClass="btn btn-primary"  value="Exportar PDF" />
+						<p:dataExporter  type="pdf" target="tablaexport" fileName="consulta"
+							pageOnly="true" />
+					</h:commandLink>
+					<h:commandLink>
+
+						<p:button styleClass="btn btn-primary"  value="Exportar Excel" />
+						<p:dataExporter  type="xls" target="tablaexport" fileName="consulta"
+							pageOnly="true" />
+					</h:commandLink>
+
+				</h:form>
+			</div>
+
+
+	</div>
+
+<p:dialog header="Actualiza Cliente" widgetVar="dlg2" modal="true" >
+ 	<p:autoUpdate />
+	<h:form method="post" id="actualizaCliente" action="#">
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Nombre</label>
+			  	<h:inputText name="nombreCompleto" class="form-control" value="#{agenteBean.to.agenteActualizar.nombres}" />
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlInput1">RUT</label>
+				<h:inputText name="rut" value="#{agenteBean.to.agenteActualizar.rut}"	class="form-control" id="frut"	placeholder="Ingrese el RUT del Agente"/>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlInput1">Monto Max. por cliente</label>
+				<h:inputText type="number" name="monto_maximo_prestamo" value="#{agenteBean.to.agenteActualizar.monto}" class="form-control" id="fmonto" />
+			</div>
+			<div class="botones-derecha">
+				<p:commandButton value="Guardar" actionListener="#{agenteBean.actualizarAgente}"  onclick="PF('dlg2').hidden();" styleClass="btn btn-primary"  />
+				<p:commandButton value="Cancelar"   onclick="PF('dlg2').hidden();" styleClass="btn btn-primary"  />
+			</div>
+	</h:form>
+</p:dialog> 
+
+	
+    </ui:define>
+</ui:composition>
+

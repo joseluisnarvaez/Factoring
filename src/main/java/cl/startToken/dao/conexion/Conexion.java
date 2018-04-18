@@ -12,8 +12,8 @@ public class Conexion {
 //	private static String pass = "admin52";
 //	private static String url = "jdbc:mysql://mysql3000.mochahost.com:3306/";
 //	private static String dsn = url + bd;
-
-	
+//
+//	
 	
 	private static Connection con = null;
 	private static String bd = "Armus Spa";
