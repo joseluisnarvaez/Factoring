@@ -23,96 +23,46 @@
 	       				 <p:autoComplete id="acSimple" value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
 					</td>
 					<td>
-						 <p:commandButton  value="Cargar Cliente" actionListener="#{chequeBean.cliente}" update="@form :formCheque"/>
+						 <p:commandButton  value="Cargar Cliente" actionListener="#{chequeBean.cliente}" role="button" styleClass="btn  btn-primary" update="@form"/>
 					</td>
 				</tr>
 			</table>
 				<p:accordionPanel rendered="#{chequeBean.to.pintaDatos}">
 					<p:tab title="Datos Cliente">
-					<table >
-						<tr>
-							<td>
-							  	<p:outputLabel value="Nombre:"/>
-	       						<p:outputLabel id="nombreCliente" value="#{chequeBean.to.nombreCliente}"  />
-							</td>
-							<td>
-								<label for="exampleFormControlInput1">RUT</label>
-								<p:outputLabel id="rut" value="#{chequeBean.to.cliente.rut}" styleClass="" />
-							</td>	
-							<td></td>
-							<td>
-								<p:outputLabel value="Interes:"  />
-	       						<p:inputText id="interes" value="#{chequeBean.to.cliente.interes_mensual}"  />
-							</td>
-							<td>
-								<label for="exampleFormControlInput1">Riesgo</label>
-					 			<p:outputLabel styleClass="form-control" id="riesgo"	placeholder="Riesgos"/>
-							</td>
-						</tr>
-					</table>		
-						
+						<h:panelGrid columns="4"  styleClass="table table-striped" >
+						 <p:outputLabel value="Nombre"  />
+						 <p:outputLabel value="Rut"  />
+						 <p:outputLabel value="Interes"  />
+						 <p:outputLabel value="Riesgo"  />
+						 
+						 <p:outputLabel id="nombreCliente" value="#{chequeBean.to.nombreCliente}"  />
+						 <p:outputLabel id="rut" value="#{chequeBean.to.cliente.rut}"  />
+						 <p:outputLabel id="interes" value="#{chequeBean.to.cliente.interes_mensual}" />
+						 <p:outputLabel  id="riesgo" />
+					</h:panelGrid>
+					<h:panelGrid id="tipoCheque" columns="2" >
+						<p:outputLabel  value="Tipo de cheque" />
+						<p:selectOneRadio  value="#{chequeBean.to.tipoCheque}" styleClass="radio-inline" disabled="#{chequeBean.to.seleccionarTipoCheque}" >
+							<p:ajax event="change" update="@(.acordion)" listener="#{chequeBean.tipoCheque}" />
+							<f:selectItem itemLabel="Cheque a entregar" itemValue="1">
+							</f:selectItem>
+							<f:selectItem itemLabel="Monto del Cheque" itemValue="2" >
+							</f:selectItem>
+						</p:selectOneRadio>
+					</h:panelGrid>
 					</p:tab>
+				</p:accordionPanel>
+				<p:accordionPanel id="panelCheques" styleClass="acordion" rendered="#{chequeBean.to.listaCheque != null}">
+					<p:dataTable tableStyleClass="table table-striped" rendered="#{chequeBean.to.listaCheque != null}" 
+						 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
+					</p:dataTable>
+				<p:tab title="Ingreso Cheques">
+				</p:tab>
 				</p:accordionPanel>
 		</h:form>
 		
-		<h:form id="formCheque" rendered="true">
-			<table>
-				<tr>
-					<td>
-					  	 <p:commandButton  value="Cheque a entregar" onclick="PF('dlg1').show();"/>
-					</td>
-					<td>
-						 <p:commandButton  value="Monto del Cheque" actionListener="#{chequeBean.chequeCliente}" onclick="PF('dlg2').show();" />
-					</td>
-				</tr>
-			</table>
-		</h:form>
-		
-		<p:dialog header="Ingreso Monto a entregar" widgetVar="dlg1" modal="true" height="100">
-		<h:form>
-    		<table>
-				<tr>
-					<td>
-					  	 <p:outputLabel value="Nombre:"  />
-	       				 <p:autoComplete   value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-					</td>
-					<td>
-						 <p:commandButton  value="Cargar Cliente" actionListener="#{chequeBean.cliente}" />
-					</td>
-				</tr>
-			</table>
-		</h:form>
-		</p:dialog> 
-		<p:dialog header="Ingreso de Cheque" widgetVar="dlg2" modal="true" height="300" resizable="false">
-		<h:form>
-		
-				<h:panelGrid columns="2">
-					
-					 <p:outputLabel value="Monto a entregar"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-				 	 <p:outputLabel value="Interes Mensual"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-					 <p:outputLabel value="Fecha Vencimiento"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-					 <p:outputLabel value="Dias"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-					 <p:outputLabel value="Monto Cheque"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-					 <p:outputLabel value="N° Cheque"  />
-					 <p:autoComplete value="#{chequeBean.to.nombreCliente}"   completeMethod="#{chequeBean.autoCompleteCliente}" />
-				</h:panelGrid>
-		
-				<p:commandButton  value="Agregar Cheque" actionListener="#{chequeBean.cliente}"/>
-		</h:form>
-		</p:dialog> 
-		
-		</div>
-		
-		<p:dataTable tableStyleClass="table table-striped" rendered="#{chequeBean.to.listaCheque != null}" 
-					 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
-		
-		</p:dataTable>
-	
+
+	</div>
     </ui:define>
 </ui:composition>
 

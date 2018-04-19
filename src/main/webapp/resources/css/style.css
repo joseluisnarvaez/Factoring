@@ -168,3 +168,7 @@ ul {
     background-color: #007bff;
     color: #040404;
 }
+
+.ui-button-text-only .ui-button-text{
+	padding: 0em 0.5em; 
+}

@@ -22,8 +22,11 @@ public class ChequebeanTO implements Serializable {
 	
 	private List<ChequeTO> listaCheque;
 	
+	private boolean seleccionarTipoCheque; 
+	
 	private ChequeTO cheque;
 	
+	private String tipoCheque;
 
 	public String getFechaIngreso() {
 		return fechaIngreso;
@@ -80,7 +83,22 @@ public class ChequebeanTO implements Serializable {
 	public void setCheque(ChequeTO cheque) {
 		this.cheque = cheque;
 	}
-	
+
+	public String getTipoCheque() {
+		return tipoCheque;
+	}
+
+	public void setTipoCheque(String tipoCheque) {
+		this.tipoCheque = tipoCheque;
+	}
+
+	public boolean isSeleccionarTipoCheque() {
+		return seleccionarTipoCheque;
+	}
+
+	public void setSeleccionarTipoCheque(boolean seleccionarTipoCheque) {
+		this.seleccionarTipoCheque = seleccionarTipoCheque;
+	}
 	
 	
 }
