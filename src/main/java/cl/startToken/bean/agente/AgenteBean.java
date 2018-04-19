@@ -55,7 +55,7 @@ public class AgenteBean implements Serializable {
 		}
 		
 		to.setListaBancos(listaBancos);
-		llenarTabla();
+//		llenarTabla();
 		to.setNuevoAgente(new AgentesTO());
 	}
 
