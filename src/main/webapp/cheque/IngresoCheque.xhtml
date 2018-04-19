@@ -59,10 +59,10 @@
 			<table>
 				<tr>
 					<td>
-					  	 <p:commandButton  value="Cheque a entregar"  onclick="PF('dlg1').show();"/>
+					  	 <p:commandButton  value="Cheque a entregar" onclick="PF('dlg1').show();"/>
 					</td>
 					<td>
-						 <p:commandButton  value="Monto del Cheque"  onclick="PF('dlg2').show();" />
+						 <p:commandButton  value="Monto del Cheque" actionListener="#{chequeBean.chequeCliente}" onclick="PF('dlg2').show();" />
 					</td>
 				</tr>
 			</table>
@@ -83,7 +83,7 @@
 			</table>
 		</h:form>
 		</p:dialog> 
-		<p:dialog header="Ingreso de Cheque" widgetVar="dlg2" modal="true" height="150" resizable="false">
+		<p:dialog header="Ingreso de Cheque" widgetVar="dlg2" modal="true" height="300" resizable="false">
 		<h:form>
 		
 				<h:panelGrid columns="2">
@@ -107,6 +107,11 @@
 		</p:dialog> 
 		
 		</div>
+		
+		<p:dataTable tableStyleClass="table table-striped" rendered="#{chequeBean.to.listaCheque != null}" 
+					 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
+		
+		</p:dataTable>
 	
     </ui:define>
 </ui:composition>
