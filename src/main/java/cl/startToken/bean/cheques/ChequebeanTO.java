@@ -1,6 +1,7 @@
 package cl.startToken.bean.cheques;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import cl.startToken.to.ChequeTO;
@@ -27,7 +28,11 @@ public class ChequebeanTO implements Serializable {
 	private ChequeTO cheque;
 	
 	private String tipoCheque;
-
+	
+	private double interes;
+	 private Date vencimiento;
+	
+	
 	public String getFechaIngreso() {
 		return fechaIngreso;
 	}
@@ -98,6 +103,22 @@ public class ChequebeanTO implements Serializable {
 
 	public void setSeleccionarTipoCheque(boolean seleccionarTipoCheque) {
 		this.seleccionarTipoCheque = seleccionarTipoCheque;
+	}
+
+	public double getInteres() {
+		return interes;
+	}
+
+	public void setInteres(double interes) {
+		this.interes = interes;
+	}
+
+	public Date getVencimiento() {
+		return vencimiento;
+	}
+
+	public void setVencimiento(Date vencimiento) {
+		this.vencimiento = vencimiento;
 	}
 	
 	
