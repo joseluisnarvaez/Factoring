@@ -172,3 +172,12 @@ ul {
 .ui-button-text-only .ui-button-text{
 	padding: 0em 0.5em; 
 }
+
+.dias{
+	width: 27%;
+}
+
+
+.calendario{
+	    width: 60%;
+}

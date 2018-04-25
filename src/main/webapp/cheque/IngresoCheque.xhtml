@@ -43,7 +43,7 @@
 					<h:panelGrid id="tipoCheque" columns="2" >
 						<p:outputLabel  value="Tipo de cheque" />
 						<p:selectOneRadio  value="#{chequeBean.to.tipoCheque}" styleClass="radio-inline" disabled="#{chequeBean.to.seleccionarTipoCheque}" >
-							<p:ajax event="change" update="@(.acordion)" listener="#{chequeBean.tipoCheque}" />
+							<p:ajax event="change"   listener="#{chequeBean.tipoCheque}" update="@this @(.panelCheques)"/>
 							<f:selectItem itemLabel="Cheque a entregar" itemValue="1">
 							</f:selectItem>
 							<f:selectItem itemLabel="Monto del Cheque" itemValue="2" >
@@ -52,13 +52,32 @@
 					</h:panelGrid>
 					</p:tab>
 				</p:accordionPanel>
-				<p:accordionPanel id="panelCheques" styleClass="acordion" rendered="#{chequeBean.to.listaCheque != null}">
-					<p:dataTable tableStyleClass="table table-striped" rendered="#{chequeBean.to.listaCheque != null}" 
-						 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
-					</p:dataTable>
-				<p:tab title="Ingreso Cheques">
-				</p:tab>
-				</p:accordionPanel>
+				
+				<h:panelGroup id="panelCheques" styleClass="panelCheques" >
+
+					<p:accordionPanel rendered="#{chequeBean.to.seleccionarTipoCheque}">
+						<p:tab title="Ingreso Cheques">
+							<h:form>
+								<h:panelGrid columns="6" styleClass="table table-striped" >
+									<p:outputLabel value="Monto Cheque" />
+									<p:outputLabel value="Fecha Vencimiento" />
+									<p:outputLabel value="Dias" styleClass="dias" />
+									<p:outputLabel value="Int. Mensual" styleClass="dias" />
+									<p:outputLabel value="N° cheque" />
+									<p:outputLabel value="Total" />
+
+									<h:inputText id="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}" />
+									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario" pattern="dd-MM-yyyy" locale="es" showOn="button" />
+									<h:inputText id="dias" value="#{chequeBean.to.cheque.fechaVencimiento}" styleClass="dias" maxlength="2" />
+									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  disabled="true" styleClass="dias"  maxlength="2" />
+									<h:inputText id="numCheque" disabled="true" />
+									<h:inputText id="Total" disabled="true" />
+								</h:panelGrid>
+							</h:form>
+
+						</p:tab>
+					</p:accordionPanel>
+				</h:panelGroup>
 		</h:form>
 		
 

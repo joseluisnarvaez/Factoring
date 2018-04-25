@@ -101,6 +101,7 @@ public class ChequeBean implements Serializable {
 	            if(cliente.getNombreCompleto().equals(to.getNombreCliente())){
 	            	cliente.setRut(cliente.getRutDb()+"-"+cliente.getDv_cliente());
 	            	to.setCliente(cliente);
+	            	to.setInteres(cliente.getInteres_mensual());
 	            	to.setPintaDatos(true);
 	            	break;
 	            }
@@ -117,13 +118,18 @@ public class ChequeBean implements Serializable {
 	  public void guardarCheque() {
 		  List<ChequeTO> lista = new ArrayList<>();
 		  
-		  lista.add(to.getCheque());
+		  lista.add(to.getCheque());	
 		  
 		  to.getListaCheque().addAll(lista);
 	  }
 	  
 	  public void tipoCheque(){
 		  System.out.println("Cheque seleccionado : "+ to.getTipoCheque());
+		  to.setListaCheque(new ArrayList<>());
 		  to.setSeleccionarTipoCheque(true);
 	  }
+	  
+	  
+	  
+	  
 }
