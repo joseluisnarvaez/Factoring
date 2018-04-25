@@ -58,7 +58,7 @@
 					<p:accordionPanel rendered="#{chequeBean.to.seleccionarTipoCheque}">
 						<p:tab title="Ingreso Cheques">
 							<h:form>
-								<h:panelGrid columns="6" styleClass="table table-striped" >
+								<h:panelGrid columns="6" id="panelCheque" styleClass="table table-striped" >
 									<p:outputLabel value="Monto Cheque" />
 									<p:outputLabel value="Fecha Vencimiento" />
 									<p:outputLabel value="Dias" styleClass="dias" />
@@ -67,10 +67,12 @@
 									<p:outputLabel value="Total" />
 
 									<h:inputText id="montoCheque" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
-										<p:ajax event="keyup" update="Total dias" listener="#{chequeBean.onkey}" />
+										<p:ajax event="blur" update="panelCheque" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
-									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" showOn="button" />
-									<h:inputText id="dias" value="#{chequeBean.to.cheque.fechaVencimiento}" styleClass="dias" maxlength="2" />
+									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" showOn="button">
+										<p:ajax event="dateSelect" update="panelCheque" process="@this" listener="#{chequeBean.cantidadDias}" />
+									</p:calendar>
+									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="2" />
 									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="2" />
 									<h:inputText id="numCheque" styleClass="montoCheque" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>

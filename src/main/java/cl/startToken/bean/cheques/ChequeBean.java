@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import cl.startToken.dao.ClientesDao;
+import cl.startToken.to.Bancos;
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
 
@@ -24,6 +25,7 @@ public class ChequeBean implements Serializable {
 
 	@Inject
 	private transient ChequebeanTO to;
+	final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día 
 
 	@PostConstruct
 	public void init() {
@@ -44,28 +46,28 @@ public class ChequeBean implements Serializable {
 	}
 	
 	  public List<String> autoCompleteCliente(String query) {
-//			List<ClientesTO> lista = new ArrayList<>();
-//			for(int i = 0 ; i< 11 ; i++){
-//				
-//			
-//			ClientesTO cliente = new ClientesTO();
-//			
-//			cliente.setBanco(i+1);
-//			
-//			cliente.setGlosaBanco(Bancos.obtenerPorCodigo(cliente.getBanco()).getGlosa());
-//			cliente.setC_corriente("13245674812");;
-//			cliente.setDv_cliente("3");
-//			cliente.setInteres_mensual(0.3);;
-//			
-//			cliente.setMonto_maximo_prestamo(500000);;
-//			cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD");;
-//			cliente.setRut("17449355-3");
-//			cliente.setRutDb(17449355);
-//			
-//			lista.add(cliente);
-//			}
+			List<ClientesTO> lista = new ArrayList<>();
+			for(int i = 0 ; i< 11 ; i++){
+				
+			
+			ClientesTO cliente = new ClientesTO();
+			
+			cliente.setBanco(i+1);
+			
+			cliente.setGlosaBanco(Bancos.obtenerPorCodigo(cliente.getBanco()).getGlosa());
+			cliente.setC_corriente("13245674812");;
+			cliente.setDv_cliente("3");
+			cliente.setInteres_mensual(0.3);;
+			
+			cliente.setMonto_maximo_prestamo(500000);;
+			cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD");;
+			cliente.setRut("17449355-3");
+			cliente.setRutDb(17449355);
+			
+			lista.add(cliente);
+			}
 		  
-		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
+//		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
 	        List<String> results = new ArrayList<>();
 	        for(ClientesTO cliente :  lista) {
 	            if(cliente.getNombreCompleto().contains(query)){
@@ -77,28 +79,28 @@ public class ChequeBean implements Serializable {
 	  
 	  
 	  public void cliente(){
-//		  List<ClientesTO> lista = new ArrayList<>();
-//			for(int i = 0 ; i< 11 ; i++){
-//				
-//			
-//			ClientesTO cliente = new ClientesTO();
-//			
-//			cliente.setBanco(i+1);
-//			
-//			cliente.setGlosaBanco(Bancos.obtenerPorCodigo(cliente.getBanco()).getGlosa());
-//			cliente.setC_corriente("13245674812");;
-//			cliente.setDv_cliente("3");
-//			cliente.setInteres_mensual(0.3);;
-//			
-//			cliente.setMonto_maximo_prestamo(500000);;
-//			cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD");;
-//			cliente.setRut("17449355-3");
-//			cliente.setRutDb(17449355);
-//			
-//			lista.add(cliente);
-//			}
+		  List<ClientesTO> lista = new ArrayList<>();
+			for(int i = 0 ; i< 11 ; i++){
+				
+			
+			ClientesTO cliente = new ClientesTO();
+			
+			cliente.setBanco(i+1);
+			
+			cliente.setGlosaBanco(Bancos.obtenerPorCodigo(cliente.getBanco()).getGlosa());
+			cliente.setC_corriente("13245674812");;
+			cliente.setDv_cliente("3");
+			cliente.setInteres_mensual(0.3);;
+			
+			cliente.setMonto_maximo_prestamo(500000);;
+			cliente.setNombreCompleto("ASDFADSFA ASDFASDF aFDASD");;
+			cliente.setRut("17449355-3");
+			cliente.setRutDb(17449355);
+			
+			lista.add(cliente);
+			}
 //		  
-		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
+//		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
 	        for(ClientesTO cliente :  lista) {
 	            if(cliente.getNombreCompleto().equals(to.getNombreCliente())){
 	            	cliente.setRut(cliente.getRutDb()+"-"+cliente.getDv_cliente());
@@ -132,7 +134,6 @@ public class ChequeBean implements Serializable {
 	  }
 	  
 	  public void  onkey() {
-		  this.cantidadDias();
 		  if( to.getTipoCheque().equals("2")) {
 			  this.calculoChequeIngreso();
 		  }
@@ -146,7 +147,16 @@ public class ChequeBean implements Serializable {
 	  
 	  private void calculoChequeIngreso() {
 		  
-		  this.to.getCheque().setTotalPrestamo(1111111);
+		  double interes = this.interes(to.getCheque().getDias());
+		  
+		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interes)/100);
+		  
+		  to.getCheque().setTotalPrestamo(to.getCheque().getMontoCheque() + totalInteres);
+		  
+		  
+		  
+		  
+		  
 		  	
 	  }
 	  
@@ -155,8 +165,37 @@ public class ChequeBean implements Serializable {
 	  }
 	  
 	  public void cantidadDias() {
-		int dias=(int) ((to.getVencimiento().getTime()- to.getHoy().getTime())/86400000);
-		to.getCheque().setDias(dias);
+		
+		SimpleDateFormat datedia = new SimpleDateFormat("dd");
+		SimpleDateFormat datemes = new SimpleDateFormat("MM");
+		
+		int diahoy = Integer.parseInt(datedia.format(to.getHoy()));
+		int meshoy = Integer.parseInt(datemes.format(to.getHoy()));
+		
+		int diavencimiento = Integer.parseInt(datedia.format(to.getVencimiento()));
+		int mesvencimiento = Integer.parseInt(datemes.format(to.getVencimiento()));
+		
+		int difMeses= mesvencimiento - meshoy;
+		int total = 0;
+		
+		if(difMeses > 0)
+			total += difMeses * 30;
+		
+		int difDias = diavencimiento - diahoy;
+		if(difDias > 0 )
+			total += difDias;
+		
+		
+		to.getCheque().setDias(total);
+	  }
+	  
+	  
+	  private double interes(int dias){
+		  
+		  double interes =((dias/30)*to.getInteres());
+		  
+		  return interes;
+		  
 	  }
 	  
 	  
