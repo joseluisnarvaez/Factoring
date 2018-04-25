@@ -66,12 +66,14 @@
 									<p:outputLabel value="N° cheque" />
 									<p:outputLabel value="Total" />
 
-									<h:inputText id="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}" />
-									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario" pattern="dd-MM-yyyy" locale="es" showOn="button" />
+									<h:inputText id="montoCheque" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
+										<p:ajax event="keyup" update="Total dias" listener="#{chequeBean.onkey}" />
+									</h:inputText>
+									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" showOn="button" />
 									<h:inputText id="dias" value="#{chequeBean.to.cheque.fechaVencimiento}" styleClass="dias" maxlength="2" />
-									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  disabled="true" styleClass="dias"  maxlength="2" />
-									<h:inputText id="numCheque" disabled="true" />
-									<h:inputText id="Total" disabled="true" />
+									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="2" />
+									<h:inputText id="numCheque" styleClass="montoCheque" />
+									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
 								</h:panelGrid>
 							</h:form>
 

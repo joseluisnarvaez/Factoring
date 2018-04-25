@@ -174,10 +174,13 @@ ul {
 }
 
 .dias{
-	width: 27%;
+	width: 36px;
 }
-
 
 .calendario{
 	    width: 60%;
+}
+
+.montoCheque{
+	width: 120px;
 }

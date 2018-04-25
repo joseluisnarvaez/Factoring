@@ -30,7 +30,10 @@ public class ChequebeanTO implements Serializable {
 	private String tipoCheque;
 	
 	private double interes;
-	 private Date vencimiento;
+	
+	private Date vencimiento;
+	
+	private Date hoy;
 	
 	
 	public String getFechaIngreso() {
@@ -119,6 +122,14 @@ public class ChequebeanTO implements Serializable {
 
 	public void setVencimiento(Date vencimiento) {
 		this.vencimiento = vencimiento;
+	}
+
+	public Date getHoy() {
+		return hoy;
+	}
+
+	public void setHoy(Date hoy) {
+		this.hoy = hoy;
 	}
 	
 	

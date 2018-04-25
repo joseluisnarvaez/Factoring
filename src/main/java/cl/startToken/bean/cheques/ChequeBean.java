@@ -30,9 +30,11 @@ public class ChequeBean implements Serializable {
 		to = new ChequebeanTO();
 		//Fecha de ingreso
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = new Date();
-		to.setFechaIngreso(dateFormat.format(date));
+		
+		to.setHoy(new Date());
+		to.setFechaIngreso(dateFormat.format(to.getHoy()));
 		to.setSeleccionarTipoCheque(false);
+		to.setCheque(new ChequeTO());
 		
 	}
 
@@ -129,7 +131,33 @@ public class ChequeBean implements Serializable {
 		  to.setSeleccionarTipoCheque(true);
 	  }
 	  
+	  public void  onkey() {
+		  this.cantidadDias();
+		  if( to.getTipoCheque().equals("2")) {
+			  this.calculoChequeIngreso();
+		  }
+		  else if( to.getTipoCheque().equals("1")) {
+			  this.calculoMontoDeCheque();
+		  }
+		  
+		  
+	  }
 	  
+	  
+	  private void calculoChequeIngreso() {
+		  
+		  this.to.getCheque().setTotalPrestamo(1111111);
+		  	
+	  }
+	  
+	  private void calculoMontoDeCheque() {
+		  
+	  }
+	  
+	  public void cantidadDias() {
+		int dias=(int) ((to.getVencimiento().getTime()- to.getHoy().getTime())/86400000);
+		to.getCheque().setDias(dias);
+	  }
 	  
 	  
 }

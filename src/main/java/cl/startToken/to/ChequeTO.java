@@ -8,6 +8,7 @@ public class ChequeTO {
 	private int dias;
 	private long montoCheque;
 	private long numeroCheque;
+	private long totalPrestamo;
 	
 	
 	public long getMontoAEntregar() {
@@ -46,6 +47,13 @@ public class ChequeTO {
 	public void setNumeroCheque(long numeroCheque) {
 		this.numeroCheque = numeroCheque;
 	}
+	public long getTotalPrestamo() {
+		return totalPrestamo;
+	}
+	public void setTotalPrestamo(long totalPrestamo) {
+		this.totalPrestamo = totalPrestamo;
+	}
+	
 	
 	@Override
 	public String toString() {
@@ -62,7 +70,10 @@ public class ChequeTO {
 		builder.append(montoCheque);
 		builder.append(", numeroCheque=");
 		builder.append(numeroCheque);
+		builder.append(", totalPrestamo=");
+		builder.append(totalPrestamo);
 		builder.append("]");
 		return builder.toString();
 	}
+
 }
