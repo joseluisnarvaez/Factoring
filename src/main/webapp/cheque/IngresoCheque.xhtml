@@ -72,8 +72,8 @@
 									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" showOn="button">
 										<p:ajax event="dateSelect" update="panelCheque" process="@this" listener="#{chequeBean.cantidadDias}" />
 									</p:calendar>
-									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="2" />
-									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="2" />
+									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
+									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4" />
 									<h:inputText id="numCheque" styleClass="montoCheque" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
 								</h:panelGrid>

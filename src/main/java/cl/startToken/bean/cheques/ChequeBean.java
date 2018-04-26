@@ -2,17 +2,19 @@ package cl.startToken.bean.cheques;
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import cl.startToken.dao.ClientesDao;
 import cl.startToken.to.Bancos;
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
@@ -135,10 +137,11 @@ public class ChequeBean implements Serializable {
 	  
 	  public void  onkey() {
 		  if( to.getTipoCheque().equals("2")) {
-			  this.calculoChequeIngreso();
+			  this.calculoMontoDeCheque();
 		  }
 		  else if( to.getTipoCheque().equals("1")) {
-			  this.calculoMontoDeCheque();
+			  
+			  this.calculoChequeIngreso();
 		  }
 		  
 		  
@@ -149,50 +152,52 @@ public class ChequeBean implements Serializable {
 		  
 		  double interes = this.interes(to.getCheque().getDias());
 		  
-		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interes)/100);
+		  double interesTotal = (1- interes);
 		  
-		  to.getCheque().setTotalPrestamo(to.getCheque().getMontoCheque() + totalInteres);
+		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interesTotal));
 		  
+		  to.getCheque().setTotalPrestamo(totalInteres);
 		  
-		  
-		  
-		  
-		  	
 	  }
 	  
 	  private void calculoMontoDeCheque() {
 		  
+		  double interes = this.interes(to.getCheque().getDias());
+		  
+		  double interesTotal = (1- interes);
+		  
+		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interesTotal));
+		  
+		  to.getCheque().setTotalPrestamo(totalInteres);
+		  
+		  
 	  }
 	  
 	  public void cantidadDias() {
+		  int difDias = 0;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(to.getHoy());
 		
-		SimpleDateFormat datedia = new SimpleDateFormat("dd");
-		SimpleDateFormat datemes = new SimpleDateFormat("MM");
+		SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+		String inputString1 = myFormat.format(to.getHoy());
+		String inputString2 = myFormat.format(to.getVencimiento());
+
+		try {
+		    Date date1 = myFormat.parse(inputString1);
+		    Date date2 = myFormat.parse(inputString2);
+		    long diff = date2.getTime() - date1.getTime();
+		    difDias = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
-		int diahoy = Integer.parseInt(datedia.format(to.getHoy()));
-		int meshoy = Integer.parseInt(datemes.format(to.getHoy()));
-		
-		int diavencimiento = Integer.parseInt(datedia.format(to.getVencimiento()));
-		int mesvencimiento = Integer.parseInt(datemes.format(to.getVencimiento()));
-		
-		int difMeses= mesvencimiento - meshoy;
-		int total = 0;
-		
-		if(difMeses > 0)
-			total += difMeses * 30;
-		
-		int difDias = diavencimiento - diahoy;
-		if(difDias > 0 )
-			total += difDias;
-		
-		
-		to.getCheque().setDias(total);
+		to.getCheque().setDias(difDias);
 	  }
 	  
 	  
 	  private double interes(int dias){
 		  
-		  double interes =((dias/30)*to.getInteres());
+		  double interes =((to.getInteres()/30)*dias);
 		  
 		  return interes;
 		  
