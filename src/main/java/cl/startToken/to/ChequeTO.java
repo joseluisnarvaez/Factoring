@@ -9,6 +9,9 @@ public class ChequeTO {
 	private long montoCheque;
 	private long numeroCheque;
 	private long totalPrestamo;
+	private int rutCliente;
+	
+	private String fechaInicial;
 	
 	
 	public long getMontoAEntregar() {
@@ -54,7 +57,19 @@ public class ChequeTO {
 		this.totalPrestamo = totalPrestamo;
 	}
 	
+	public int getRutCliente() {
+		return rutCliente;
+	}
+	public void setRutCliente(int rutCliente) {
+		this.rutCliente = rutCliente;
+	}
 	
+	public String getFechaInicial() {
+		return fechaInicial;
+	}
+	public void setFechaInicial(String fechaInicial) {
+		this.fechaInicial = fechaInicial;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -72,6 +87,8 @@ public class ChequeTO {
 		builder.append(numeroCheque);
 		builder.append(", totalPrestamo=");
 		builder.append(totalPrestamo);
+		builder.append(", rutCliente=");
+		builder.append(rutCliente);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import cl.startToken.dao.ChequesDao;
 import cl.startToken.dao.ClientesDao;
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
@@ -126,7 +127,7 @@ public class ChequeBean implements Serializable {
 		  
 		  double interesTotal = (1- interes);
 		  
-		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interesTotal));
+		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() / interesTotal));
 		  
 		  to.getCheque().setTotalPrestamo(totalInteres);
 		  
@@ -150,7 +151,7 @@ public class ChequeBean implements Serializable {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+		to.getCheque().setFechaVencimiento(inputString2);
 		to.getCheque().setDias(difDias);
 	  }
 	  
@@ -158,10 +159,21 @@ public class ChequeBean implements Serializable {
 	  private double interes(int dias){
 		  
 		  double interes =((to.getInteres()/30)*dias);
-		  
+		  to.getCheque().setInteres(to.getInteres());
 		  return interes;
 		  
 	  }
 	  
+	  public void agregarCheque() {
+		  to.getCheque().setRutCliente(to.getCliente().getRutDb());
+		  to.getListaCheque().add(to.getCheque());
+		  to.setCheque(new ChequeTO());
+		  to.setVencimiento(null);
+	  }
+	  
+	  
+	  public void guardarProceso() {
+		  ChequesDao.crearClientes(to.getListaCheque());
+	  }
 	  
 }
