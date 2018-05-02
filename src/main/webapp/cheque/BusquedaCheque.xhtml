@@ -1,0 +1,101 @@
+<ui:composition template="/WEB-INF/template/Template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="title">ArmusSpa</ui:define>
+	<script src="../resources/js/clientes.js"></script>
+
+	<ui:define name="content">
+		<div class="contenido">
+			<h3>Busqueda de cheques</h3>
+			<p:accordionPanel>
+			<p:tab title="Busqueda">
+			
+			<table>
+				<tr>
+					<td>
+						<p:outputLabel value="Fecha de Ingreso" />
+						<p:calendar id="button" value="#{busquedaChequeBean.to.fechaInicio}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search" />
+					</td>
+					<td>
+						<p:outputLabel value="Fecha de Vencimiento" />
+						<p:calendar id="buttonV" value="#{busquedaChequeBean.to.fechaVencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search" />
+					</td>
+					<td>
+						<p:outputLabel value="Nombre Cliente" />
+						<p:inputText id="fIngreso" value="#{busquedaChequeBean.to.nombre}" styleClass="montoCheque"  />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search"  />
+						
+					</td>
+					<td>
+						<p:outputLabel value="Entregado a agente" />
+						<p:inputText id="fIngreso"  value="#{busquedaChequeBean.to.agente}"  styleClass="montoCheque"  />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search"  />
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p:outputLabel value="Titular" />
+						<br />
+						<p:inputText id="fIngreso" value="#{busquedaChequeBean.to.titular}"  styleClass="montoCheque"  />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search" />
+					</td>
+					<td>
+						<p:outputLabel value="Número de cheque" />
+						<br />
+						<p:inputText id="fIngreso" value="#{busquedaChequeBean.to.nCheque}"  styleClass="montoCheque"  />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search" />
+					</td>
+					<td>
+						<p:outputLabel value="Rut" />
+						<br />
+						<p:inputText id="fIngreso" value="#{busquedaChequeBean.to.rut}"  styleClass="montoCheque"  />
+						<p:commandLink styleClass="lupaBusqueda fa fa-search" />
+					</td>
+					<td>
+						 <h:outputLabel for="multiple" value="Estados" />
+						 <br />
+				        <p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"  multiple="true"
+				                              panelStyle="width:250px">
+				            <f:selectItems value="#{busquedaChequeBean.to.listaEstados}" />
+				        </p:selectCheckboxMenu>
+					</td>
+				</tr>
+			</table>
+			</p:tab>
+			</p:accordionPanel>
+			
+				<h:form id= "tabla">
+					<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No cheques que mostrar" 
+					 id="tablaexport" var="item" value="#{busquedaChequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
+
+						<p:column headerText="#"  exportable="false">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						<p:column headerText="#"  exportable="true">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						<p:column headerText="#"  exportable="true">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						<p:column headerText="#"  exportable="true">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						<p:column headerText="#"  exportable="true">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						<p:column headerText="#"  exportable="true">
+							<h:outputText value="#{i+1}" />
+						</p:column>
+						
+				</h:form>
+			
+		</div>
+	</ui:define>
+</ui:composition>
+

@@ -28,7 +28,6 @@ public class ChequeBean implements Serializable {
 
 	@Inject
 	private transient ChequebeanTO to;
-	final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día 
 
 	@PostConstruct
 	public void init() {
