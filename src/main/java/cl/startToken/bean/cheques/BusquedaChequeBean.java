@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
 import cl.startToken.to.EstadosCheques;
 
 @ManagedBean
@@ -32,6 +34,7 @@ public class BusquedaChequeBean implements Serializable {
 			estados.add(estado);
 		
 		to.setListaEstados(estados);
+		RequestContext.getCurrentInstance().execute("$('#btnToggleFiltros').click()");
 		
 	}
 	
