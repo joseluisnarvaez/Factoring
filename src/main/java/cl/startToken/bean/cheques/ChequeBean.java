@@ -172,7 +172,7 @@ public class ChequeBean implements Serializable {
 	  
 	  
 	  public void guardarProceso() {
-		  ChequesDao.crearClientes(to.getListaCheque());
+		  ChequesDao.crearCheque(to.getListaCheque());
 	  }
 	  
 }
