@@ -9,7 +9,7 @@ import cl.startToken.to.EstadosCheques;
 public class BusquedaChequeBeanTO {
 	
 	private List<EstadosCheques> listaEstados;
-	private List<EstadosCheques> listaEstadosSeleccionados;
+	private List<String> listaEstadosSeleccionados;
 	private Date fechaInicio;
 	private Date fechaVencimiento;
 	private String nombre;
@@ -27,10 +27,10 @@ public class BusquedaChequeBeanTO {
 	public void setListaEstados(List<EstadosCheques> listaEstados) {
 		this.listaEstados = listaEstados;
 	}
-	public List<EstadosCheques> getListaEstadosSeleccionados() {
-		return listaEstadosSeleccionados;
+	public List<String> getListaEstadosSeleccionados() {
+		return listaEstadosSeleccionados;	
 	}
-	public void setListaEstadosSeleccionados(List<EstadosCheques> listaEstadosSeleccionados) {
+	public void setListaEstadosSeleccionados(List<String> listaEstadosSeleccionados) {
 		this.listaEstadosSeleccionados = listaEstadosSeleccionados;
 	}
 	public Date getFechaInicio() {

@@ -165,6 +165,7 @@ public class ChequeBean implements Serializable {
 	  
 	  public void agregarCheque() {
 		  to.getCheque().setRutCliente(to.getCliente().getRutDb());
+		  to.getCheque().setFechaInicial(to.getFechaIngreso());
 		  to.getListaCheque().add(to.getCheque());
 		  to.setCheque(new ChequeTO());
 		  to.setVencimiento(null);

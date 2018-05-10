@@ -5,6 +5,7 @@ import java.util.List;
 
 import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
+import cl.startToken.to.TitularTO;
 
 public class ClientebeanTO implements Serializable {
 
@@ -16,6 +17,7 @@ public class ClientebeanTO implements Serializable {
 	private ClientesTO clienteActualizar;
 	private ClientesTO nuevoCliente;
 	private List<Bancos> listaBancos;
+	private TitularTO titular;
 
 	public List<ClientesTO> getListaClientes() {
 		return listaClientes;
@@ -64,7 +66,13 @@ public class ClientebeanTO implements Serializable {
 	public void setListaBancos(List<Bancos> listaBancos) {
 		this.listaBancos = listaBancos;
 	}
-	
-	
+
+	public TitularTO getTitular() {
+		return titular;
+	}
+
+	public void setTitular(TitularTO titular) {
+		this.titular = titular;
+	}
 	
 }

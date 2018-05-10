@@ -9,6 +9,7 @@ import java.util.List;
 
 import cl.startToken.dao.conexion.Conexion;
 import cl.startToken.to.ChequeTO;
+import cl.startToken.to.ClientesTO;
 import cl.startToken.to.EstadosCheques;
 
 public class ChequesDao {
@@ -30,7 +31,7 @@ public class ChequesDao {
 			stmt.setString(4,  cheque.getFechaInicial());
 			stmt.setLong(5,  cheque.getTotalPrestamo());
 			stmt.setInt(6,  cheque.getDias());
-			stmt.setLong(7,  cheque.getNumeroCheque());
+			stmt.setString(7,  cheque.getNumeroCheque());
 			
 			stmt.executeUpdate();
 			}
@@ -118,9 +119,10 @@ public class ChequesDao {
 		List<ChequeTO> listaCheques = new ArrayList<>();
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_nCheque (?,?)");
-			ResultSet rs = stmt.executeQuery()){
+			){
 			stmt.setInt(1, numero);
 			stmt.setInt(2, estado.getCodEstado());
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				listaCheques.add(parceaCheque(rs));			
 			}
@@ -139,11 +141,18 @@ public class ChequesDao {
 		
 		cheque.setDias(rs.getInt("diasCheque"));
 		cheque.setFechaInicial(rs.getString("fechaInicial"));
-		cheque.setFechaVencimiento(rs.getString("fechaVencimiento"));
+		cheque.setFechaVencimiento(rs.getString("fechaVencimiento").replace(" ","/"));
 		cheque.setInteres(rs.getDouble("interes"));		
-		cheque.setNumeroCheque(rs.getInt("numCheque"));
+		cheque.setNumeroCheque(rs.getString("numCheque"));
 		cheque.setRutCliente(rs.getInt("rutCliente"));
 		cheque.setTotalPrestamo(rs.getInt("totalPrestamo"));
+		cheque.setId(rs.getInt("idCheque"));
+		for(ClientesTO cliente : ClientesDao.obtenerClientes()) {
+			if(cliente.getRutDb() == cheque.getRutCliente()) {
+				cheque.setCliente(cliente);
+				break;
+			}
+		}
 		return cheque;
 	}
 }

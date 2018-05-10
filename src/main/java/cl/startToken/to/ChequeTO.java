@@ -1,15 +1,23 @@
 package cl.startToken.to;
 
-public class ChequeTO {
+import java.io.Serializable;
+
+public class ChequeTO implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7834334865439972485L;
 	private long montoAEntregar;
 	private double interes;
 	private String fechaVencimiento;
 	private int dias;
 	private long montoCheque;
-	private long numeroCheque;
+	private String numeroCheque;
 	private long totalPrestamo;
 	private int rutCliente;
+	private ClientesTO cliente;
+	private int id;
 	
 	private String fechaInicial;
 	
@@ -44,10 +52,10 @@ public class ChequeTO {
 	public void setMontoCheque(long montoCheque) {
 		this.montoCheque = montoCheque;
 	}
-	public long getNumeroCheque() {
+	public String getNumeroCheque() {
 		return numeroCheque;
 	}
-	public void setNumeroCheque(long numeroCheque) {
+	public void setNumeroCheque(String numeroCheque) {
 		this.numeroCheque = numeroCheque;
 	}
 	public long getTotalPrestamo() {
@@ -70,6 +78,18 @@ public class ChequeTO {
 	public void setFechaInicial(String fechaInicial) {
 		this.fechaInicial = fechaInicial;
 	}
+	public ClientesTO getCliente() {
+		return cliente;
+	}
+	public void setCliente(ClientesTO cliente) {
+		this.cliente = cliente;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -89,6 +109,12 @@ public class ChequeTO {
 		builder.append(totalPrestamo);
 		builder.append(", rutCliente=");
 		builder.append(rutCliente);
+		builder.append(", cliente=");
+		builder.append(cliente);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append(", fechaInicial=");
+		builder.append(fechaInicial);
 		builder.append("]");
 		return builder.toString();
 	}

@@ -40,7 +40,6 @@ public class BusquedaChequeBean implements Serializable {
 		
 		to.setListaEstados(estados);
 		
-		
 	}
 	
 	public void busquedaRutCliente() {
@@ -62,14 +61,21 @@ public class BusquedaChequeBean implements Serializable {
 				}
 				rut = Integer.parseInt(rutValido[0]);
 		 }
+		 else {
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Rut.)"));
+			 return ;
+		 }
 		
 		
-		for(EstadosCheques estado : to.getListaEstados()) {
-			lista.addAll( ChequesDao.busquedaRutCliente(rut, estado));
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			
+			lista.addAll( ChequesDao.busquedaRutCliente(rut, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
 		}
 		
-		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		System.out.println("Sali");
+		to.setListaCheque(lista);
+		
+		PrimeFaces.current().executeScript("alert('$('#btnToggleFiltros').click()');");
+
 	}
 	
 	public void busquedaRutAgente() {
@@ -93,12 +99,11 @@ public class BusquedaChequeBean implements Serializable {
 		 }
 		
 		
-		for(EstadosCheques estado : to.getListaEstados()) {
-			lista.addAll( ChequesDao.busquedaRutAgente(rut, estado));
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			lista.addAll( ChequesDao.busquedaRutAgente(rut, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
 		}
-		
+		to.setListaCheque(lista);
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		System.out.println("Sali");
 	}
 	
 	public void busquedaNCheque() {
@@ -122,12 +127,13 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		
 		
-		for(EstadosCheques estado : to.getListaEstados()) {
-			lista.addAll( ChequesDao.busquedaNumeroCheque(numCheque, estado));
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			lista.addAll( ChequesDao.busquedaNumeroCheque(numCheque, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		System.out.println("Sali");
+		
+		to.setListaCheque(lista);
 	}
 	
 	

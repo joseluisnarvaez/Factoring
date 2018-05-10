@@ -77,7 +77,7 @@
 									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4" />
 									<h:inputText id="numCheque" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
-									<p:commandLink styleClass="fa fa-mail-forward" process="@this" actionListener="#{chequeBean.agregarCheque}" update="@form" />
+									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
 								</h:panelGrid>
 								
 								<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay cheques que mostrar" 

@@ -12,8 +12,10 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import cl.startToken.dao.ClientesDao;
+import cl.startToken.dao.TitularDao;
 import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
+import cl.startToken.to.TitularTO;
 import cl.startToken.utils.Validaciones;
 
 
@@ -43,6 +45,7 @@ public class IngresoClienteBeans implements Serializable {
 		to.setListaClientes(lista);
 		to.setNuevoCliente(new ClientesTO());
 		to.setClienteActualizar(new ClientesTO());
+		to.setTitular(new TitularTO());
 	}
 	
 	
@@ -138,6 +141,21 @@ public class IngresoClienteBeans implements Serializable {
 
 	public ClientebeanTO getTo() {
 		return to;
+	}
+	
+	public void setCodCliente(int idCliente) {
+		to.getTitular().setIdCliente(idCliente);
+	}
+	
+	public void crearTitular() {
+		
+		String[] rut = to.getTitular().getRut().split("-");
+		to.getTitular().setRut(rut[0]);
+		to.getTitular().setDv(rut[1]);
+		TitularDao.crearTitular(to.getTitular());
+		
+		
+		
 	}
 
 }

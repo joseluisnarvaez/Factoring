@@ -1,7 +1,13 @@
 package cl.startToken.to;
 
-public class AgentesTO {
+import java.io.Serializable;
+
+public class AgentesTO implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2714000849729349225L;
 	private int id;
 	private String nombres;
 	private int rutDb;

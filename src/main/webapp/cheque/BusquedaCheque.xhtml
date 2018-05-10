@@ -9,10 +9,11 @@
 
 	<ui:define name="content">
 		<div class="contenido">
+		<h:form>
 			<h3>Busqueda de cheques</h3>
 			<p:accordionPanel id="btnToggleFiltros">
 			<p:tab title="Busqueda" >
-			<h:form>
+			
 				<table>
 				
 					<tr>
@@ -35,7 +36,7 @@
 						<td>
 							<p:outputLabel value="Entregado a agente" />
 							<p:inputText id="agente"  value="#{busquedaChequeBean.to.agente}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaRutAgente}"  process="@form"  />
+							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaRutAgente}"  update="@form"   process="@form" />
 							
 						</td>
 					</tr>
@@ -50,30 +51,71 @@
 							<p:outputLabel value="Número de cheque" />
 							<br />
 							<p:inputText id="nCheque" value="#{busquedaChequeBean.to.nCheque}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaRutAgente}"  process="@form"   />
+							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaNCheque}"  update="@form"  process="@form" />
 						</td>
 						<td>
-							<p:outputLabel value="Rut Cliente" />
-							<br />
-							<p:inputText id="rutCliente" value="#{busquedaChequeBean.to.rut}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaRutCliente}"  process="@form"/>
+							
+								<p:outputLabel value="Rut Cliente" />
+								<br />
+								<p:inputText id="rutCliente" value="#{busquedaChequeBean.to.rut}"  styleClass="montoCheque"  />
+								<p:commandLink styleClass="lupaBusqueda fa fa-search" action="#{busquedaChequeBean.busquedaRutCliente}" update="@form" process="@form"/>
+							
 						</td>
 						<td>
 							 <h:outputLabel for="multiple" value="Estados" />
 							 <br />
-					        <p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"  multiple="true"
-					                              panelStyle="width:250px">
-					            <f:selectItems value="#{busquedaChequeBean.to.listaEstados}"/>
+					        <p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"  multiple="true"  panelStyle="width:250px">
+					            <f:selectItems value="#{busquedaChequeBean.to.listaEstados}" var="item" itemValue="#{item.codEstado}" itemLabel="#{item.glosa}"/>
 					        </p:selectCheckboxMenu>
 						</td>
 					</tr>
+					
 				</table>
-			</h:form>
 			</p:tab>
 			</p:accordionPanel>
 			
 			
-		</div>
+			
+			
+					<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay Cheque que mostrar" 
+					 id="tablaexport" var="item" value="#{busquedaChequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
+						
+						<p:column headerText="Id" sortBy="#{item.id}" exportable="true">
+							<h:outputText value="#{item.id}" />
+						</p:column>
+				     	<p:column headerText="N° Cheque" sortBy="#{item.numeroCheque}">
+							<h:outputText value="#{item.numeroCheque}" />
+						</p:column>
+						<p:column headerText="Fecha Ingreso" sortBy="#{item.fechaInicial}">
+							<h:outputText value="#{item.fechaInicial}" />
+						</p:column>
+						<p:column headerText="Fecha Vencimiento" sortBy="#{item.fechaVencimiento}">
+							<h:outputText value="#{item.fechaVencimiento}" />
+						</p:column>
+						<p:column headerText="Cliente" sortBy="#{item.dias}">
+							<h:outputText value="#{item.cliente.nombreCompleto}" />
+						</p:column>
+						<p:column headerText="Total Prestamo" sortBy="#{item.totalPrestamo}">
+							<h:outputText value="#{item.totalPrestamo}" />
+						</p:column>
+					</p:dataTable>
+
+					<h:commandLink>
+
+						<p:button styleClass="btn btn-primary"  value="Exportar PDF" />
+						<p:dataExporter  type="pdf" target="tablaexport" fileName="consulta"
+							pageOnly="true" />
+					</h:commandLink>
+					<h:commandLink>
+
+						<p:button styleClass="btn btn-primary"  value="Exportar Excel" />
+						<p:dataExporter  type="xls" target="tablaexport" fileName="consulta"
+							pageOnly="true" />
+					</h:commandLink>
+
+				</h:form>
+			</div>
+			
 	</ui:define>
 </ui:composition>
 
