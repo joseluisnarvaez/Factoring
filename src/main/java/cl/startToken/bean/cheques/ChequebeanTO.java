@@ -6,6 +6,7 @@ import java.util.List;
 
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
+import cl.startToken.to.TitularTO;
 
 public class ChequebeanTO implements Serializable {
 
@@ -34,6 +35,10 @@ public class ChequebeanTO implements Serializable {
 	private Date vencimiento;
 	
 	private Date hoy;
+	
+	private List<TitularTO> titulares;
+	
+	private TitularTO titularSeleccionado;
 	
 	
 	public String getFechaIngreso() {
@@ -131,6 +136,23 @@ public class ChequebeanTO implements Serializable {
 	public void setHoy(Date hoy) {
 		this.hoy = hoy;
 	}
+
+	public List<TitularTO> getTitulares() {
+		return titulares;
+	}
+
+	public void setTitulares(List<TitularTO> titulares) {
+		this.titulares = titulares;
+	}
+
+	public TitularTO getTitularSeleccionado() {
+		return titularSeleccionado;
+	}
+
+	public void setTitularSeleccionado(TitularTO titularSeleccionado) {
+		this.titularSeleccionado = titularSeleccionado;
+	}
+	
 	
 	
 }

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class TitularTO implements Serializable {
 	
 	private static final long serialVersionUID = 5954053410827360988L;
+	private int idTitular;
 	private String nombre;
 	private String rut;
 	private String dv;
@@ -56,6 +57,12 @@ public class TitularTO implements Serializable {
 	public void setDv(String dv) {
 		this.dv = dv;
 	}
+	public int getIdTitular() {
+		return idTitular;
+	}
+	public void setIdTitular(int idTitular) {
+		this.idTitular = idTitular;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -75,6 +82,10 @@ public class TitularTO implements Serializable {
 		builder.append(idCliente);
 		builder.append("]");
 		return builder.toString();
+	}
+	public String obtenerBanco() {
+		Bancos banco = Bancos.obtenerPorCodigo(Integer.parseInt(this.banco));
+		return banco.getGlosa();
 	}
 
 }

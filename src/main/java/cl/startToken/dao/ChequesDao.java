@@ -31,8 +31,8 @@ public class ChequesDao {
 			stmt.setString(4,  cheque.getFechaInicial());
 			stmt.setLong(5,  cheque.getTotalPrestamo());
 			stmt.setInt(6,  cheque.getDias());
-			stmt.setString(7,  cheque.getNumeroCheque());
-			
+			stmt.setString(7, cheque.getCodTitular());
+			stmt.setString(8,  cheque.getNumeroCheque());
 			stmt.executeUpdate();
 			}
 			
@@ -102,9 +102,10 @@ public class ChequesDao {
 		List<ChequeTO> listaCheques = new ArrayList<>();
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_fingreso (?,?)");
-			ResultSet rs = stmt.executeQuery()){
+			){
 			stmt.setString(1, fechaIngreso);
 			stmt.setInt(2, estado.getCodEstado());
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				listaCheques.add(parceaCheque(rs));			
 			}
@@ -147,12 +148,15 @@ public class ChequesDao {
 		cheque.setRutCliente(rs.getInt("rutCliente"));
 		cheque.setTotalPrestamo(rs.getInt("totalPrestamo"));
 		cheque.setId(rs.getInt("idCheque"));
+		cheque.setCodTitular(rs.getString("idTitular"));
 		for(ClientesTO cliente : ClientesDao.obtenerClientes()) {
 			if(cliente.getRutDb() == cheque.getRutCliente()) {
 				cheque.setCliente(cliente);
 				break;
 			}
 		}
+		cheque.setTitular(TitularDao.obtenerTitular(rs.getInt("idTitular")));
+		
 		return cheque;
 	}
 }

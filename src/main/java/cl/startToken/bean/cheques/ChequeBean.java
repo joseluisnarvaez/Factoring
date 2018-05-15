@@ -17,8 +17,10 @@ import javax.inject.Inject;
 
 import cl.startToken.dao.ChequesDao;
 import cl.startToken.dao.ClientesDao;
+import cl.startToken.dao.TitularDao;
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
+import cl.startToken.to.TitularTO;
 
 @ManagedBean
 @ViewScoped
@@ -72,6 +74,9 @@ public class ChequeBean implements Serializable {
 	            	break;
 	            }
 	        }
+	        
+	        List<TitularTO> titular = TitularDao.obtenerTitulares(to.getCliente().getIdClientes());
+	        to.setTitulares(titular);
 	  }
 	  
 	  

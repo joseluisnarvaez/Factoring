@@ -5,117 +5,132 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<ui:define name="title">ArmusSpa</ui:define>
-	<script src="../resources/js/clientes.js"></script>
 
 	<ui:define name="content">
 		<div class="contenido">
-		<h:form>
-			<h3>Busqueda de cheques</h3>
-			<p:accordionPanel id="btnToggleFiltros">
-			<p:tab title="Busqueda" >
-			
-				<table>
-				
-					<tr>
-						<td>
-							<p:outputLabel value="Fecha de Ingreso" />
-							<p:calendar id="button" value="#{busquedaChequeBean.to.fechaInicio}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search" />
-						</td>
-						<td>
-							<p:outputLabel value="Fecha de Vencimiento" />
-							<p:calendar id="buttonV" value="#{busquedaChequeBean.to.fechaVencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search" />
-						</td>
-						<td>
-							<p:outputLabel value="Nombre Cliente" />
-							<p:inputText id="nombreCliente" value="#{busquedaChequeBean.to.nombre}" styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  />
-							
-						</td>
-						<td>
-							<p:outputLabel value="Entregado a agente" />
-							<p:inputText id="agente"  value="#{busquedaChequeBean.to.agente}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaRutAgente}"  update="@form"   process="@form" />
-							
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<p:outputLabel value="Titular" />
-							<br />
-							<p:inputText id="titular" value="#{busquedaChequeBean.to.titular}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  />
-						</td>
-						<td>
-							<p:outputLabel value="Número de cheque" />
-							<br />
-							<p:inputText id="nCheque" value="#{busquedaChequeBean.to.nCheque}"  styleClass="montoCheque"  />
-							<p:commandLink styleClass="lupaBusqueda fa fa-search"  actionListener="#{busquedaChequeBean.busquedaNCheque}"  update="@form"  process="@form" />
-						</td>
-						<td>
-							
-								<p:outputLabel value="Rut Cliente" />
-								<br />
-								<p:inputText id="rutCliente" value="#{busquedaChequeBean.to.rut}"  styleClass="montoCheque"  />
-								<p:commandLink styleClass="lupaBusqueda fa fa-search" action="#{busquedaChequeBean.busquedaRutCliente}" update="@form" process="@form"/>
-							
-						</td>
-						<td>
-							 <h:outputLabel for="multiple" value="Estados" />
-							 <br />
-					        <p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"  multiple="true"  panelStyle="width:250px">
-					            <f:selectItems value="#{busquedaChequeBean.to.listaEstados}" var="item" itemValue="#{item.codEstado}" itemLabel="#{item.glosa}"/>
-					        </p:selectCheckboxMenu>
-						</td>
-					</tr>
-					
-				</table>
-			</p:tab>
-			</p:accordionPanel>
-			
-			
-			
-			
-					<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay Cheque que mostrar" 
-					 id="tablaexport" var="item" value="#{busquedaChequeBean.to.listaCheque}" paginator="true" paginatorPosition="bottom" rowIndexVar="i" rows="10">
-						
-						<p:column headerText="Id" sortBy="#{item.id}" exportable="true">
-							<h:outputText value="#{item.id}" />
-						</p:column>
-				     	<p:column headerText="N° Cheque" sortBy="#{item.numeroCheque}">
-							<h:outputText value="#{item.numeroCheque}" />
-						</p:column>
-						<p:column headerText="Fecha Ingreso" sortBy="#{item.fechaInicial}">
-							<h:outputText value="#{item.fechaInicial}" />
-						</p:column>
-						<p:column headerText="Fecha Vencimiento" sortBy="#{item.fechaVencimiento}">
-							<h:outputText value="#{item.fechaVencimiento}" />
-						</p:column>
-						<p:column headerText="Cliente" sortBy="#{item.dias}">
-							<h:outputText value="#{item.cliente.nombreCompleto}" />
-						</p:column>
-						<p:column headerText="Total Prestamo" sortBy="#{item.totalPrestamo}">
-							<h:outputText value="#{item.totalPrestamo}" />
-						</p:column>
-					</p:dataTable>
+			<h:form>
+				<h3>Busqueda de cheques</h3>
+				<p:accordionPanel id="btnToggleFiltros">
+					<p:tab title="Busqueda">
 
-					<h:commandLink>
+						<table>
 
-						<p:button styleClass="btn btn-primary"  value="Exportar PDF" />
-						<p:dataExporter  type="pdf" target="tablaexport" fileName="consulta"
-							pageOnly="true" />
-					</h:commandLink>
-					<h:commandLink>
+							<tr>
+								<td><p:outputLabel value="Fecha de Ingreso" /> <p:calendar
+										id="button" value="#{busquedaChequeBean.to.fechaInicio}"
+										inputStyleClass="calendario" pattern="dd/MM/yyyy" locale="es" />
+									<p:commandLink styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaPorFechaIngreso}"
+										update="@form" process="@form" /></td>
+								<td><p:outputLabel value="Fecha de Vencimiento" /> <p:calendar
+										id="buttonV" value="#{busquedaChequeBean.to.fechaVencimiento}"
+										inputStyleClass="calendario" pattern="dd-MM-yyyy" locale="es" />
+									<p:commandLink styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaPorFechaVencimiento}"
+										update="@form" process="@form" /></td>
+								<td><p:outputLabel value="Nombre Cliente" /> <p:inputText
+										id="nombreCliente" value="#{busquedaChequeBean.to.nombre}"
+										styleClass="montoCheque" /> <p:commandLink
+										styleClass="lupaBusqueda fa fa-search" /></td>
+								<td><p:outputLabel value="Entregado a agente" /> <p:inputText
+										id="agente" value="#{busquedaChequeBean.to.agente}"
+										styleClass="montoCheque" /> <p:commandLink
+										styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaRutAgente}"
+										update="@form" process="@form" /></td>
+							</tr>
+							<tr>
+								<td><p:outputLabel value="Titular" /> <br /> <p:inputText
+										id="titular" value="#{busquedaChequeBean.to.titular}"
+										styleClass="montoCheque" /> <p:commandLink
+										styleClass="lupaBusqueda fa fa-search" /></td>
+								<td><p:outputLabel value="Número de cheque" /> <br /> <p:inputText
+										id="nCheque" value="#{busquedaChequeBean.to.nCheque}"
+										styleClass="montoCheque" /> <p:commandLink
+										styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaNCheque}"
+										update="@form" process="@form" /></td>
+								<td><p:outputLabel value="Rut Cliente" /> <br /> <p:inputText
+										id="rutCliente" value="#{busquedaChequeBean.to.rut}"
+										styleClass="montoCheque" /> <p:commandLink
+										styleClass="lupaBusqueda fa fa-search"
+										action="#{busquedaChequeBean.busquedaRutCliente}"
+										update="@form" process="@form" /></td>
+								<td><h:outputLabel for="multiple" value="Estados" /> <br />
+									<p:selectCheckboxMenu id="estados"
+										value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"
+										multiple="true" panelStyle="width:250px">
+										<f:selectItems value="#{busquedaChequeBean.to.listaEstados}"
+											var="item" itemValue="#{item.codEstado}"
+											itemLabel="#{item.glosa}" />
+									</p:selectCheckboxMenu></td>
+							</tr>
 
-						<p:button styleClass="btn btn-primary"  value="Exportar Excel" />
-						<p:dataExporter  type="xls" target="tablaexport" fileName="consulta"
-							pageOnly="true" />
-					</h:commandLink>
+						</table>
+					</p:tab>
+				</p:accordionPanel>
 
-				</h:form>
-			</div>
-			
+
+
+
+				<p:dataTable tableStyleClass="table table-striped"
+					emptyMessage="No hay Cheque que mostrar" id="tablaexport"
+					var="item" value="#{busquedaChequeBean.to.listaCheque}"
+					paginator="true" paginatorPosition="bottom" rowIndexVar="i"
+					rows="10">
+
+					<p:column headerText="Id" sortBy="#{item.id}" exportable="true">
+						<h:outputText value="#{item.id}" />
+					</p:column>
+					<p:column headerText="N° Cheque" sortBy="#{item.numeroCheque}">
+						<h:outputText value="#{item.numeroCheque}" />
+					</p:column>
+					<p:column headerText="Fecha Ingreso" sortBy="#{item.fechaInicial}">
+						<h:outputText value="#{item.fechaInicial}" />
+					</p:column>
+					<p:column headerText="Fecha Vencimiento"
+						sortBy="#{item.fechaVencimiento}">
+						<h:outputText value="#{item.fechaVencimiento}" />
+					</p:column>
+					<p:column headerText="Cliente" sortBy="#{item.dias}">
+						<h:outputText value="#{item.cliente.nombreCompleto}" />
+					</p:column>
+					<p:column headerText="Rut Titular" sortBy="#{item.titular.rut}">
+						<h:outputText value="#{item.titular.rut}-#{item.titular.dv}  " />
+					</p:column>
+					<p:column headerText="Nombre titular"
+						sortBy="#{item.titular.nombre}">
+						<h:outputText value="#{item.titular.nombre}" />
+					</p:column>
+					<p:column headerText="Cta cte titular"
+						sortBy="#{item.titular.cuentaCorriente}">
+						<h:outputText value="#{item.titular.cuentaCorriente}" />
+					</p:column>
+					<p:column headerText="Banco">
+						<h:outputText value="#{item.titular.obtenerBanco()}" />
+					</p:column>
+					<p:column headerText="Total Prestamo"
+						sortBy="#{item.totalPrestamo}">
+						<h:outputText value="#{item.totalPrestamo}" />
+					</p:column>
+				</p:dataTable>
+
+				<h:commandLink>
+
+					<p:button styleClass="btn btn-primary" value="Exportar PDF" />
+					<p:dataExporter type="pdf" target="tablaexport" fileName="consulta"
+						pageOnly="true" />
+				</h:commandLink>
+				<h:commandLink>
+
+					<p:button styleClass="btn btn-primary" value="Exportar Excel" />
+					<p:dataExporter type="xls" target="tablaexport" fileName="consulta"
+						pageOnly="true" />
+				</h:commandLink>
+
+			</h:form>
+		</div>
+
 	</ui:define>
 </ui:composition>
 

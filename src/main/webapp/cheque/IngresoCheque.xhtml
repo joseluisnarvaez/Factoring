@@ -58,25 +58,31 @@
 					<p:accordionPanel rendered="#{chequeBean.to.seleccionarTipoCheque}">
 						<p:tab title="Ingreso Cheques">
 							<h:form id="panelCheque">
-								<h:panelGrid columns="7" styleClass="table table-striped" >
+								<h:panelGrid columns="8" styleClass="table table-striped" >
 									<p:outputLabel value="Monto Cheque" />
 									<p:outputLabel value="Fecha Vencimiento" />
 									<p:outputLabel value="Dias" styleClass="dias" />
 									<p:outputLabel value="Int. Mensual" styleClass="dias" />
 									<p:outputLabel value="N° cheque" />
 									<p:outputLabel value="Total" />
+									<p:outputLabel value="Titular" />
 									<p:outputLabel value="agregar" />
 
 									<h:inputText id="montoCheque" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
 										<p:ajax event="blur" update="panelCheque" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
-									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es" showOn="button">
+									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es">
 										<p:ajax event="dateSelect" update="panelCheque" process="@this" listener="#{chequeBean.cantidadDias}" />
 									</p:calendar>
 									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
 									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4" />
 									<h:inputText id="numCheque" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
+															
+							        <p:selectOneMenu id="titular" showHeader="false" value="#{chequeBean.to.cheque.codTitular}" title="Titular"   multiple="false"  panelStyle="width:250px">
+							        	<f:selectItem itemLabel="Seleccionar"/>
+							            <f:selectItems value="#{chequeBean.to.titulares}" var="item" itemValue="#{item.idTitular}" itemLabel="#{item.nombre}"/>
+							        </p:selectOneMenu>
 									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
 								</h:panelGrid>
 								

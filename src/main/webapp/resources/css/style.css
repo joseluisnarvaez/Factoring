@@ -178,7 +178,7 @@ ul {
 }
 
 .calendario{
-	    width: 60%;
+	   width: 95px;
 }
 
 .montoCheque{
@@ -187,4 +187,10 @@ ul {
 
 .lupaBusqueda{
 	margin-left: 5%;
+}
+
+.tablacheque{
+	position: absolute;
+    margin-left: -72px;
+    margin-right: 125px;
 }

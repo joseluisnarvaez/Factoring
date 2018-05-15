@@ -18,8 +18,9 @@ public class ChequeTO implements Serializable  {
 	private int rutCliente;
 	private ClientesTO cliente;
 	private int id;
-	
 	private String fechaInicial;
+	private String codTitular;
+	private TitularTO titular;
 	
 	
 	public long getMontoAEntregar() {
@@ -89,6 +90,18 @@ public class ChequeTO implements Serializable  {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getCodTitular() {
+		return codTitular;
+	}
+	public void setCodTitular(String codTitular) {
+		this.codTitular = codTitular;
+	}
+	public TitularTO getTitular() {
+		return titular;
+	}
+	public void setTitular(TitularTO titular) {
+		this.titular = titular;
 	}
 	@Override
 	public String toString() {

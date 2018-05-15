@@ -1,6 +1,9 @@
 package cl.startToken.bean.cheques;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,6 +140,57 @@ public class BusquedaChequeBean implements Serializable {
 	}
 	
 	
+	public void busquedaPorFechaIngreso() {
+		
+		if(to.getListaEstadosSeleccionados().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
+			return ;
+		}
+		List<ChequeTO> lista = new ArrayList<>();
+
+		if (to.getFechaInicio() == null) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Una fecha de ingreso.)"));
+			return;
+		}
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		String fecha =  df.format(to.getFechaInicio());
+		
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			lista.addAll( ChequesDao.busquedaFIngreso(fecha, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
+		}
+		
+		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
+		
+		to.setListaCheque(lista);
+	}
+	
+	
+
+	public void busquedaPorFechaVencimiento() {
+		
+		if(to.getListaEstadosSeleccionados().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
+			return ;
+		}
+		List<ChequeTO> lista = new ArrayList<>();
+
+		if (to.getFechaVencimiento() == null) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Una fecha de Termino."));
+			return;
+		}
+		
+		DateFormat df = new SimpleDateFormat("dd MM yyyy");
+		String fecha =  df.format(to.getFechaVencimiento());
+		
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			lista.addAll( ChequesDao.busquedaFVencimiento(fecha, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
+		}
+		
+		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
+		
+		to.setListaCheque(lista);
+	}
 	
 	
 	
