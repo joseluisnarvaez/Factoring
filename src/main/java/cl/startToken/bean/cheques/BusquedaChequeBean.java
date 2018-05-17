@@ -15,8 +15,12 @@ import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 
 import cl.startToken.dao.ChequesDao;
+import cl.startToken.dao.ClientesDao;
+import cl.startToken.dao.TitularDao;
 import cl.startToken.to.ChequeTO;
+import cl.startToken.to.ClientesTO;
 import cl.startToken.to.EstadosCheques;
+import cl.startToken.to.TitularTO;
 import cl.startToken.utils.Validaciones;
 
 @ManagedBean
@@ -75,7 +79,7 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		
 		to.setListaCheque(lista);
-		
+		limpiarVariables();
 		PrimeFaces.current().executeScript("alert('$('#btnToggleFiltros').click()');");
 
 	}
@@ -105,6 +109,7 @@ public class BusquedaChequeBean implements Serializable {
 			lista.addAll( ChequesDao.busquedaRutAgente(rut, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
 		}
 		to.setListaCheque(lista);
+		limpiarVariables();
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
 	}
 	
@@ -134,7 +139,7 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		
+		limpiarVariables();
 		to.setListaCheque(lista);
 	}
 	
@@ -160,7 +165,7 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		
+		limpiarVariables();
 		to.setListaCheque(lista);
 	}
 	
@@ -187,14 +192,94 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
-		
+		limpiarVariables();
 		to.setListaCheque(lista);
 	}
 	
-	
-	
-	
+
+	public void busquedaPorNombreTitular() {
+		
+		if(to.getListaEstadosSeleccionados().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
+			return ;
+		}
+		if (to.getTitular().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar el nombre de un titular."));
+			return;
+		}
+		
+		List<ChequeTO> lista = new ArrayList<>();
+
+
+		List<TitularTO> listaTitulares = TitularDao.obtenerNombre(to.getTitular());
+		
+		for (TitularTO titularTO : listaTitulares) {
+			lista.addAll( ChequesDao.busquedaIdTitular(titularTO.getIdTitular()));
+		}
+
+		List<ChequeTO> listaSalida = new ArrayList<>();
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			
+			for(ChequeTO cheque : lista) {
+				if(cheque.getEstado().getCodEstado()== Integer.parseInt(estado))
+					listaSalida.add(cheque);
+			}
+			
+		}
+		
+		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
+		
+		to.setListaCheque(listaSalida);
+		limpiarVariables();
+	}
 	
 
+	public void busquedaPorNombreCliente() {
+		
+		if(to.getListaEstadosSeleccionados().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
+			return ;
+		}
+		if (to.getNombre().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar el nombre de un titular."));
+			return;
+		}
+		
+		List<ChequeTO> lista = new ArrayList<>();
+
+
+		List<ClientesTO> listaClientes = ClientesDao.obtenerClientes();
+		List<ClientesTO> listaClientesSeleccionado = new ArrayList<>();
+		
+		for (ClientesTO cliente : listaClientes) {
+			if(cliente.getNombreCompleto().contains(to.getNombre())) {
+				listaClientesSeleccionado.add(cliente);
+			}
+		}
+
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			
+			for(ClientesTO cliente : listaClientesSeleccionado) {
+				lista.addAll( ChequesDao.busquedaRutCliente(cliente.getRutDb(), EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
+			}
+			
+		}
+		
+		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
+		
+		to.setListaCheque(lista);
+		limpiarVariables();
+	}
+	
+	private void limpiarVariables() {
+		to.setAgente("");
+		to.setFechaInicio(null);
+		to.setFechaVencimiento(null);;
+		to.setListaEstadosSeleccionados(new ArrayList<>());;
+		to.setnCheque("");
+		to.setNombre("");
+		to.setRut("");
+		to.setTitular("");
+	}
 
 }

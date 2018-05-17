@@ -21,6 +21,7 @@ public class ChequeTO implements Serializable  {
 	private String fechaInicial;
 	private String codTitular;
 	private TitularTO titular;
+	private EstadosCheques estado;
 	
 	
 	public long getMontoAEntregar() {
@@ -102,6 +103,12 @@ public class ChequeTO implements Serializable  {
 	}
 	public void setTitular(TitularTO titular) {
 		this.titular = titular;
+	}
+	public EstadosCheques getEstado() {
+		return estado;
+	}
+	public void setEstado(EstadosCheques estado) {
+		this.estado = estado;
 	}
 	@Override
 	public String toString() {

@@ -31,7 +31,9 @@
 								<td><p:outputLabel value="Nombre Cliente" /> <p:inputText
 										id="nombreCliente" value="#{busquedaChequeBean.to.nombre}"
 										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search" /></td>
+										styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaPorNombreCliente}"
+										update="@form" process="@form" /></td>
 								<td><p:outputLabel value="Entregado a agente" /> <p:inputText
 										id="agente" value="#{busquedaChequeBean.to.agente}"
 										styleClass="montoCheque" /> <p:commandLink
@@ -43,7 +45,9 @@
 								<td><p:outputLabel value="Titular" /> <br /> <p:inputText
 										id="titular" value="#{busquedaChequeBean.to.titular}"
 										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search" /></td>
+										styleClass="lupaBusqueda fa fa-search"
+										actionListener="#{busquedaChequeBean.busquedaPorNombreTitular}"
+										update="@form" process="@form" /></td>
 								<td><p:outputLabel value="Número de cheque" /> <br /> <p:inputText
 										id="nCheque" value="#{busquedaChequeBean.to.nCheque}"
 										styleClass="montoCheque" /> <p:commandLink

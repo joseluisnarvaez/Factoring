@@ -1,44 +1,50 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<head>
+<h:head>
   <meta charset="UTF-8"/>
   <title>Login Form</title>
   
       <link rel="stylesheet" href="css/styleIndex.css"/>
   
-</head>
+</h:head>
 
 <body>
 
   <body>
+		<p:messages id="messages" showDetail="true" closable="true">
+       		 <p:autoUpdate />
+    	</p:messages>
 	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
 				<h1>Factoring</h1>
 			</div>
-
-			<div class="login-form">
-				<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="username" id="login-name"/>
-				<label class="login-field-icon fui-user" for="login-name"></label>
+	
+				<div class="login-form">
+				<h:form>
+					<div class="control-group">
+					<p:inputText id="login-name" value="#{login.to.usuario}" styleClass="login-field" />
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					</div>
+	
+					<div class="control-group">
+					<p:password id="login-pass" value="#{login.to.contrasenia}" styleClass="login-field" />
+					<label class="login-field-icon fui-lock" for="login-pass"></label>
+					</div>
+	
+					<p:commandLink styleClass="btn btn-primary btn-large btn-block" value="login" action="#{login.inicioSession}" process="@form"/>
+					</h:form>				
 				</div>
-
-				<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="password" id="login-pass"/>
-				<label class="login-field-icon fui-lock" for="login-pass"></label>
-				</div>
-
-				<a class="btn btn-primary btn-large btn-block" href="#">login</a>
-				<a class="login-link" href="#">Lost your password?</a>
 			</div>
+	
 		</div>
-	</div>
+
 </body>
   
   

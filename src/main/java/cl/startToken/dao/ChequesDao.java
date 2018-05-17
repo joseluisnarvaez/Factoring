@@ -134,6 +134,23 @@ public class ChequesDao {
 		return listaCheques;
 	}
 	
+	public static List<ChequeTO> busquedaIdTitular(int id){
+		List<ChequeTO> listaCheques = new ArrayList<>();
+		try(Connection con = Conexion.getConnection(); 
+			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_id_titular (?)");
+			){
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				listaCheques.add(parceaCheque(rs));			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaCheques;
+	}
+	
 	
 	
 	private static ChequeTO parceaCheque(ResultSet rs) throws SQLException {
@@ -149,6 +166,7 @@ public class ChequesDao {
 		cheque.setTotalPrestamo(rs.getInt("totalPrestamo"));
 		cheque.setId(rs.getInt("idCheque"));
 		cheque.setCodTitular(rs.getString("idTitular"));
+		cheque.setEstado(EstadosCheques.obtenerPorCodigo(rs.getInt("estado")));
 		for(ClientesTO cliente : ClientesDao.obtenerClientes()) {
 			if(cliente.getRutDb() == cheque.getRutCliente()) {
 				cheque.setCliente(cliente);

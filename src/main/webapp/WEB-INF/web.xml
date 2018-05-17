@@ -45,8 +45,7 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-<!-- <context-param> -->
-<!--     <param-name>primefaces.THEME</param-name> -->
-<!--     <param-value>none</param-value> -->
-<!--   </context-param> -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 </web-app>

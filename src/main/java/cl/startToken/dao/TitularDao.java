@@ -99,4 +99,38 @@ public class TitularDao {
 		return titular;
 	}
 	
+	
+	/**
+	 * Obtiene los titulares Por nombre
+	 * 
+	 * @return List<TitularTO>
+	 * @author Jnarvaez
+	 */
+	public static List<TitularTO> obtenerNombre(String nombre) {
+		List<TitularTO> lista = new ArrayList<>();
+		
+		try(Connection con = Conexion.getConnection(); 
+			PreparedStatement stmt = con.prepareStatement("call sp_lst_titular_nombre (?)");
+			){
+			stmt.setString(1, "%"+nombre+"%");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				TitularTO titular = new TitularTO();
+				titular.setBanco(rs.getString("banco"));
+				titular.setNombre(rs.getString("nombres"));
+				titular.setRut(rs.getString("rut"));
+				titular.setDv(rs.getString("dv"));
+				titular.setCuentaCorriente(rs.getString("c_corriente"));
+				titular.setIdCliente(rs.getInt("Clientes_idClientes"));
+				titular.setMontoMaximo(rs.getLong("montoMaximo"));
+				titular.setIdTitular(rs.getInt("idcuentas_anexas"));
+				lista.add(titular);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	
 }
