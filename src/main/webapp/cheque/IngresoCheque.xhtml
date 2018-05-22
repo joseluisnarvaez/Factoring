@@ -29,22 +29,20 @@
 			</table>
 				<p:accordionPanel rendered="#{chequeBean.to.pintaDatos}">
 					<p:tab title="Datos Cliente">
-						<h:panelGrid columns="4"  styleClass="table table-striped" >
+						<h:panelGrid columns="3"  styleClass="table table-striped" >
 						 <p:outputLabel value="Nombre"  />
-						 <p:outputLabel value="Rut"  />
 						 <p:outputLabel value="Interes"  />
 						 <p:outputLabel value="Riesgo"  />
 						 
 						 <p:outputLabel id="nombreCliente" value="#{chequeBean.to.nombreCliente}"  />
-						 <p:outputLabel id="rut" value="#{chequeBean.to.cliente.rut}"  />
-						 <p:outputLabel id="interes" value="#{chequeBean.to.cliente.interes_mensual}" />
+						 <p:outputLabel id="interes" value="#{chequeBean.to.cliente.interes_mensual}%" />
 						 <p:outputLabel  id="riesgo" />
 					</h:panelGrid>
 					<h:panelGrid id="tipoCheque" columns="2" >
 						<p:outputLabel  value="Tipo de cheque" />
 						<p:selectOneRadio  value="#{chequeBean.to.tipoCheque}" styleClass="radio-inline" disabled="#{chequeBean.to.seleccionarTipoCheque}" >
 							<p:ajax event="change"   listener="#{chequeBean.tipoCheque}" update="@this @(.panelCheques)"/>
-							<f:selectItem itemLabel="Cheque a entregar" itemValue="1">
+							<f:selectItem itemLabel="Monto a entregar" itemValue="1">
 							</f:selectItem>
 							<f:selectItem itemLabel="Monto del Cheque" itemValue="2" >
 							</f:selectItem>
@@ -75,7 +73,9 @@
 										<p:ajax event="dateSelect" update="panelCheque" process="@this" listener="#{chequeBean.cantidadDias}" />
 									</p:calendar>
 									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
-									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4" />
+									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4">
+										<p:ajax event="blur" update="panelCheque" process="@form" listener="#{chequeBean.onkey}" />
+									</h:inputText>
 									<h:inputText id="numCheque" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
 															
@@ -85,38 +85,39 @@
 							        </p:selectOneMenu>
 									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
 								</h:panelGrid>
-								
-								<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay cheques que mostrar" 
-								 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="false" paginatorPosition="bottom" rowIndexVar="i" >
-									
-									<p:column headerText="#"  exportable="false">
-										<h:outputText value="#{i+1}" />
-									</p:column>
-									
-									<p:column headerText="Num° Cheque" sortBy="#{item.numeroCheque}">
-										<h:outputText value="#{item.numeroCheque}" />
-									</p:column>
-									<p:column headerText="Monto Cheque" sortBy="#{item.montoCheque}">
-										<h:outputText value="#{item.montoCheque} " />
-									</p:column>
-									<p:column headerText="Fecha Vencimiento" sortBy="#{item.fechaVencimiento}">
-										<h:outputText value="#{item.fechaVencimiento}" />
-									</p:column>
-									<p:column headerText="Dias" sortBy="#{item.dias}">
-										<h:outputText value="#{item.dias}" />
-									</p:column>
-									<p:column headerText="Int. Mensual" sortBy="#{item.interes}">
-										<h:outputText value="#{item.interes}" />
-									</p:column>
-									<p:column headerText="Total" exportable="false" >
-										<h:outputText value="#{item.totalPrestamo}" />
-									</p:column>
-									<p:column headerText="Eliminar" exportable="false" >
-			
-									</p:column>
-								</p:dataTable>
-								
-								 <p:commandButton  value="Procesar" action="#{chequeBean.guardarProceso}" process="@this" role="button" styleClass="btn  btn-primary" update="@form"/>
+								<h:form>
+										<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay cheques que mostrar" 
+										 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="false" rowIndexVar="i" >
+											
+											<p:column headerText="#"  exportable="false">
+												<h:outputText value="#{i+1}" />
+											</p:column>
+											
+											<p:column headerText="Num° Cheque" sortBy="#{item.numeroCheque}">
+												<h:outputText value="#{item.numeroCheque}" />
+											</p:column>
+											<p:column headerText="Monto Cheque" sortBy="#{item.montoCheque}">
+												<h:outputText value="#{item.montoCheque} " />
+											</p:column>
+											<p:column headerText="Fecha Vencimiento" sortBy="#{item.fechaVencimiento}">
+												<h:outputText value="#{item.fechaVencimiento}" />
+											</p:column>
+											<p:column headerText="Dias" sortBy="#{item.dias}">
+												<h:outputText value="#{item.dias}" />
+											</p:column>
+											<p:column headerText="Int. Mensual" sortBy="#{item.interes}">
+												<h:outputText value="#{item.interes}" />
+											</p:column>
+											<p:column headerText="Total" exportable="false" >
+												<h:outputText value="#{item.totalPrestamo}" />
+											</p:column>
+											<p:column headerText="Eliminar" exportable="false" >
+												<p:commandLink styleClass="fa fa-trash" actionListener="#{chequeBean.eliminaCheque(item.numeroCheque)}" update="@form" />	
+											</p:column>
+										</p:dataTable>
+										<p:commandButton  value="Procesar" action="#{chequeBean.guardarProceso}" process="@this" role="button" styleClass="btn  btn-primary" update="@form"/>
+									</h:form>
+								 
 							</h:form>
 
 						</p:tab>

@@ -48,18 +48,6 @@
 						<p:column headerText="Nombre" sortBy="#{item.nombreCompleto}">
 							<h:outputText value="#{item.nombreCompleto}" />
 						</p:column>
-						<p:column headerText="Rut" sortBy="#{item.rutDb}">
-							<h:outputText value="#{item.rutDb} - #{item.dv_cliente} " />
-						</p:column>
-						<p:column headerText="Banco" sortBy="#{item.banco}">
-							<h:outputText value="#{item.glosaBanco}" />
-						</p:column>
-						<p:column headerText="Cuenta Corriente" sortBy="#{item.c_corriente}">
-							<h:outputText value="#{item.c_corriente}" />
-						</p:column>
-						<p:column headerText="Monto Max. Por Cliente" sortBy="#{item.monto_maximo_prestamo}">
-							<h:outputText value="#{item.monto_maximo_prestamo}" />
-						</p:column>
 						<p:column headerText="Agregar Agente" exportable="false" >
 							<p:commandLink styleClass="fa fa-pencil" update=":tabla"  actionListener="#{ingresoClienteBeans.setCodCliente(item.idClientes)}"  oncomplete="PF('dlg3').show();" />
 						</p:column>

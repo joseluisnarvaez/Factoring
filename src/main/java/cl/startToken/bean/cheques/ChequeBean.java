@@ -11,8 +11,10 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import cl.startToken.dao.ChequesDao;
@@ -161,14 +163,23 @@ public class ChequeBean implements Serializable {
 	  
 	  
 	  private double interes(int dias){
-		  
-		  double interes =((to.getInteres()/30)*dias);
+		 
+		  double interesDecimal =to.getInteres()/100; 
+		  double interes =((interesDecimal/30)*dias);
 		  to.getCheque().setInteres(to.getInteres());
 		  return interes;
 		  
 	  }
 	  
 	  public void agregarCheque() {
+//		  if(to.getTitularSeleccionado() == null) {
+//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un Titular."));
+//				return ;
+//		  }
+		  if(to.getCheque().getNumeroCheque() == null || to.getCheque().getNumeroCheque().isEmpty()) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que ingresar un Numero de Cheque."));
+				return ;
+		  }
 		  to.getCheque().setRutCliente(to.getCliente().getRutDb());
 		  to.getCheque().setFechaInicial(to.getFechaIngreso());
 		  to.getListaCheque().add(to.getCheque());
@@ -179,6 +190,17 @@ public class ChequeBean implements Serializable {
 	  
 	  public void guardarProceso() {
 		  ChequesDao.crearCheque(to.getListaCheque());
+	  }
+	  
+	  public void eliminaCheque(String numCheque) {
+		  List<ChequeTO> listaSalida = new ArrayList<>();
+		  for(ChequeTO item : to.getListaCheque()) {
+			  if(!item.getNumeroCheque().equals(numCheque)) {
+				  listaSalida.add(item);
+			  }
+		  }
+		  
+		  to.setListaCheque(listaSalida);
 	  }
 	  
 }
