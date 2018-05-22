@@ -172,10 +172,10 @@ public class ChequeBean implements Serializable {
 	  }
 	  
 	  public void agregarCheque() {
-//		  if(to.getTitularSeleccionado() == null) {
-//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un Titular."));
-//				return ;
-//		  }
+		  if(to.getTitularSeleccionado() == null) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un Titular."));
+				return ;
+		  }
 		  if(to.getCheque().getNumeroCheque() == null || to.getCheque().getNumeroCheque().isEmpty()) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que ingresar un Numero de Cheque."));
 				return ;
