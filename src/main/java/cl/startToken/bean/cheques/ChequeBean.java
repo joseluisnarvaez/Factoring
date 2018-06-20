@@ -23,6 +23,7 @@ import cl.startToken.dao.TitularDao;
 import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
 import cl.startToken.to.TitularTO;
+import cl.startToken.utils.SessionJsf;
 
 @ManagedBean
 @ViewScoped
@@ -35,6 +36,7 @@ public class ChequeBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		SessionJsf.validaSession();
 		to = new ChequebeanTO();
 		//Fecha de ingreso
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

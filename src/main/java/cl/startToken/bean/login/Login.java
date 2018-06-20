@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import cl.startToken.dao.LoginDao;
 import cl.startToken.to.Usuario;
+import cl.startToken.utils.SessionJsf;
 
 @ManagedBean
 @SessionScoped
@@ -37,6 +38,7 @@ public class Login {
 				&& usuario.getContrasenia().equals(to.getContrasenia())) {
 					FacesContext contex = FacesContext.getCurrentInstance();
 		            try {
+		            	SessionJsf.seteaSession(usuario);
 						contex.getExternalContext().redirect( "cheque/BusquedaCheque.jsf" );
 					} catch (IOException e) {
 						e.printStackTrace();

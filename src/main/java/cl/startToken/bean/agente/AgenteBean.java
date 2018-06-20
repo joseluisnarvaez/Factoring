@@ -1,5 +1,6 @@
 package cl.startToken.bean.agente;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,15 @@ import javax.inject.Inject;
 import cl.startToken.dao.AgentesDao;
 import cl.startToken.to.AgentesTO;
 import cl.startToken.to.Bancos;
+import cl.startToken.utils.SessionJsf;
 import cl.startToken.utils.Validaciones;
+
+/**
+ * Clase bean de agente
+ * 
+ * @author JNarvaez
+ *
+ */
 
 @ManagedBean
 @ViewScoped
@@ -27,6 +36,7 @@ public class AgenteBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		SessionJsf.validaSession();
 		to = new AgentebeanTO();
 	
 		List<Bancos> listaBancos = new ArrayList<>();

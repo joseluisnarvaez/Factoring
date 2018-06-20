@@ -21,6 +21,7 @@ import cl.startToken.to.ChequeTO;
 import cl.startToken.to.ClientesTO;
 import cl.startToken.to.EstadosCheques;
 import cl.startToken.to.TitularTO;
+import cl.startToken.utils.SessionJsf;
 import cl.startToken.utils.Validaciones;
 
 @ManagedBean
@@ -37,6 +38,7 @@ public class BusquedaChequeBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		SessionJsf.validaSession();
 		to = new BusquedaChequeBeanTO();
 		
 		List<EstadosCheques> estados = new ArrayList<>();

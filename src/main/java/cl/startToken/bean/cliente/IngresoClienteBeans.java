@@ -16,6 +16,7 @@ import cl.startToken.dao.TitularDao;
 import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
 import cl.startToken.to.TitularTO;
+import cl.startToken.utils.SessionJsf;
 import cl.startToken.utils.Validaciones;
 
 
@@ -31,6 +32,7 @@ public class IngresoClienteBeans implements Serializable {
 	
 	@PostConstruct
 	public void init () {
+		SessionJsf.validaSession();
 		to = new ClientebeanTO();
 		
 		List<ClientesTO> lista = ClientesDao.obtenerClientes();
