@@ -74,6 +74,7 @@ ul {
   border-radius: 4px;
   margin-top: 8px;
   border: solid 1px #1e2a36;
+  margin-left: 100px;
 }
   .main-nav > li {
     float: left;
@@ -163,11 +164,6 @@ ul {
 
 #tabla tr:hover {background-color: #ddd;}
 
-#tabla th{
-    text-align: left;
-    background-color: #007bff;
-    color: #040404;
-}
 
 .ui-button-text-only .ui-button-text{
 	padding: 0em 0.5em; 
@@ -198,3 +194,57 @@ ul {
 .img-login{
 	width: 263px;
 }
+
+/* Tabla Css */
+.tablaDefinitiva { 
+    width: 750px; 
+    border-collapse: collapse; 
+    margin:50px auto;
+    }
+
+.tablaDefinitiva tr:nth-of-type(odd) { 
+    background: #eee; 
+    }
+.tablaDefinitiva th { 
+    background: #2980b9 !important; 
+    color: white !important;
+    text-shadow: none !important;
+    }
+.tablaDefinitiva td, th { 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+    font-size: 12px;
+    }
+    
+    
+    .trFiltro {
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

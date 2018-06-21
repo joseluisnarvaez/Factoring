@@ -16,58 +16,86 @@
 						<table>
 
 							<tr>
-								<td><p:outputLabel value="Fecha de Ingreso" /> <p:calendar
-										id="button" value="#{busquedaChequeBean.to.fechaInicio}"
-										inputStyleClass="calendario" pattern="dd/MM/yyyy" locale="es" />
-									<p:commandLink styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaPorFechaIngreso}"
-										update="@form" process="@form" /></td>
-								<td><p:outputLabel value="Fecha de Vencimiento" /> <p:calendar
-										id="buttonV" value="#{busquedaChequeBean.to.fechaVencimiento}"
-										inputStyleClass="calendario" pattern="dd-MM-yyyy" locale="es" />
-									<p:commandLink styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaPorFechaVencimiento}"
-										update="@form" process="@form" /></td>
-								<td><p:outputLabel value="Nombre Cliente" /> <p:inputText
-										id="nombreCliente" value="#{busquedaChequeBean.to.nombre}"
-										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaPorNombreCliente}"
-										update="@form" process="@form" /></td>
-								<td><p:outputLabel value="Entregado a agente" /> <p:inputText
-										id="agente" value="#{busquedaChequeBean.to.agente}"
-										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaRutAgente}"
-										update="@form" process="@form" /></td>
+								<td>
+									<table>
+										<tr>
+											<td style="width: 162px;"><p:outputLabel value="Fecha de Ingreso" /> </td>
+											<td><p:calendar id="button" value="#{busquedaChequeBean.to.fechaInicio}" inputStyleClass="calendario" pattern="dd/MM/yyyy" locale="es" /></td>
+											<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorFechaIngreso}" update="@form" process="@form" /></td>
+										</tr>
+									</table>
+								</td>
+								<td>
+									<table>
+										<tr>
+											<td style="width: 102px;"><p:outputLabel value="Fecha de Vencimiento" /></td>
+											<td><p:calendar id="buttonV" value="#{busquedaChequeBean.to.fechaVencimiento}" inputStyleClass="calendario" pattern="dd-MM-yyyy" locale="es" /></td>
+											<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorFechaVencimiento}" update="@form" process="@form" /></td>
+										</tr>
+									</table>
+
+								</td>
+								<td>
+									<table>
+										<tr>
+											<td><p:outputLabel value="Nombre Cliente" /></td>		
+											<td><p:inputText id="nombreCliente" value="#{busquedaChequeBean.to.nombre}" styleClass="montoCheque" /></td>		
+											<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorNombreCliente}" update="@form" process="@form" /></td>		
+										</tr>
+									</table>
+								
+							 	</td>
+								<td>
+									<table>
+											<tr>
+												<td><p:outputLabel value="Entregado a agente" /></td>
+												<td><p:inputText id="agente" value="#{busquedaChequeBean.to.agente}" styleClass="montoCheque" /></td>
+												<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaRutAgente}" update="@form" process="@form" /></td>
+											</tr>
+									</table>
+								</td>	
+								<td>
+									<table>
+											<tr>
+												<td><p:outputLabel value="Titular" /></td>
+												<td><p:inputText id="titular" value="#{busquedaChequeBean.to.titular}" styleClass="montoCheque" /></td>
+												<td> <p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorNombreTitular}"	update="@form" process="@form" /></td>
+											</tr>
+									</table>
+								</td>											
 							</tr>
 							<tr>
-								<td><p:outputLabel value="Titular" /> <br /> <p:inputText
-										id="titular" value="#{busquedaChequeBean.to.titular}"
-										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaPorNombreTitular}"
-										update="@form" process="@form" /></td>
-								<td><p:outputLabel value="Número de cheque" /> <br /> <p:inputText
-										id="nCheque" value="#{busquedaChequeBean.to.nCheque}"
-										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search"
-										actionListener="#{busquedaChequeBean.busquedaNCheque}"
-										update="@form" process="@form" /></td>
-								<td><p:outputLabel value="Rut Cliente" /> <br /> <p:inputText
-										id="rutCliente" value="#{busquedaChequeBean.to.rut}"
-										styleClass="montoCheque" /> <p:commandLink
-										styleClass="lupaBusqueda fa fa-search"
-										action="#{busquedaChequeBean.busquedaRutCliente}"
-										update="@form" process="@form" /></td>
-								<td><h:outputLabel for="multiple" value="Estados" /> <br />
-									<p:selectCheckboxMenu id="estados"
-										value="#{busquedaChequeBean.to.listaEstadosSeleccionados}"
-										multiple="true" panelStyle="width:250px">
-										<f:selectItems value="#{busquedaChequeBean.to.listaEstados}"
-											var="item" itemValue="#{item.codEstado}"
-											itemLabel="#{item.glosa}" />
-									</p:selectCheckboxMenu></td>
+								<td>
+									<table>
+											<tr>
+												<td><p:outputLabel value="Número de cheque" /></td>
+												<td><p:inputText id="nCheque" value="#{busquedaChequeBean.to.nCheque}" styleClass="montoCheque" /></td>
+												<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaNCheque}" update="@form" process="@form" /></td>
+											</tr>
+									</table>
+											
+								</td>
+								<td>
+									<table>
+											<tr>
+												<td><p:outputLabel value="Rut Cliente" /></td>
+												<td><p:inputText id="rutCliente" value="#{busquedaChequeBean.to.rut}" styleClass="montoCheque" /></td>
+												<td><p:commandLink styleClass="lupaBusqueda fa fa-search" action="#{busquedaChequeBean.busquedaRutCliente}" update="@form" process="@form" /></td>
+											</tr>
+									</table>
+								</td>
+								<td>
+									<table>
+											<tr>
+												<td style="width: 113px;"><h:outputLabel for="multiple" value="Estados" /></td>
+												<td>
+													<p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}" multiple="true" panelStyle="width:250px">
+														<f:selectItems value="#{busquedaChequeBean.to.listaEstados}" var="item" itemValue="#{item.codEstado}" itemLabel="#{item.glosa}" />
+													</p:selectCheckboxMenu>			
+												</td>
+											</tr>
+									</table>
+								 </td>
 							</tr>
 
 						</table>
@@ -77,7 +105,7 @@
 
 
 
-				<p:dataTable tableStyleClass="table table-striped"
+				<p:dataTable tableStyleClass="tablaDefinitiva"
 					emptyMessage="No hay Cheque que mostrar" id="tablaexport"
 					var="item" value="#{busquedaChequeBean.to.listaCheque}"
 					paginator="true" paginatorPosition="bottom" rowIndexVar="i"
