@@ -86,7 +86,7 @@
 									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
 								</h:panelGrid>
 								<h:form>
-										<p:dataTable  tableStyleClass="table table-striped"  emptyMessage="No hay cheques que mostrar" 
+										<p:dataTable  tableStyleClass="tablaDefinitiva"  emptyMessage="No hay cheques que mostrar" 
 										 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="false" rowIndexVar="i" >
 											
 											<p:column headerText="#"  exportable="false">
