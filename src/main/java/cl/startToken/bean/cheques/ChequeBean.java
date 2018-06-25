@@ -17,6 +17,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.context.RequestContext;
+
 import cl.startToken.dao.ChequesDao;
 import cl.startToken.dao.ClientesDao;
 import cl.startToken.dao.TitularDao;
@@ -45,7 +47,7 @@ public class ChequeBean implements Serializable {
 		to.setFechaIngreso(dateFormat.format(to.getHoy()));
 		to.setSeleccionarTipoCheque(false);
 		to.setCheque(new ChequeTO());
-		
+		to.setRenderDatosUsuarios(true);
 	}
 
 	public ChequebeanTO getTo() {
@@ -81,6 +83,7 @@ public class ChequeBean implements Serializable {
 	        
 	        List<TitularTO> titular = TitularDao.obtenerTitulares(to.getCliente().getIdClientes());
 	        to.setTitulares(titular);
+	        
 	  }
 	  
 	  
@@ -98,10 +101,13 @@ public class ChequeBean implements Serializable {
 		  to.getListaCheque().addAll(lista);
 	  }
 	  
-	  public void tipoCheque(){
+	  @SuppressWarnings("deprecation")
+	public void tipoCheque(){
 		  System.out.println("Cheque seleccionado : "+ to.getTipoCheque());
 		  to.setListaCheque(new ArrayList<>());
 		  to.setSeleccionarTipoCheque(true);
+		  
+		  RequestContext.getCurrentInstance().execute("$('.acordion > div').click()");
 	  }
 	  
 	  public void  onkey() {
@@ -161,7 +167,7 @@ public class ChequeBean implements Serializable {
 		}
 		to.getCheque().setFechaVencimiento(inputString2);
 		to.getCheque().setDias(difDias);
-		calculoChequeIngreso();
+		onkey();
 	  }
 	  
 	  
@@ -194,6 +200,9 @@ public class ChequeBean implements Serializable {
 	  public void guardarProceso() {
 		  ChequesDao.crearCheque(to.getListaCheque());
 		  to.setListaCheque(new ArrayList<>());
+		  to.setCliente(new ClientesTO());
+		  to.setPintaDatos(false);
+		  to.setNombreCliente("");;
 		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Los Cheques se ingresaron correctamente."));
 	  }
 	  

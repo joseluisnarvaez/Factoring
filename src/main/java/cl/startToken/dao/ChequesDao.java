@@ -29,8 +29,8 @@ public class ChequesDao {
 			stmt.setDouble(2,  cheque.getInteres());
 			stmt.setString(3,  cheque.getFechaVencimiento());
 			stmt.setString(4,  cheque.getFechaInicial());
-			stmt.setLong(5,  cheque.getTotalPrestamo());
-			stmt.setInt(6,  cheque.getDias());
+			stmt.setInt(5,  cheque.getDias());
+			stmt.setLong(6,  cheque.getTotalPrestamo());
 			stmt.setString(7,  cheque.getNumeroCheque());
 			stmt.setString(8, cheque.getCodTitular());
 			stmt.executeUpdate();
@@ -82,9 +82,10 @@ public class ChequesDao {
 		List<ChequeTO> listaCheques = new ArrayList<>();
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_fvencimiento (?,?)");
-			ResultSet rs = stmt.executeQuery()){
+			){
 			stmt.setString(1, fechaVencimiento);
 			stmt.setInt(2, estado.getCodEstado());
+			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				listaCheques.add(parceaCheque(rs));			
 			}
@@ -116,12 +117,12 @@ public class ChequesDao {
 		return listaCheques;
 	}
 	
-	public static List<ChequeTO> busquedaNumeroCheque(int numero,EstadosCheques estado){
+	public static List<ChequeTO> busquedaNumeroCheque(long numero,EstadosCheques estado){
 		List<ChequeTO> listaCheques = new ArrayList<>();
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_nCheque (?,?)");
 			){
-			stmt.setInt(1, numero);
+			stmt.setLong(1, numero);
 			stmt.setInt(2, estado.getCodEstado());
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {

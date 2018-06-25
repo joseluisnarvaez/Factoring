@@ -23,6 +23,7 @@ public class SessionJsf {
 	
 	
 	public static void validaSession() {
+		try {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -32,6 +33,14 @@ public class SessionJsf {
 				contex.getExternalContext().redirect( "/Factoring" );
 			} catch (IOException e) {
 				e.printStackTrace();
+			}
+		}
+		}catch (Exception e) {
+			FacesContext contex = FacesContext.getCurrentInstance();
+			try {
+				contex.getExternalContext().redirect( "/Factoring" );
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}
 	}

@@ -27,8 +27,8 @@
 					</td>
 				</tr>
 			</table>
-				<p:accordionPanel rendered="#{chequeBean.to.pintaDatos}">
-					<p:tab title="Datos Cliente">
+				<p:accordionPanel styleClass="acordion" id="btnToggleFiltros"   rendered="#{chequeBean.to.pintaDatos}">
+					<p:tab title="Datos Cliente" >
 						<h:panelGrid columns="3"  styleClass="table table-striped" >
 						 <p:outputLabel value="Nombre"  />
 						 <p:outputLabel value="Interes"  />
@@ -54,8 +54,8 @@
 				<h:panelGroup id="panelCheques" styleClass="panelCheques" >
 
 					<p:accordionPanel rendered="#{chequeBean.to.seleccionarTipoCheque}">
-						<p:tab title="Ingreso Cheques">
-							<h:form id="panelCheque">
+						<p:tab title="Ingreso Cheques" id="panelCheque">
+							<h:form >
 								<h:panelGrid columns="8" styleClass="table table-striped" >
 									<p:outputLabel value="Monto Cheque" />
 									<p:outputLabel value="Fecha Vencimiento" />
@@ -67,14 +67,14 @@
 									<p:outputLabel value="agregar" />
 
 									<h:inputText id="montoCheque" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
-										<p:ajax event="blur" update="panelCheque" process="@form" listener="#{chequeBean.onkey}" />
+										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
 									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es">
-										<p:ajax event="dateSelect" update="panelCheque" process="@this" listener="#{chequeBean.cantidadDias}" />
+										<p:ajax event="dateSelect" update="@form" process="@this" listener="#{chequeBean.cantidadDias}" />
 									</p:calendar>
 									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
 									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4">
-										<p:ajax event="blur" update="panelCheque" process="@form" listener="#{chequeBean.onkey}" />
+										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
 									<h:inputText id="numCheque" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
 									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
@@ -85,7 +85,6 @@
 							        </p:selectOneMenu>
 									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
 								</h:panelGrid>
-								<h:form>
 										<p:dataTable  tableStyleClass="tablaDefinitiva"  emptyMessage="No hay cheques que mostrar" 
 										 id="tablaexport" var="item" value="#{chequeBean.to.listaCheque}" paginator="false" rowIndexVar="i" >
 											
@@ -112,13 +111,13 @@
 												<h:outputText value="#{item.totalPrestamo}" />
 											</p:column>
 											<p:column headerText="Eliminar" exportable="false" >
-												<p:commandLink styleClass="fa fa-trash" actionListener="#{chequeBean.eliminaCheque(item.numeroCheque)}" update="@form" />	
+												<p:commandLink styleClass="fa fa-trash" process="@this" actionListener="#{chequeBean.eliminaCheque(item.numeroCheque)}" update="@form" /> 
 											</p:column>
 										</p:dataTable>
 										<p:commandButton  value="Procesar" action="#{chequeBean.guardarProceso}" process="@this" role="button" styleClass="btn  btn-primary" update="@form"/>
 									</h:form>
 								 
-							</h:form>
+							
 
 						</p:tab>
 					</p:accordionPanel>

@@ -78,15 +78,6 @@
 								<td>
 									<table>
 											<tr>
-												<td><p:outputLabel value="Rut Cliente" /></td>
-												<td><p:inputText id="rutCliente" value="#{busquedaChequeBean.to.rut}" styleClass="montoCheque" /></td>
-												<td><p:commandLink styleClass="lupaBusqueda fa fa-search" action="#{busquedaChequeBean.busquedaRutCliente}" update="@form" process="@form" /></td>
-											</tr>
-									</table>
-								</td>
-								<td>
-									<table>
-											<tr>
 												<td style="width: 113px;"><h:outputLabel for="multiple" value="Estados" /></td>
 												<td>
 													<p:selectCheckboxMenu id="estados" value="#{busquedaChequeBean.to.listaEstadosSeleccionados}" multiple="true" panelStyle="width:250px">

@@ -1,6 +1,7 @@
 package cl.startToken.bean.login;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,8 +15,10 @@ import cl.startToken.utils.SessionJsf;
 
 @ManagedBean
 @SessionScoped
-public class Login {
+public class Login implements Serializable {
 	
+
+	private static final long serialVersionUID = -3793232891850972594L;
 	private transient LoginTO to;
 	
 	public LoginTO getTo() {
@@ -45,13 +48,13 @@ public class Login {
 					}
 				}
 				else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña Invalida."));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseï¿½a Invalida."));
 					 return;
 				}
 			
 		}
 		else {
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña Invalida."));
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseï¿½a Invalida."));
 			 return;
 		}
 		

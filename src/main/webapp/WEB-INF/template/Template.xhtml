@@ -24,7 +24,9 @@
     	 <ui:include src = "Menu.xhtml" />
 
 		<div class="container-fluid">
-    		<p:messages id="messages" showDetail="true" closable="true" autoUpdate="true"/>
+    		<p:messages id="messages" showDetail="true" closable="true">
+    			<p:autoUpdate/>
+    		</p:messages>
          	<ui:insert name="content"></ui:insert>
          </div> 
      </h:body> 

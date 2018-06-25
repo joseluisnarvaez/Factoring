@@ -49,42 +49,7 @@ public class BusquedaChequeBean implements Serializable {
 		to.setListaEstados(estados);
 		
 	}
-	
-	public void busquedaRutCliente() {
-		
-		if(to.getListaEstadosSeleccionados().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
-			return ;
-		}
-		List<ChequeTO> lista = new ArrayList<>();
 
-		int rut = 0 ;
-		 if(!to.getRut().isEmpty()) {
-				String[] rutValido = to.getRut().split("-");
-				boolean validacionRut = Validaciones.validarRut(to.getRut());
-				
-				if(!validacionRut) {
-					  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Rut Invalido.)"));
-						return;
-				}
-				rut = Integer.parseInt(rutValido[0]);
-		 }
-		 else {
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Rut.)"));
-			 return ;
-		 }
-		
-		
-		for(String estado : to.getListaEstadosSeleccionados()) {
-			
-			lista.addAll( ChequesDao.busquedaRutCliente(rut, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
-		}
-		
-		to.setListaCheque(lista);
-		limpiarVariables();
-		PrimeFaces.current().executeScript("alert('$('#btnToggleFiltros').click()');");
-
-	}
 	
 	public void busquedaRutAgente() {
 		
@@ -127,12 +92,12 @@ public class BusquedaChequeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar un numero de cheque.)"));
 			return;
 		}
-		int numCheque = 0;
+		long numCheque = 0;
 		
 		try {
-		numCheque = Integer.parseInt(to.getnCheque());
+		numCheque = Long.parseLong(to.getnCheque());
 		}catch(NumberFormatException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El numero de cheque debe ser solo numeros.)"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El numero de cheque debe ser solo numeros."));
 		}
 		
 		

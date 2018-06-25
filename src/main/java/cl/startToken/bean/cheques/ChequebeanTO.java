@@ -24,7 +24,9 @@ public class ChequebeanTO implements Serializable {
 	
 	private List<ChequeTO> listaCheque;
 	
-	private boolean seleccionarTipoCheque; 
+	private boolean seleccionarTipoCheque;
+	
+	private boolean renderDatosUsuarios;
 	
 	private ChequeTO cheque;
 	
@@ -39,6 +41,8 @@ public class ChequebeanTO implements Serializable {
 	private List<TitularTO> titulares;
 	
 	private TitularTO titularSeleccionado;
+	
+	
 	
 	
 	public String getFechaIngreso() {
@@ -152,6 +156,15 @@ public class ChequebeanTO implements Serializable {
 	public void setTitularSeleccionado(TitularTO titularSeleccionado) {
 		this.titularSeleccionado = titularSeleccionado;
 	}
+
+	public boolean isRenderDatosUsuarios() {
+		return renderDatosUsuarios;
+	}
+
+	public void setRenderDatosUsuarios(boolean renderDatosUsuarios) {
+		this.renderDatosUsuarios = renderDatosUsuarios;
+	}
+	
 	
 	
 	

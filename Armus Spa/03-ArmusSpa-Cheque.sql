@@ -11,7 +11,7 @@ CREATE PROCEDURE sp_crea_cheque(
 	IN _fechaInicial VARCHAR(20),
 	IN _totalPrestamo INT,
 	IN _diasCheque INT,
-	IN _numCheque INT,
+	IN _numCheque VARCHAR(255),
 	IN _idTitular INT
 	)
 BEGIN
@@ -48,7 +48,7 @@ DROP PROCEDURE IF EXISTS sp_lst_cheque_nCheque;
 DELIMITER $$
  
 CREATE PROCEDURE sp_lst_cheque_nCheque(
-	IN _nCheque INT,
+	IN _nCheque varchar(255),
 	IN _estado INT
 )
 BEGIN
