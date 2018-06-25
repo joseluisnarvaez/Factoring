@@ -161,6 +161,7 @@ public class ChequeBean implements Serializable {
 		}
 		to.getCheque().setFechaVencimiento(inputString2);
 		to.getCheque().setDias(difDias);
+		calculoChequeIngreso();
 	  }
 	  
 	  
@@ -174,7 +175,7 @@ public class ChequeBean implements Serializable {
 	  }
 	  
 	  public void agregarCheque() {
-		  if(to.getTitularSeleccionado() == null) {
+		  if(to.getCheque().getCodTitular() == null) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un Titular."));
 				return ;
 		  }
@@ -192,6 +193,8 @@ public class ChequeBean implements Serializable {
 	  
 	  public void guardarProceso() {
 		  ChequesDao.crearCheque(to.getListaCheque());
+		  to.setListaCheque(new ArrayList<>());
+		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Los Cheques se ingresaron correctamente."));
 	  }
 	  
 	  public void eliminaCheque(String numCheque) {
@@ -203,6 +206,7 @@ public class ChequeBean implements Serializable {
 		  }
 		  
 		  to.setListaCheque(listaSalida);
+		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Cheque eliminado."));
 	  }
 	  
 }

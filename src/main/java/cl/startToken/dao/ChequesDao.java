@@ -23,7 +23,7 @@ public class ChequesDao {
 	 */
 	public static void crearCheque(List<ChequeTO> lista) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_crea_cheque (?,?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_crea_cheque (?,?,?,?,?,?,?,?)");){
 			for (ChequeTO cheque : lista) {
 			stmt.setInt(1,  cheque.getRutCliente());
 			stmt.setDouble(2,  cheque.getInteres());
@@ -31,8 +31,8 @@ public class ChequesDao {
 			stmt.setString(4,  cheque.getFechaInicial());
 			stmt.setLong(5,  cheque.getTotalPrestamo());
 			stmt.setInt(6,  cheque.getDias());
-			stmt.setString(7, cheque.getCodTitular());
-			stmt.setString(8,  cheque.getNumeroCheque());
+			stmt.setString(7,  cheque.getNumeroCheque());
+			stmt.setString(8, cheque.getCodTitular());
 			stmt.executeUpdate();
 			}
 			
