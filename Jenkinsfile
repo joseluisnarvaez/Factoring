@@ -1,5 +1,5 @@
-NAMESPACE="cap-apps"
-NOMBRE_APP="eap-app"
+NAMESPACE="compilador"
+NOMBRE_APP="compilador-app"
 APPROVAL_EMAIL=""
 
 def templateName = "eap71-basic-s2i"
