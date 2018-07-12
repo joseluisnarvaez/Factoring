@@ -3,7 +3,7 @@ NOMBRE_APP="eap-app"
 APPROVAL_EMAIL=""
 
 def templateName = "eap71-basic-s2i"
-def templatePath = "https://raw.githubusercontent.com/scanalesrh/cap-fund-apps/master/eap71-basic-s2i.json"
+def templatePath = "https://raw.githubusercontent.com/joseluisnarvaez/Factoring/master/eap71-basic-s2i.json"
 def projectDev = "${NAMESPACE}"
 def projectQA = "${NAMESPACE}-qa"
 def projectProd = "${NAMESPACE}-production"
@@ -26,7 +26,7 @@ try {
                                     // delete everything with this template label
 				    openshift.selector("all", [ template : "${templateName}" ]).delete()
                                     if (openshift.selector("secrets","${templateName}").exists()) {
-                                        openshift.selector("secrets","${templateName}").delete()
+                                        openshift.selector("secrets","${templatePath}").delete()
                                     }
 
                                 }
