@@ -42,19 +42,19 @@ public class Login implements Serializable {
 					FacesContext contex = FacesContext.getCurrentInstance();
 		            try {
 		            	SessionJsf.seteaSession(usuario);
-						contex.getExternalContext().redirect( "cheque/BusquedaCheque.jsf" );
+						contex.getExternalContext().redirect( "cheque/IngresoCheque.jsf" );
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 				else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contrase�a Invalida."));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña Invalida."));
 					 return;
 				}
 			
 		}
 		else {
-			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contrase�a Invalida."));
+			 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Usuario o contraseña Invalida."));
 			 return;
 		}
 		

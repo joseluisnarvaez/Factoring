@@ -13,9 +13,6 @@ public class ClientesTO implements Serializable {
 	private static final long serialVersionUID = -4871164744088837917L;
 	private int idClientes;
 	private String nombreCompleto;
-	private String rut;
-	private int rutDb;
-	private String dv_cliente;
 	private int banco;
 	private String glosaBanco;
 	private String c_corriente;
@@ -41,38 +38,6 @@ public class ClientesTO implements Serializable {
 	public void setNombreCompleto(String nombreCompleto) {
 		this.nombreCompleto = nombreCompleto;
 	}
-
-
-
-	public String getRut() {
-		return rut;
-	}
-
-
-	public void setRut(String rut) {
-		this.rut = rut;
-	}
-
-
-	public int getRutDb() {
-		return rutDb;
-		
-	}
-
-
-	public void setRutDb(int rutDb) {
-		this.rutDb = rutDb;
-	}
-
-
-	public String getDv_cliente() {
-		return dv_cliente;
-	}
-
-	public void setDv_cliente(String dv_cliente) {
-		this.dv_cliente = dv_cliente;
-	}
-
 	public int getBanco() {
 		return banco;
 	}
@@ -124,10 +89,6 @@ public class ClientesTO implements Serializable {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ClientesTO [nombreCompleto=");
 		builder.append(nombreCompleto);
-		builder.append(", rut=");
-		builder.append(rut);
-		builder.append(", dv_cliente=");
-		builder.append(dv_cliente);
 		builder.append(", banco=");
 		builder.append(banco);
 		builder.append(", c_corriente=");

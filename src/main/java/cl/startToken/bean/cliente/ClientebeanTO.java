@@ -12,7 +12,6 @@ public class ClientebeanTO implements Serializable {
 	private static final long serialVersionUID = 2637758829962441585L;
 
 	private List<ClientesTO> listaClientes;
-	private String rut;
 	private String nombre;
 	private ClientesTO clienteActualizar;
 	private ClientesTO nuevoCliente;
@@ -25,14 +24,6 @@ public class ClientebeanTO implements Serializable {
 
 	public void setListaClientes(List<ClientesTO> listaClientes) {
 		this.listaClientes = listaClientes;
-	}
-
-	public String getRut() {
-		return rut;
-	}
-
-	public void setRut(String rut) {
-		this.rut = rut;
 	}
 
 	public String getNombre() {

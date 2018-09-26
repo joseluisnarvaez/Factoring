@@ -54,8 +54,6 @@ public class ClientesDao {
 			PreparedStatement stmt = con.prepareStatement("call sp_upd_cliente (?,?,?,?,?,?,?,?)");){
 			stmt.setInt(1, cliente.getIdClientes());
 			stmt.setString(2, cliente.getNombreCompleto());
-			stmt.setInt(3,cliente.getRutDb());
-			stmt.setString(4, cliente.getDv_cliente());
 			stmt.setInt(5, cliente.getBanco());
 			stmt.setString(6, cliente.getC_corriente());
 			stmt.setDouble(7, cliente.getInteres_mensual());
@@ -97,8 +95,6 @@ public class ClientesDao {
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_crea_cliente (?,?,?,?,?,?,?)");){
 			stmt.setString(1, cliente.getNombreCompleto());
-			stmt.setInt(2,cliente.getRutDb());
-			stmt.setString(3, cliente.getDv_cliente());
 			stmt.setInt(4, cliente.getBanco());
 			stmt.setString(5, cliente.getC_corriente());
 			stmt.setDouble(6, cliente.getInteres_mensual());
@@ -122,10 +118,8 @@ public class ClientesDao {
 		cliente.setNombreCompleto(nombre.toString());
 		cliente.setBanco(rs.getInt("banco"));
 		cliente.setC_corriente(rs.getString("c_corriente"));
-		cliente.setDv_cliente(rs.getString("dv_cliente"));
 		cliente.setInteres_mensual(rs.getDouble("interes_mensual"));
 		cliente.setMonto_maximo_prestamo(rs.getLong("monto_maximo_prestamo"));
-		cliente.setRutDb(rs.getInt("rut"));
 		return cliente;
 	}
 	

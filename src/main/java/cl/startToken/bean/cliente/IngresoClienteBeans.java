@@ -17,7 +17,6 @@ import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
 import cl.startToken.to.TitularTO;
 import cl.startToken.utils.SessionJsf;
-import cl.startToken.utils.Validaciones;
 
 
 
@@ -53,36 +52,13 @@ public class IngresoClienteBeans implements Serializable {
 	
 	public void  buscar() {
 		List<ClientesTO> listaFiltro = new ArrayList<>();
-		if(to.getNombre() == null || to.getRut() == null) {
+		if(to.getNombre() == null ) {
 			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Favor ingresar algun valor en las busquedas."));
 				return;
 		}
-		if(!to.getRut().contains("-") || to.getRut().contains(".")) {
-			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Formato Rut invalido (solo lleva Guion ejm: 1-9)."));
-			return;
-		}
-
-		int rut = 0 ;
-		 if(!to.getRut().isEmpty()) {
-				String[] rutValido = to.getRut().split("-");
-				boolean validacionRut = Validaciones.validarRut(to.getRut());
-				
-				if(!validacionRut) {
-					  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Rut Invalido.)"));
-						return;
-				}
-				rut = Integer.parseInt(rutValido[0]);
-		 }
 		if(!to.getNombre().isEmpty()) {
 			for(ClientesTO cliente : to.getListaClientes()) {
 				if(cliente.getNombreCompleto().contains(to.getNombre())) {
-					listaFiltro.add(cliente);
-				}
-			}
-		}
-		else if(!to.getRut().isEmpty()) {
-			for(ClientesTO cliente : to.getListaClientes()) {
-				if(cliente.getRutDb() == rut) {
 					listaFiltro.add(cliente);
 				}
 			}
@@ -114,7 +90,6 @@ public class IngresoClienteBeans implements Serializable {
 		
 		for (ClientesTO clientesTO : lista) {
 			if(clientesTO.getIdClientes() == idCliente) {
-				clientesTO.setRut(clientesTO.getRutDb()+"-"+clientesTO.getDv_cliente());
 				to.setClienteActualizar(clientesTO);
 				break;
 			}
@@ -131,10 +106,6 @@ public class IngresoClienteBeans implements Serializable {
 	
 	
 	public void guardarCliente() {
-		String[] rut = to.getNuevoCliente().getRut().split("-");
-		
-		to.getNuevoCliente().setRutDb(Integer.parseInt(rut[0]));
-		to.getNuevoCliente().setDv_cliente(rut[1]);
 		ClientesDao.crearClientes(to.getNuevoCliente());
 		to.setNuevoCliente(new ClientesTO());
 		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info", "Cliente Creado Exitosamente"));
