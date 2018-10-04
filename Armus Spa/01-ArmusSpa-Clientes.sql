@@ -4,8 +4,6 @@ DELIMITER $$
  
 CREATE PROCEDURE sp_crea_cliente(
     IN _nombres VARCHAR(300),
-	IN _rut INT,
-	IN _dv_cliente char(1),
 	IN _banco VARCHAR(200),
 	IN _c_corriente VARCHAR(200),
 	IN _interes_mensual decimal(20,4),
@@ -13,11 +11,9 @@ CREATE PROCEDURE sp_crea_cliente(
 BEGIN
     
 	INSERT INTO clientes
-(nombres,rut,dv_cliente,banco,c_corriente,interes_mensual,monto_maximo_prestamo,estado)
+(nombres,banco,c_corriente,interes_mensual,monto_maximo_prestamo,estado)
 VALUES
 ( 	_nombres,
-	_rut,
-	_dv_cliente,
 	_banco,
 	_c_corriente,
 	_interes_mensual,
@@ -57,23 +53,13 @@ DELIMITER $$
 CREATE PROCEDURE sp_upd_cliente(
 	IN _id INT,
 	IN _nombres VARCHAR(300),
-	IN _rut INT,
-	IN _dv_cliente char(1),
-	IN _banco VARCHAR(200),
-	IN _c_corriente VARCHAR(200),
-	IN _interes_mensual decimal(20),
-	IN _monto_maximo_prestamo decimal(20))
+	IN _interes_mensual decimal(20))
 BEGIN
 
 UPDATE clientes
 SET
 nombres = _nombres,
-rut = _rut,
-dv_cliente = _dv_cliente,
-banco = _banco,
-c_corriente = _c_corriente,
-interes_mensual = _interes_mensual,
-monto_maximo_prestamo =_monto_maximo_prestamo
+interes_mensual = _interes_mensual
 WHERE idClientes = _id;
 	
 END $$

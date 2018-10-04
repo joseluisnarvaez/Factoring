@@ -15,13 +15,13 @@ public class ChequeTO implements Serializable  {
 	private long montoCheque;
 	private String numeroCheque;
 	private long totalPrestamo;
-	private int rutCliente;
 	private ClientesTO cliente;
 	private int id;
 	private String fechaInicial;
 	private String codTitular;
 	private TitularTO titular;
 	private EstadosCheques estado;
+	private int idCliente;
 	
 	
 	public long getMontoAEntregar() {
@@ -67,13 +67,6 @@ public class ChequeTO implements Serializable  {
 		this.totalPrestamo = totalPrestamo;
 	}
 	
-	public int getRutCliente() {
-		return rutCliente;
-	}
-	public void setRutCliente(int rutCliente) {
-		this.rutCliente = rutCliente;
-	}
-	
 	public String getFechaInicial() {
 		return fechaInicial;
 	}
@@ -110,6 +103,12 @@ public class ChequeTO implements Serializable  {
 	public void setEstado(EstadosCheques estado) {
 		this.estado = estado;
 	}
+	public int getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -127,16 +126,23 @@ public class ChequeTO implements Serializable  {
 		builder.append(numeroCheque);
 		builder.append(", totalPrestamo=");
 		builder.append(totalPrestamo);
-		builder.append(", rutCliente=");
-		builder.append(rutCliente);
 		builder.append(", cliente=");
 		builder.append(cliente);
 		builder.append(", id=");
 		builder.append(id);
 		builder.append(", fechaInicial=");
 		builder.append(fechaInicial);
+		builder.append(", codTitular=");
+		builder.append(codTitular);
+		builder.append(", titular=");
+		builder.append(titular);
+		builder.append(", estado=");
+		builder.append(estado);
+		builder.append(", idCliente=");
+		builder.append(idCliente);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 }

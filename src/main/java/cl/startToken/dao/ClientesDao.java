@@ -51,14 +51,10 @@ public class ClientesDao {
 	 */
 	public static void actualizarClientes(ClientesTO cliente) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_upd_cliente (?,?,?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_upd_cliente (?,?,?)");){
 			stmt.setInt(1, cliente.getIdClientes());
 			stmt.setString(2, cliente.getNombreCompleto());
-			stmt.setInt(5, cliente.getBanco());
-			stmt.setString(6, cliente.getC_corriente());
-			stmt.setDouble(7, cliente.getInteres_mensual());
-			stmt.setLong(8, cliente.getMonto_maximo_prestamo());
-			
+			stmt.setDouble(3, cliente.getInteres_mensual());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -93,12 +89,12 @@ public class ClientesDao {
 	 */
 	public static void crearClientes(ClientesTO cliente) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_crea_cliente (?,?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_crea_cliente (?,?,?,?,?)");){
 			stmt.setString(1, cliente.getNombreCompleto());
-			stmt.setInt(4, cliente.getBanco());
-			stmt.setString(5, cliente.getC_corriente());
-			stmt.setDouble(6, cliente.getInteres_mensual());
-			stmt.setLong(7, cliente.getMonto_maximo_prestamo());
+			stmt.setInt(2, cliente.getBanco());
+			stmt.setString(3, cliente.getC_corriente());
+			stmt.setDouble(4, cliente.getInteres_mensual());
+			stmt.setLong(5, cliente.getMonto_maximo_prestamo());
 			
 			stmt.executeUpdate();
 			

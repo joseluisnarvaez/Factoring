@@ -19,7 +19,7 @@ public class TitularDao {
 	 */
 	public static void crearTitular(TitularTO titular) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_crea_titular (?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_crea_titular (?,?,?,?,?,?,?)");){
 			stmt.setString(1, titular.getNombre());
 			stmt.setString(2,titular.getRut());
 			stmt.setString(3, titular.getDv());

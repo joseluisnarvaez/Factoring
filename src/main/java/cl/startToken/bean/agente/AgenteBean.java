@@ -15,7 +15,6 @@ import cl.startToken.dao.AgentesDao;
 import cl.startToken.to.AgentesTO;
 import cl.startToken.to.Bancos;
 import cl.startToken.utils.SessionJsf;
-import cl.startToken.utils.Validaciones;
 
 /**
  * Clase bean de agente
@@ -51,28 +50,10 @@ public class AgenteBean implements Serializable {
 
 	public void buscar() {
 		List<AgentesTO> listaFiltro = new ArrayList<>();
-		if (to.getNombre() == null || to.getRut() == null) {
+		if (to.getNombre() == null) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error",
 					"Favor ingresar algun valor en las busquedas."));
 			return;
-		}
-		if (!to.getRut().contains("-") || to.getRut().contains(".")) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error",
-					"Formato Rut invalido (solo lleva Guion ejm: 1-9)."));
-			return;
-		}
-
-		int rut = 0;
-		if (!to.getRut().isEmpty()) {
-			String[] rutValido = to.getRut().split("-");
-			boolean validacionRut = Validaciones.validarRut(to.getRut());
-
-			if (!validacionRut) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Rut Invalido.)"));
-				return;
-			}
-			rut = Integer.parseInt(rutValido[0]);
 		}
 		if (!to.getNombre().isEmpty()) {
 			for (AgentesTO agente : to.getListaAgente()) {
@@ -81,17 +62,8 @@ public class AgenteBean implements Serializable {
 				}
 			}
 		}
-		if (!to.getRut().isEmpty()) {
-			for (AgentesTO agente : to.getListaAgente()) {
-				if (agente.getRutDb() == rut) {
-					listaFiltro.add(agente);
-				}
-			}
-		} else {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Error en los criterios de busqueda."));
-			return;
-		}
+		
+		to.setListaAgente(listaFiltro);
 
 	}
 
@@ -110,7 +82,6 @@ public class AgenteBean implements Serializable {
 
 		for (AgentesTO agente : lista) {
 			if (agente.getId() == idCliente) {
-				agente.setRut(agente.getRutDb() + "-" + agente.getDv());
 				to.setAgenteActualizar(agente);
 				break;
 			}
@@ -126,23 +97,7 @@ public class AgenteBean implements Serializable {
 	}
 
 	public void guardarAgente() {
-		String[] rut = to.getNuevoAgente().getRut().split("-");
 		
-		if (!to.getNuevoAgente().getRut().contains("-") || to.getNuevoAgente().getRut().contains(".")) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error",
-					"Formato Rut invalido (solo lleva Guion ejm: 1-9)."));
-			return;
-		}
-		try {
-			to.getNuevoAgente().setRutDb(Integer.parseInt(rut[0]));
-			to.getNuevoAgente().setDv(rut[1]);
-			if(!Validaciones.validarRut(to.getNuevoAgente().getRut())) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Rut Invalido"));	
-				return;
-			}	
-		}catch(Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al ingresar el Rut"));
-		}
 		AgentesDao.crearAgente(to.getNuevoAgente());
 		to.setNuevoAgente(new AgentesTO());
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Agente Creado Exitosamente"));

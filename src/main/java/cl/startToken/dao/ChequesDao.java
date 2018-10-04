@@ -25,7 +25,7 @@ public class ChequesDao {
 		try(Connection con = Conexion.getConnection(); 
 			PreparedStatement stmt = con.prepareStatement("call sp_crea_cheque (?,?,?,?,?,?,?,?)");){
 			for (ChequeTO cheque : lista) {
-			stmt.setInt(1,  cheque.getRutCliente());
+			stmt.setInt(1,  cheque.getIdCliente());
 			stmt.setDouble(2,  cheque.getInteres());
 			stmt.setString(3,  cheque.getFechaVencimiento());
 			stmt.setString(4,  cheque.getFechaInicial());
@@ -163,13 +163,13 @@ public class ChequesDao {
 		cheque.setFechaVencimiento(rs.getString("fechaVencimiento").replace(" ","/"));
 		cheque.setInteres(rs.getDouble("interes"));		
 		cheque.setNumeroCheque(rs.getString("numCheque"));
-		cheque.setRutCliente(rs.getInt("rutCliente"));
+		cheque.setIdCliente(rs.getInt("idCliente"));
 		cheque.setTotalPrestamo(rs.getInt("totalPrestamo"));
 		cheque.setId(rs.getInt("idCheque"));
 		cheque.setCodTitular(rs.getString("idTitular"));
 		cheque.setEstado(EstadosCheques.obtenerPorCodigo(rs.getInt("estado")));
 		for(ClientesTO cliente : ClientesDao.obtenerClientes()) {
-			if(cliente.getRutDb() == cheque.getRutCliente()) {
+			if(cliente.getIdClientes()== cheque.getIdCliente()) {
 				cheque.setCliente(cliente);
 				break;
 			}

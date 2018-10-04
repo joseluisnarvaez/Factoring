@@ -68,7 +68,7 @@ public class IngresoClienteBeans implements Serializable {
 			 return;
 		}
 		
-
+		to.setListaClientes(listaFiltro);
 	}
 	
 	

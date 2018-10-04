@@ -73,7 +73,6 @@ public class ChequeBean implements Serializable {
 		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
 	        for(ClientesTO cliente :  lista) {
 	            if(cliente.getNombreCompleto().equals(to.getNombreCliente())){
-	            	cliente.setRut(cliente.getRutDb()+"-"+cliente.getDv_cliente());
 	            	to.setCliente(cliente);
 	            	to.setInteres(cliente.getInteres_mensual());
 	            	to.setPintaDatos(true);
@@ -127,7 +126,7 @@ public class ChequeBean implements Serializable {
 		  
 		  double interes = this.interes(to.getCheque().getDias());
 		  
-		  double interesTotal = (1- interes);
+		  double interesTotal = (1+ interes);
 		  
 		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interesTotal));
 		  
@@ -139,12 +138,11 @@ public class ChequeBean implements Serializable {
 		  
 		  double interes = this.interes(to.getCheque().getDias());
 		  
-		  double interesTotal = (1- interes);
+		  double interesTotal = (1+ interes);
 		  
 		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() / interesTotal));
 		  
 		  to.getCheque().setTotalPrestamo(totalInteres);
-		  
 		  
 	  }
 	  
@@ -189,7 +187,6 @@ public class ChequeBean implements Serializable {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que ingresar un Numero de Cheque."));
 				return ;
 		  }
-		  to.getCheque().setRutCliente(to.getCliente().getRutDb());
 		  to.getCheque().setFechaInicial(to.getFechaIngreso());
 		  to.getListaCheque().add(to.getCheque());
 		  to.setCheque(new ChequeTO());

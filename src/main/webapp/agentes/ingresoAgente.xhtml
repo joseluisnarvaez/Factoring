@@ -22,31 +22,11 @@
 							value="#{agenteBean.to.nuevoAgente.nombres}" />
 					</div>
 					<div class="form-group">
-						<label for="exampleFormControlInput1">RUT</label>
-						<h:inputText name="rut"
-							value="#{agenteBean.to.nuevoAgente.rut}"
+						<label for="exampleFormControlInput1">Interes</label>
+						<h:inputText name="Interes"
+							value="#{agenteBean.to.nuevoAgente.interes}"
 							class="form-control" id="frut"
-							placeholder="Ingrese el RUT del Agente" />
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlInput1">Banco</label>
-							<p:selectOneMenu  value="#{agenteBean.to.nuevoAgente.banco}"  >
-								<f:selectItems value="#{agenteBean.to.listaBancos}"    var="banco"    itemLabel="#{banco.glosa}"   itemValue="#{banco.codBanco}"/> 
-							</p:selectOneMenu>
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlInput1">CTA. Corriente</label>
-						<h:inputText type="text" name="c_corriente" class="form-control"
-							value="#{agenteBean.to.nuevoAgente.cCorriente}"
-							placeholder="Ingrese la cuenta corriente" />
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlInput1">Monto Max. por
-							cliente</label>
-						<h:inputText type="number" name="monto_maximo_prestamo"
-							value="#{agenteBean.to.nuevoAgente.monto}"
-							class="form-control" id="fmonto"
-							placeholder="Ingrese el monto Maximo" />
+							placeholder="Ingrese el Interes del Agente" />
 					</div>
 
 					<div class="botones-derecha">

@@ -4,27 +4,15 @@ DELIMITER $$
  
 CREATE PROCEDURE sp_crea_agente(
     IN _nombres VARCHAR(300),
-	IN _rut INT,
-	IN _dv_Agente char(1),
-	IN _banco VARCHAR(200),
-	IN _c_corriente VARCHAR(200),
-	IN _monto decimal(20))
+	IN _interes INT)
 BEGIN
     
 INSERT INTO agentes
 (nombre,
-rut,
-dv_Agente,
-banco,
-cCorriente,
-monto)
+interes)
 VALUES(
 	_nombres,
-	_rut,
-	_dv_Agente,
-	_banco,
-	_c_corriente,
-	_monto);
+	_interes);
 
 	
 END $$
@@ -50,22 +38,14 @@ DELIMITER $$
  
 CREATE PROCEDURE sp_upd_agente(
 	IN _id INT,
-    IN _nombres VARCHAR(300),
-	IN _rut INT,
-	IN _dv_Agente char(1),
-	IN _banco VARCHAR(200),
-	IN _c_corriente VARCHAR(200),
-	IN _monto decimal(20))
+	IN _nombres varchar(50),
+   	IN _interes INT)
 BEGIN
 
 UPDATE agentes
 SET
 nombre = _nombres,
-rut = _rut,
-dv_Agente = _dv_Agente,
-banco = _banco,
-cCorriente = _c_corriente,
-monto = _monto
+interes = _interes
 WHERE idagentes = _id;
 	
 END $$

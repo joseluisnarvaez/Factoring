@@ -223,14 +223,6 @@ public class BusquedaChequeBean implements Serializable {
 				listaClientesSeleccionado.add(cliente);
 			}
 		}
-
-		for(String estado : to.getListaEstadosSeleccionados()) {
-			
-			for(ClientesTO cliente : listaClientesSeleccionado) {
-				lista.addAll( ChequesDao.busquedaRutCliente(cliente.getRutDb(), EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
-			}
-			
-		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
 		

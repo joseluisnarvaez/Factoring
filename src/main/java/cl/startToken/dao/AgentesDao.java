@@ -51,17 +51,11 @@ public class AgentesDao {
 	 */
 	public static void actualizarAgentes(AgentesTO agente) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_upd_agente (?,?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_upd_agente (?,?,?)");){
 			stmt.setInt(1, agente.getId());
 			stmt.setString(2, agente.getNombres());
-			stmt.setInt(3,agente.getRutDb());
-			stmt.setString(4, agente.getDv());
-			stmt.setInt(5, agente.getBanco());
-			stmt.setString(6, agente.getcCorriente());
-			stmt.setDouble(7, agente.getMonto());
-			
+			stmt.setDouble(3,agente.getInteres());
 			stmt.executeUpdate();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -94,14 +88,9 @@ public class AgentesDao {
 	 */
 	public static void crearAgente(AgentesTO agente) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_crea_agente (?,?,?,?,?,?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_crea_agente (?,?)");){
 			stmt.setString(1, agente.getNombres());
-			stmt.setInt(2,agente.getRutDb());
-			stmt.setString(3, agente.getDv());
-			stmt.setInt(4, agente.getBanco());
-			stmt.setString(5, agente.getcCorriente());
-			stmt.setDouble(6, agente.getMonto());
-			
+			stmt.setDouble(2, agente.getInteres());
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -115,13 +104,9 @@ public class AgentesDao {
 		
 		AgentesTO agente = new AgentesTO();
 		agente.setNombres(rs.getString("nombre"));
-		agente.setRutDb(rs.getInt("rut"));
-		agente.setDv(rs.getString("dv_agente"));
-		agente.setBanco(rs.getInt("banco"));
-		agente.setcCorriente(rs.getString("cCorriente"));
-		agente.setMonto(rs.getLong("monto"));
-		agente.setEstado(rs.getInt("estado"));
 		agente.setId(rs.getInt("idagentes"));
+		agente.setInteres(rs.getDouble("interes"));
+		agente.setEstado(rs.getInt("estado"));
 		return agente;
 	}
 	

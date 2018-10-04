@@ -1,10 +1,5 @@
 package cl.startToken.utils;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import cl.startToken.to.ClientesTO;
-
 public class Validaciones {
 
 	public static boolean validarRut(String rut) {
@@ -30,37 +25,6 @@ public class Validaciones {
 		} catch (Exception e) {
 		}
 		return validacion;
-	}
-	
-	
-	public static ClientesTO validaCliente (String entrada){
-
-		Map<String, String> mapValores = new HashMap<>(); 
-		for(String item : entrada.split("&")){
-			
-			String[] datos = item.split("=");
-			mapValores.put(datos[0],datos[1]);
-		}
-		
-		ClientesTO cliente = new ClientesTO();
-		cliente.setIdClientes(Integer.parseInt(mapValores.get("id")));
-		cliente.setNombreCompleto(mapValores.get("nombreCompleto").replace("+"," "));
-//		cliente.setBanco(mapValores.get("banco"));
-		cliente.setC_corriente(mapValores.get("c_corriente"));
-		cliente.setMonto_maximo_prestamo(Long.parseLong(mapValores.get("monto_maximo_prestamo")));
-		boolean rutValido = validarRut(mapValores.get("rut"));
-		if(!rutValido){
-			return null;
-		}
-		String[] rut = mapValores.get("rut").split("-");
-		cliente.setRutDb(Integer.parseInt(rut[0]));
-		cliente.setDv_cliente(rut[1]);
-		
-		return cliente;
-			
-		
-		
-		
 	}
 
 }
