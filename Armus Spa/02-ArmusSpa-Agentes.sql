@@ -52,11 +52,11 @@ END $$
 DELIMITER ;
 
 
-DROP PROCEDURE IF EXISTS sp_del_cliente;
+DROP PROCEDURE IF EXISTS sp_del_Agente;
  
 DELIMITER $$
  
-CREATE PROCEDURE sp_del_cliente(
+CREATE PROCEDURE sp_del_Agente(
 	IN _id INT)
 BEGIN
 

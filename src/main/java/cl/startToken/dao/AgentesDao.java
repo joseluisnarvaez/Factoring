@@ -70,7 +70,7 @@ public class AgentesDao {
 	 */
 	public static void eliminaAgente(int id) {
 		try(Connection con = Conexion.getConnection(); 
-			PreparedStatement stmt = con.prepareStatement("call sp_del_cliente(?)");){
+			PreparedStatement stmt = con.prepareStatement("call sp_del_Agente(?)");){
 			stmt.setInt(1, id);
 			
 			stmt.executeUpdate();
