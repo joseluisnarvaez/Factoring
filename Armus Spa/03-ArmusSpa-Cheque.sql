@@ -16,7 +16,7 @@ CREATE PROCEDURE sp_crea_cheque(
 	)
 BEGIN
     
-INSERT INTO Cheque(
+INSERT INTO cheque(
 					 idCliente,
 					 interes,
 					 fechaVencimiento,
