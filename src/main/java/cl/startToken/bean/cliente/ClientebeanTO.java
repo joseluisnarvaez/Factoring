@@ -17,6 +17,7 @@ public class ClientebeanTO implements Serializable {
 	private ClientesTO nuevoCliente;
 	private List<Bancos> listaBancos;
 	private TitularTO titular;
+	
 
 	public List<ClientesTO> getListaClientes() {
 		return listaClientes;
@@ -65,5 +66,6 @@ public class ClientebeanTO implements Serializable {
 	public void setTitular(TitularTO titular) {
 		this.titular = titular;
 	}
+	
 	
 }

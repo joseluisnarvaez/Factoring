@@ -11,6 +11,7 @@ public class AgentesTO implements Serializable  {
 	private int id;
 	private String nombres;
 	private double interes;
+	private String interesIngresado;
 	private int estado;
 	public int getId() {
 		return id;
@@ -36,7 +37,12 @@ public class AgentesTO implements Serializable  {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
-	
+	public String getInteresIngresado() {
+		return interesIngresado;
+	}
+	public void setInteresIngresado(String interesIngresado) {
+		this.interesIngresado = interesIngresado;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -46,6 +52,8 @@ public class AgentesTO implements Serializable  {
 		builder.append(nombres);
 		builder.append(", interes=");
 		builder.append(interes);
+		builder.append(", interesIngresado=");
+		builder.append(interesIngresado);
 		builder.append(", estado=");
 		builder.append(estado);
 		builder.append("]");

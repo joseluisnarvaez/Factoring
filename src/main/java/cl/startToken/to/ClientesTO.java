@@ -18,6 +18,7 @@ public class ClientesTO implements Serializable {
 	private String c_corriente;
 	private double interes_mensual;
 	private long monto_maximo_prestamo;
+	private String interesIngresado;
 
 	
 	public int getIdClientes() {
@@ -78,6 +79,15 @@ public class ClientesTO implements Serializable {
 
 	public void setGlosaBanco(String glosaBanco) {
 		this.glosaBanco = glosaBanco;
+	}
+
+	public String getInteresIngresado() {
+		return interesIngresado;
+	}
+
+
+	public void setInteresIngresado(String interesIngresado) {
+		this.interesIngresado = interesIngresado;
 	}
 
 

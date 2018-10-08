@@ -15,6 +15,7 @@ import cl.startToken.dao.AgentesDao;
 import cl.startToken.to.AgentesTO;
 import cl.startToken.to.Bancos;
 import cl.startToken.utils.SessionJsf;
+import cl.startToken.utils.Validaciones;
 
 /**
  * Clase bean de agente
@@ -97,6 +98,19 @@ public class AgenteBean implements Serializable {
 	}
 
 	public void guardarAgente() {
+		if(!Validaciones.validacionSoloLetras(to.getNuevoAgente().getNombres())){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "En el campo nombre debe ingresar solo letras"));
+			return;
+		}
+		
+		if(!Validaciones.validacionSoloNumeros(to.getNuevoAgente().getInteresIngresado())){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "En el campo interés debe ingresar solo Numeros"));
+			return;
+		}
+		
+		to.getNuevoAgente().setInteres(Double.valueOf(to.getNuevoAgente().getInteresIngresado()));
 		
 		AgentesDao.crearAgente(to.getNuevoAgente());
 		to.setNuevoAgente(new AgentesTO());

@@ -17,6 +17,7 @@ import cl.startToken.to.Bancos;
 import cl.startToken.to.ClientesTO;
 import cl.startToken.to.TitularTO;
 import cl.startToken.utils.SessionJsf;
+import cl.startToken.utils.Validaciones;
 
 
 
@@ -106,6 +107,21 @@ public class IngresoClienteBeans implements Serializable {
 	
 	
 	public void guardarCliente() {
+		
+		if(!Validaciones.validacionSoloLetras(to.getNuevoCliente().getNombreCompleto())){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "En el campo nombre debe ingresar solo letras"));
+			return;
+		}
+		
+		if(!Validaciones.validacionSoloNumeros(to.getNuevoCliente().getInteresIngresado())){
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "En el campo interés debe ingresar solo Numeros"));
+			return;
+		}
+		
+		to.getNuevoCliente().setInteres_mensual(Double.valueOf(to.getNuevoCliente().getInteresIngresado()));
+		
 		ClientesDao.crearClientes(to.getNuevoCliente());
 		to.setNuevoCliente(new ClientesTO());
 		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Info", "Cliente Creado Exitosamente"));

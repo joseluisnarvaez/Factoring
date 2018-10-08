@@ -1,5 +1,8 @@
 package cl.startToken.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validaciones {
 
 	public static boolean validarRut(String rut) {
@@ -25,6 +28,30 @@ public class Validaciones {
 		} catch (Exception e) {
 		}
 		return validacion;
+	}
+	
+	public static boolean validacionSoloLetras(String entrada){
+        
+        Pattern patron = Pattern.compile("[A-Za-zñÑáéíóúÁÉÍÓÚ]");
+        Matcher encaja = patron.matcher(entrada);
+        
+        if(encaja.find())
+        	return true;
+        
+        return false;
+
+	}
+	
+	public static boolean validacionSoloNumeros(String entrada){
+        
+        Pattern patron = Pattern.compile("[123456789.]");
+        Matcher encaja = patron.matcher(entrada);
+        
+        if(encaja.find())
+        	return true;
+        
+        return false;
+
 	}
 
 }
