@@ -5,7 +5,7 @@ DELIMITER $$
 CREATE PROCEDURE sp_crea_cheque(
 
    
-	IN _rutCliente INT,
+	IN _idCliente INT,
 	IN _interes INT,
 	IN _fechaVencimiento VARCHAR(20),
 	IN _fechaInicial VARCHAR(20),
@@ -17,7 +17,7 @@ CREATE PROCEDURE sp_crea_cheque(
 BEGIN
     
 INSERT INTO Cheque(
-					 rutCliente,
+					 idCliente,
 					 interes,
 					 fechaVencimiento,
 					 fechaInicial,
@@ -27,7 +27,7 @@ INSERT INTO Cheque(
 					 idTitular,
 					 estado)
 					 VALUES (
-					 _rutCliente,
+					 _idCliente,
 					 _interes,
 					 _fechaVencimiento,
 					 _fechaInicial,
