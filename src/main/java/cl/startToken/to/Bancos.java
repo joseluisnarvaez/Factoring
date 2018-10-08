@@ -8,12 +8,12 @@ package cl.startToken.to;
  */
 public enum Bancos {
 	BBVA 			(1,"Banco BBVA"),
-	BCI 			(2,"Banco Crédito e Inversiones BCI"),
+	BCI 			(2,"Banco CrÃ©dito e Inversiones BCI"),
 	CHILE 			(3,"Banco Chile - Edwards-Citi"),
 	DESARROLLO 		(4,"Banco del Desarrollo"),
 	ESTADO 			(5,"Banco Estado"),
 	FALABELLA 		(6,"Banco Falabella"),
-	ITAU 			(7,"Banco Itaú"),
+	ITAU 			(7,"Banco ItaÃº"),
 	INTERNACIONAL 	(8,"Banco Internacional"),
 	RIPLEY 			(9,"Banco Ripley"),
 	SANTANDER 		(10,"Banco Santander Santiago"),
