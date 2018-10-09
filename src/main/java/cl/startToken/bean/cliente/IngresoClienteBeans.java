@@ -57,6 +57,11 @@ public class IngresoClienteBeans implements Serializable {
 			  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Favor ingresar algun valor en las busquedas."));
 				return;
 		}
+		if(!Validaciones.validacionSoloLetras(to.getNombre())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El nombre solo pueden ser letras."));
+			return;
+		}
+			
 		if(!to.getNombre().isEmpty()) {
 			for(ClientesTO cliente : to.getListaClientes()) {
 				if(cliente.getNombreCompleto().contains(to.getNombre())) {

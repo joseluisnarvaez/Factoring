@@ -89,6 +89,7 @@ public class ChequeBean implements Serializable {
 	  public void chequeCliente() {
 		  ChequeTO cheque = new ChequeTO();
 		  cheque.setInteres(to.getCliente().getInteres_mensual());
+		  cheque.setIdCliente(to.getCliente().getIdClientes());
 		  to.setCheque(cheque);
 	  }
 	  
@@ -188,6 +189,7 @@ public class ChequeBean implements Serializable {
 				return ;
 		  }
 		  to.getCheque().setFechaInicial(to.getFechaIngreso());
+		  to.getCheque().setIdCliente(to.getCliente().getIdClientes());
 		  to.getListaCheque().add(to.getCheque());
 		  to.setCheque(new ChequeTO());
 		  to.setVencimiento(null);

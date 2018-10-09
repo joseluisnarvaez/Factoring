@@ -10,8 +10,8 @@ public class Conexion {
 	private static String bd = "armusspa_armus";
 	private static String login ="armusspa_adminAr";
 	private static String pass = "Joe83949550";
-//	private static String url = "jdbc:mysql://mysql3000.mochahost.com:3306/";
-	private static String url = "jdbc:mysql://127.0.0.1:3306/";
+	private static String url = "jdbc:mysql://mysql3000.mochahost.com:3306/";
+//	private static String url = "jdbc:mysql://127.0.0.1:3306/";
 	private static String dsn = url + bd;
 	
 	public static Connection getConnection() {

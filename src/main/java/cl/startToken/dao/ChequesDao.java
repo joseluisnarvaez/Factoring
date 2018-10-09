@@ -168,6 +168,7 @@ public class ChequesDao {
 		cheque.setId(rs.getInt("idCheque"));
 		cheque.setCodTitular(rs.getString("idTitular"));
 		cheque.setEstado(EstadosCheques.obtenerPorCodigo(rs.getInt("estado")));
+		cheque.setIdCliente(rs.getInt("idCliente"));
 		for(ClientesTO cliente : ClientesDao.obtenerClientes()) {
 			if(cliente.getIdClientes()== cheque.getIdCliente()) {
 				cheque.setCliente(cliente);

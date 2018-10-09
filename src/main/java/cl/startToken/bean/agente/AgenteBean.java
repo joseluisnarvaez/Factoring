@@ -56,6 +56,10 @@ public class AgenteBean implements Serializable {
 					"Favor ingresar algun valor en las busquedas."));
 			return;
 		}
+		if(!Validaciones.validacionSoloLetras(to.getNombre())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El nombre solo pueden ser letras."));
+			return;
+		}
 		if (!to.getNombre().isEmpty()) {
 			for (AgentesTO agente : to.getListaAgente()) {
 				if (agente.getNombres().contains(to.getNombre())) {

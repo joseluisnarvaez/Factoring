@@ -86,10 +86,15 @@ public class BusquedaChequeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
 			return ;
 		}
+
 		List<ChequeTO> lista = new ArrayList<>();
 
 		if (to.getnCheque().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar un numero de cheque.)"));
+			return;
+		}
+		if(!Validaciones.validacionSoloNumeros(to.getNombre())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El numero de cheque solo pueden ser numeros."));
 			return;
 		}
 		long numCheque = 0;
@@ -174,6 +179,10 @@ public class BusquedaChequeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar el nombre de un titular."));
 			return;
 		}
+		if(!Validaciones.validacionSoloLetras(to.getTitular())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El nombre del Titular solo pueden ser Letras."));
+			return;
+		}
 		
 		List<ChequeTO> lista = new ArrayList<>();
 
@@ -186,7 +195,6 @@ public class BusquedaChequeBean implements Serializable {
 
 		List<ChequeTO> listaSalida = new ArrayList<>();
 		for(String estado : to.getListaEstadosSeleccionados()) {
-			
 			for(ChequeTO cheque : lista) {
 				if(cheque.getEstado().getCodEstado()== Integer.parseInt(estado))
 					listaSalida.add(cheque);
@@ -211,22 +219,30 @@ public class BusquedaChequeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar el nombre de un titular."));
 			return;
 		}
-		
-		List<ChequeTO> lista = new ArrayList<>();
-
-
+		if(!Validaciones.validacionSoloLetras(to.getNombre())) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "El nombre del Cliente solo pueden ser letras."));
+			return;
+		}
 		List<ClientesTO> listaClientes = ClientesDao.obtenerClientes();
-		List<ClientesTO> listaClientesSeleccionado = new ArrayList<>();
+		ClientesTO clienteSeleccionado = null;
 		
 		for (ClientesTO cliente : listaClientes) {
 			if(cliente.getNombreCompleto().contains(to.getNombre())) {
-				listaClientesSeleccionado.add(cliente);
+				clienteSeleccionado = cliente;
+				break;
 			}
+		}
+		
+		List<ChequeTO> listaSalida = new ArrayList<>();
+		for(String estado : to.getListaEstadosSeleccionados()) {
+			
+			listaSalida.addAll(ChequesDao.busquedaRutCliente(clienteSeleccionado.getIdClientes(), EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
+			
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
 		
-		to.setListaCheque(lista);
+		to.setListaCheque(listaSalida);
 		limpiarVariables();
 	}
 	

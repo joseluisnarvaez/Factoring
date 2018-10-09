@@ -55,7 +55,7 @@ BEGIN
 
  SELECT 
 	*
-FROM Cheque where estado = _estado and numCheque = _nCheque;
+FROM cheque where estado = _estado and numCheque = _nCheque;
 	
 END $$
 DELIMITER ;
@@ -74,7 +74,7 @@ BEGIN
 
  SELECT 
 	*
-FROM Cheque where estado = _estado and fechaInicial = _fIngreso;
+FROM cheque where estado = _estado and fechaInicial = _fIngreso;
 	
 END $$
 DELIMITER ;
@@ -93,27 +93,27 @@ BEGIN
 
  SELECT 
 	*
-FROM Cheque where estado = _estado and fechaVencimiento = _fVencimiento;
+FROM cheque where estado = _estado and fechaVencimiento = _fVencimiento;
 	
 END $$
 DELIMITER ;
 
 
--- rut Cliente
+-- idCliente Cliente
 
 DROP PROCEDURE IF EXISTS sp_lst_cheque_rcliente;
  
 DELIMITER $$
  
 CREATE PROCEDURE sp_lst_cheque_rcliente(
-	IN _rutCliente INT,
+	IN _idCliente INT,
 	IN _estado INT
 )
 BEGIN
 
  SELECT 
 	*
-FROM Cheque where estado = _estado and rutCliente = _rutCliente;
+FROM cheque where estado = _estado and idCliente = _idCliente;
 	
 END $$
 DELIMITER ;
@@ -134,7 +134,7 @@ BEGIN
 
  SELECT 
 	*
-FROM Cheque where estado = _estado and rutAgente = _rutAgente;
+FROM cheque where estado = _estado and rutAgente = _rutAgente;
 	
 END $$
 DELIMITER ;
@@ -153,7 +153,7 @@ BEGIN
 
  SELECT 
 	*
-FROM Cheque where idTitular = _idTitular;
+FROM cheque where idTitular = _idTitular;
 	
 END $$
 DELIMITER ;

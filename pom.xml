@@ -123,7 +123,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>ROOT</finalName>
+		<finalName>Factoring</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
