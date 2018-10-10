@@ -42,6 +42,12 @@ public class ChequebeanTO implements Serializable {
 	
 	private TitularTO titularSeleccionado;
 	
+	private boolean tipoMontoaEntregar;
+	
+	private boolean tipoMontodelCheque;
+
+	private boolean sumarDias;
+	
 	
 	
 	
@@ -164,8 +170,30 @@ public class ChequebeanTO implements Serializable {
 	public void setRenderDatosUsuarios(boolean renderDatosUsuarios) {
 		this.renderDatosUsuarios = renderDatosUsuarios;
 	}
-	
-	
+
+	public boolean isTipoMontoaEntregar() {
+		return tipoMontoaEntregar;
+	}
+
+	public void setTipoMontoaEntregar(boolean tipoMontoaEntregar) {
+		this.tipoMontoaEntregar = tipoMontoaEntregar;
+	}
+
+	public boolean isTipoMontodelCheque() {
+		return tipoMontodelCheque;
+	}
+
+	public void setTipoMontodelCheque(boolean tipoMontodelCheque) {
+		this.tipoMontodelCheque = tipoMontodelCheque;
+	}
+
+	public boolean isSumarDias() {
+		return sumarDias;
+	}
+
+	public void setSumarDias(boolean sumarDias) {
+		this.sumarDias = sumarDias;
+	}
 	
 	
 }

@@ -197,3 +197,41 @@ FROM usuario where usuario = _usuario ;
 	
 END $$
 DELIMITER ;
+
+
+
+-- monto del cheque Cliente
+
+DROP PROCEDURE IF EXISTS sp_lst_cheque_monto;
+ 
+DELIMITER $$
+ 
+CREATE PROCEDURE sp_lst_cheque_monto(
+	IN _montoCheque INT,
+	IN _estado INT
+)
+BEGIN
+
+ SELECT 
+	*
+FROM cheque where estado = _estado and totalPrestamo = _montoCheque;
+	
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_upd_estadoCheque;
+ 
+DELIMITER $$
+ 
+CREATE PROCEDURE sp_upd_estadoCheque(
+	IN _idCheque INT,
+   	IN _estado INT)
+BEGIN
+
+UPDATE cheque
+SET
+estado = _estado
+WHERE idCheque = _idCheque;
+	
+END $$
+DELIMITER ;

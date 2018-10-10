@@ -10,7 +10,7 @@
 		<div class="contenido">
 			<h:form>
 				<h3>Busqueda de cheques</h3>
-				<p:accordionPanel id="btnToggleFiltros">
+				<p:accordionPanel id="btnToggleFiltros" style="width: 104%;">
 					<p:tab title="Busqueda">
 
 						<table>
@@ -19,9 +19,9 @@
 								<td>
 									<table>
 										<tr>
-											<td style="width: 162px;"><p:outputLabel value="Fecha de Ingreso" /> </td>
-											<td><p:calendar id="button" value="#{busquedaChequeBean.to.fechaInicio}" inputStyleClass="calendario" pattern="dd/MM/yyyy" locale="es" /></td>
-											<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorFechaIngreso}" update="@form" process="@form" /></td>
+											<td style="width: 162px;"><p:outputLabel value="Monto del Cheque" /> </td>
+											<td><p:inputText id="montoCheque" value="#{busquedaChequeBean.to.montoCheque}" styleClass="montoCheque" /></td>
+											<td><p:commandLink styleClass="lupaBusqueda fa fa-search" actionListener="#{busquedaChequeBean.busquedaPorMontoCheque}" update="@form" process="@form" /></td>
 										</tr>
 									</table>
 								</td>
@@ -96,7 +96,7 @@
 
 
 
-				<p:dataTable tableStyleClass="tablaDefinitiva"
+				<p:dataTable tableStyleClass="tablaDefinitiva" style="width: 106%;"
 					emptyMessage="No hay Cheque que mostrar" id="tablaexport"
 					var="item" value="#{busquedaChequeBean.to.listaCheque}"
 					paginator="true" paginatorPosition="bottom" rowIndexVar="i"
@@ -136,6 +136,11 @@
 						sortBy="#{item.totalPrestamo}">
 						<h:outputText value="#{item.totalPrestamo}" />
 					</p:column>
+					<p:column headerText="Estado">
+					    <p:selectOneMenu id="estados" showHeader="false" value="#{ item.estado.codEstado}" title="estado"   multiple="false" >
+			            	<f:selectItems value="#{busquedaChequeBean.to.listaEstados}" var="estado" itemValue="#{estado.codEstado}" itemLabel="#{estado.glosa}"/>
+			        	</p:selectOneMenu>
+					</p:column>
 				</p:dataTable>
 
 				<h:commandLink>
@@ -150,7 +155,7 @@
 					<p:dataExporter type="xls" target="tablaexport" fileName="consulta"
 						pageOnly="false" />
 				</h:commandLink>
-
+				<p:commandButton value="Actualiza Estados"  styleClass="btn btn-primary" actionListener="#{busquedaChequeBean.actualizaEstados}" update="@form" process="@form" />
 			</h:form>
 		</div>
 

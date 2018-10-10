@@ -47,6 +47,7 @@ public class BusquedaChequeBean implements Serializable {
 			estados.add(estado);
 		
 		to.setListaEstados(estados);
+		to.setListaCheque(new ArrayList<>());
 		
 	}
 
@@ -116,7 +117,7 @@ public class BusquedaChequeBean implements Serializable {
 	}
 	
 	
-	public void busquedaPorFechaIngreso() {
+	public void busquedaPorMontoCheque() {
 		
 		if(to.getListaEstadosSeleccionados().isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Tiene que seleccionar un estado."));
@@ -124,16 +125,21 @@ public class BusquedaChequeBean implements Serializable {
 		}
 		List<ChequeTO> lista = new ArrayList<>();
 
-		if (to.getFechaInicio() == null) {
-			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Una fecha de ingreso.)"));
+		if (to.getMontoCheque() == null) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Monto para la busqueda."));
+			return;
+		}
+		if (to.getMontoCheque().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe ingresar Monto para la busqueda."));
+			return;
+		}
+		if (!Validaciones.validacionSoloNumeros(to.getMontoCheque())) {
+			FacesContext.getCurrentInstance().addMessage(null,	new FacesMessage(FacesMessage.SEVERITY_WARN, "Error", "Debe Monto debe ser solo numeros."));
 			return;
 		}
 		
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-		String fecha =  df.format(to.getFechaInicio());
-		
 		for(String estado : to.getListaEstadosSeleccionados()) {
-			lista.addAll( ChequesDao.busquedaFIngreso(fecha, EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
+			lista.addAll( ChequesDao.busquedaMontoCheque(to.getMontoCheque(), EstadosCheques.obtenerPorCodigo(Integer.parseInt(estado))));
 		}
 		
 		PrimeFaces.current().executeScript("$('#btnToggleFiltros').click()");
@@ -246,9 +252,20 @@ public class BusquedaChequeBean implements Serializable {
 		limpiarVariables();
 	}
 	
+	public void actualizaEstados() {
+		if(to.getListaCheque() == null || to.getListaCheque().isEmpty())
+			return;
+		
+		for(ChequeTO cheque :to.getListaCheque()) {
+			ChequesDao.actualizaEstados(cheque.getId(), cheque.getEstado());
+		}
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Estados Actualizados correctamente"));
+		
+	}
+	
 	private void limpiarVariables() {
 		to.setAgente("");
-		to.setFechaInicio(null);
+		to.setMontoCheque("");
 		to.setFechaVencimiento(null);;
 		to.setListaEstadosSeleccionados(new ArrayList<>());;
 		to.setnCheque("");

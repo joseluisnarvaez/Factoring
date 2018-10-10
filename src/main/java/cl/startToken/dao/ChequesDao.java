@@ -152,7 +152,35 @@ public class ChequesDao {
 		return listaCheques;
 	}
 	
+	public static List<ChequeTO> busquedaMontoCheque(String monto,EstadosCheques estado){
+		List<ChequeTO> listaCheques = new ArrayList<>();
+		try(Connection con = Conexion.getConnection(); 
+			PreparedStatement stmt = con.prepareStatement("call sp_lst_cheque_monto (?,?)");
+			){
+			stmt.setString(1, monto);
+			stmt.setInt(2, estado.getCodEstado());
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				listaCheques.add(parceaCheque(rs));			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listaCheques;
+	}
 	
+	public static void actualizaEstados(int idCheque,EstadosCheques estado){
+		try(Connection con = Conexion.getConnection(); 
+				PreparedStatement stmt = con.prepareStatement("call sp_upd_estadoCheque (?,?)");
+				){
+			stmt.setInt(1, idCheque);
+			stmt.setInt(2, estado.getCodEstado());
+			stmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private static ChequeTO parceaCheque(ResultSet rs) throws SQLException {
 		

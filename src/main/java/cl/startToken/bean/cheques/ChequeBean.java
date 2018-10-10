@@ -46,6 +46,8 @@ public class ChequeBean implements Serializable {
 		to.setHoy(new Date());
 		to.setFechaIngreso(dateFormat.format(to.getHoy()));
 		to.setSeleccionarTipoCheque(false);
+		to.setTipoMontoaEntregar(false);
+		to.setTipoMontodelCheque(false);
 		to.setCheque(new ChequeTO());
 		to.setRenderDatosUsuarios(true);
 	}
@@ -59,8 +61,10 @@ public class ChequeBean implements Serializable {
 		  
 		  	List<ClientesTO> lista = ClientesDao.obtenerClientes();
 	        List<String> results = new ArrayList<>();
+	        String nombre;
 	        for(ClientesTO cliente :  lista) {
-	            if(cliente.getNombreCompleto().contains(query)){
+	        	nombre = cliente.getNombreCompleto().toUpperCase();
+	            if(nombre.contains(query.toUpperCase())){
 	            	results.add(cliente.getNombreCompleto());
 	            }
 	        }
@@ -106,6 +110,10 @@ public class ChequeBean implements Serializable {
 		  System.out.println("Cheque seleccionado : "+ to.getTipoCheque());
 		  to.setListaCheque(new ArrayList<>());
 		  to.setSeleccionarTipoCheque(true);
+		  if( to.getTipoCheque().equals("1"))
+			  to.setTipoMontodelCheque(true);
+		  else
+			  to.setTipoMontoaEntregar(true);
 		  
 		  RequestContext.getCurrentInstance().execute("$('.acordion > div').click()");
 	  }
@@ -215,6 +223,18 @@ public class ChequeBean implements Serializable {
 		  
 		  to.setListaCheque(listaSalida);
 		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Cheque eliminado."));
+	  }
+	  
+	  
+	  public void sumardias() {
+		  
+		  if(to.isSumarDias())
+			  to.getCheque().setDias(to.getCheque().getDias()+3);
+		  else 
+			  to.getCheque().setDias(to.getCheque().getDias()-3); 
+
+		  this.onkey();
+		  
 	  }
 	  
 }

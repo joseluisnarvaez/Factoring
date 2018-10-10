@@ -56,28 +56,66 @@
 					<p:accordionPanel rendered="#{chequeBean.to.seleccionarTipoCheque}">
 						<p:tab title="Ingreso Cheques" id="panelCheque">
 							<h:form >
-								<h:panelGrid columns="8" styleClass="table table-striped" >
+								<h:panelGrid columns="9" styleClass="table table-striped" rendered="#{chequeBean.to.tipoMontodelCheque}" >
 									<p:outputLabel value="Monto Cheque" />
 									<p:outputLabel value="Fecha Vencimiento" />
 									<p:outputLabel value="Dias" styleClass="dias" />
+									<p:outputLabel value="sumar Dias" styleClass="dias" />
 									<p:outputLabel value="Int. Mensual" styleClass="dias" />
 									<p:outputLabel value="N° cheque" />
-									<p:outputLabel value="Total" />
+									<p:outputLabel value="monto a entregar" />
 									<p:outputLabel value="Titular" />
 									<p:outputLabel value="agregar" />
 
 									<h:inputText id="montoCheque" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
 										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
+									<p:calendar id="button1" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es">
+										<p:ajax event="dateSelect" update="@form" process="@this" listener="#{chequeBean.cantidadDias}" />
+									</p:calendar>
+									<h:inputText id="dias1" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
+									<p:selectBooleanCheckbox value="#{chequeBean.to.sumarDias}">
+							            <p:ajax update="@form" process="@form" listener="#{chequeBean.sumardias}" />
+							        </p:selectBooleanCheckbox>
+									<h:inputText id="interesMensual1" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4">
+										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
+									</h:inputText>
+									<h:inputText id="numCheque1" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
+									<h:inputText id="Total1" styleClass="montoCheque"  value="#{chequeBean.to.cheque.totalPrestamo}"/>
+															
+							        <p:selectOneMenu id="titular1" showHeader="false" value="#{chequeBean.to.cheque.codTitular}" title="Titular"   multiple="false"  panelStyle="width:250px">
+							        	<f:selectItem itemLabel="Seleccionar"/>
+							            <f:selectItems value="#{chequeBean.to.titulares}" var="item" itemValue="#{item.idTitular}" itemLabel="#{item.nombre}"/>
+							        </p:selectOneMenu>
+									<p:commandLink styleClass="fa fa-mail-forward" process="@form" actionListener="#{chequeBean.agregarCheque}" update="@form" />
+								</h:panelGrid>
+								
+								<h:panelGrid columns="9" styleClass="table table-striped" rendered="#{chequeBean.to.tipoMontoaEntregar}" >
+									<p:outputLabel value="Monto a entregar" />
+									<p:outputLabel value="Fecha Vencimiento" />
+									<p:outputLabel value="Dias" styleClass="dias" />
+									<p:outputLabel value="sumar Dias" styleClass="dias" />
+									<p:outputLabel value="Int. Mensual" styleClass="dias" />
+									<p:outputLabel value="N° cheque" />
+									<p:outputLabel value="Monto del cheque" />
+									<p:outputLabel value="Titular" />
+									<p:outputLabel value="agregar" />
+
+									<h:inputText id="montoCheque1" styleClass="montoCheque"	value="#{chequeBean.to.cheque.montoCheque}">
+										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
+									</h:inputText>
 									<p:calendar id="button" value="#{chequeBean.to.vencimiento}" inputStyleClass="calendario"  pattern="dd-MM-yyyy" locale="es">
 										<p:ajax event="dateSelect" update="@form" process="@this" listener="#{chequeBean.cantidadDias}" />
 									</p:calendar>
 									<h:inputText id="dias" value="#{chequeBean.to.cheque.dias}" styleClass="dias" maxlength="3" />
+									<p:selectBooleanCheckbox value="#{chequeBean.to.sumarDias}">
+							            <p:ajax update="@form" process="@form" listener="#{chequeBean.sumardias}" />
+							        </p:selectBooleanCheckbox>
 									<h:inputText id="interesMensual" value="#{chequeBean.to.interes}"  styleClass="dias"  maxlength="4">
 										<p:ajax event="blur" update="@form" process="@form" listener="#{chequeBean.onkey}" />
 									</h:inputText>
 									<h:inputText id="numCheque" styleClass="montoCheque" value="#{chequeBean.to.cheque.numeroCheque}" />
-									<h:inputText id="Total" styleClass="montoCheque" disabled="true" value="#{chequeBean.to.cheque.totalPrestamo}"/>
+									<h:inputText id="Total" styleClass="montoCheque"  value="#{chequeBean.to.cheque.totalPrestamo}"/>
 															
 							        <p:selectOneMenu id="titular" showHeader="false" value="#{chequeBean.to.cheque.codTitular}" title="Titular"   multiple="false"  panelStyle="width:250px">
 							        	<f:selectItem itemLabel="Seleccionar"/>

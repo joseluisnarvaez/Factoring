@@ -10,14 +10,13 @@ public class BusquedaChequeBeanTO {
 	
 	private List<EstadosCheques> listaEstados;
 	private List<String> listaEstadosSeleccionados;
-	private Date fechaInicio;
+	private String montoCheque;
 	private Date fechaVencimiento;
 	private String nombre;
 	private String agente;
 	private String titular;
 	private String nCheque;
 	private String rut;
-	
 	private List<ChequeTO> listaCheque;
 	
 	
@@ -32,12 +31,6 @@ public class BusquedaChequeBeanTO {
 	}
 	public void setListaEstadosSeleccionados(List<String> listaEstadosSeleccionados) {
 		this.listaEstadosSeleccionados = listaEstadosSeleccionados;
-	}
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
 	}
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
@@ -81,6 +74,13 @@ public class BusquedaChequeBeanTO {
 	public void setListaCheque(List<ChequeTO> listaCheque) {
 		this.listaCheque = listaCheque;
 	}
+	public String getMontoCheque() {
+		return montoCheque;
+	}
+	public void setMontoCheque(String montoCheque) {
+		this.montoCheque = montoCheque;
+	}
+	
 	
 
 }
