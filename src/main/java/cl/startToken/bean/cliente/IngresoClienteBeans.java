@@ -64,7 +64,7 @@ public class IngresoClienteBeans implements Serializable {
 			
 		if(!to.getNombre().isEmpty()) {
 			for(ClientesTO cliente : to.getListaClientes()) {
-				if(cliente.getNombreCompleto().contains(to.getNombre())) {
+				if(cliente.getNombreCompleto().toUpperCase().contains(to.getNombre().toUpperCase())) {
 					listaFiltro.add(cliente);
 				}
 			}

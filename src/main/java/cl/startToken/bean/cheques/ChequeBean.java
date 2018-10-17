@@ -120,11 +120,11 @@ public class ChequeBean implements Serializable {
 	  
 	  public void  onkey() {
 		  if( to.getTipoCheque().equals("2")) {
-			  this.calculoMontoDeCheque();
-		  }
-		  else if( to.getTipoCheque().equals("1")) {
 			  
 			  this.calculoChequeIngreso();
+		  }
+		  else if( to.getTipoCheque().equals("1")) {
+			  this.calculoMontoDeCheque();
 		  }
 		  
 		  
@@ -147,9 +147,9 @@ public class ChequeBean implements Serializable {
 		  
 		  double interes = this.interes(to.getCheque().getDias());
 		  
-		  double interesTotal = (1+ interes);
+		  double interesTotal = (1 - interes);
 		  
-		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() / interesTotal));
+		  Long totalInteres = Math.round((to.getCheque().getMontoCheque() * interesTotal));
 		  
 		  to.getCheque().setTotalPrestamo(totalInteres);
 		  

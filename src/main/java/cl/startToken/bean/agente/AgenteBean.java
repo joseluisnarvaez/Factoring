@@ -62,7 +62,7 @@ public class AgenteBean implements Serializable {
 		}
 		if (!to.getNombre().isEmpty()) {
 			for (AgentesTO agente : to.getListaAgente()) {
-				if (agente.getNombres().contains(to.getNombre())) {
+				if (agente.getNombres().toUpperCase().contains(to.getNombre().toUpperCase())) {
 					listaFiltro.add(agente);
 				}
 			}
